@@ -1,7 +1,8 @@
 <?php
+session_start();
 $id = $_POST['id'];
 $password = $_POST['password'];
-
+//서버에 접속하기 위해 필요
 $connect = mysqli_connect("127.0.0.1", "root", "Dlrkdus0607", "harrypotter");
 $sql = "SELECT * FROM userProfile WHERE id='$id'";
 
@@ -30,10 +31,11 @@ if (!$numberMatch) {
         exit;
     } else {
         session_start();
-        $_SESSION["userid"] = $row["id"];
-        $_SESSION["username"] = $row["name"];
+        $_SESSION['userid'] = $row['id'];
+        $_SESSION['username'] = $row['name'];
         echo ("<script>
-            location.href = 'imageBoardPage.php';
+        window.alert('세션 시작');
+            location.href = 'mainPage.php';
             </script>
             ");
     }
