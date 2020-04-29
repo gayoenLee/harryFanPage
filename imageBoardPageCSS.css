@@ -1,0 +1,139 @@
+html {
+  padding: 10px;
+}
+body {
+  font-family: "Source Sans Pro", sans-serif;
+  background-color: rgb(243, 239, 239);
+}
+.content {
+  display: table;
+  margin: auto;
+  display: table-cell;
+  vertical-align: middle;
+}
+header {
+  width: auto;
+  height: 200px;
+  background-image: url("https://lh3.googleusercontent.com/proxy/4zMGCr-jcvsjRYf_hQdCtg5lhv9A6GiXI_PsiVrIB9wYNjr2gf1MBEdr3EGIEUpP5NpUC6_wdutXvfdDW_oMWXwHoGmcA2uG8-oE9-qABGg4V1UOzZa5YIOBtUOFEByUXLVv07hgfxsd2D5cdA48tv55AtsNcvrmqvOyY3EyszH_eJ5Cgtli5yUwhtA_");
+  background-repeat: no-repeat;
+  background-position: right bottom;
+  background-size: cover;
+}
+/* .headerImage {
+  position: relative;
+  top: 0;
+  right: 0;
+  width: 45.8%;
+} */
+nav {
+  width: 800px;
+  height: 100px;
+  margin-left: 10%;
+}
+nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+nav ul li {
+  padding: 10px;
+  display: inline-block;
+  list-style-type: none;
+
+  margin: 0;
+  padding: 0;
+  width: 100px;
+  float: left;
+  background: #f9f9f9;
+}
+
+ul li a {
+  display: block;
+  color: #000;
+  padding: 8px 16px;
+  text-decoration: none;
+}
+
+ul li a:hover {
+  background: #ccc;
+  color: #fff;
+}
+
+aside {
+  width: 20%;
+  float: left;
+}
+td li {
+  list-style-type: none;
+  padding-left: 0px;
+}
+tr td {
+  padding-left: 0px;
+}
+
+.writeBtn {
+  position: relative;
+  left: 100px;
+}
+.write {
+  border: none;
+  width: 100px;
+  padding: 15px 0;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 4px;
+  font-size: 15px;
+  border-radius: 10px;
+  background-color: whitesmoke;
+}
+.write:hover {
+  cursor: pointer;
+  border: none;
+  width: 100px;
+  padding: 15px 0;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 4px;
+  font-size: 15px;
+  border-radius: 10px;
+  background-color: thistle;
+}
+.content {
+  width: 80%;
+  float: left;
+  align-content: center;
+}
+.listTable {
+  width: 80%;
+  height: 300px;
+  margin-left: 20%;
+  align-content: center;
+  border: 1px solid #444444;
+  border-collapse: collapse;
+}
+
+h1 {
+  text-align: center;
+}
+.pagingSection {
+  padding: 5%;
+  text-align: center;
+}
+.pagingItem {
+  align-items: center;
+  text-align: center;
+  font-size: 15px;
+}
+
+th,
+td {
+  border: 1px solid #444444;
+  padding: 10px;
+}
+/* .container::after {
+  content: "";
+  display: block;
+  clear: both;
+} */
