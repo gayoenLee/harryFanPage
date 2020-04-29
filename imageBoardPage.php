@@ -19,10 +19,10 @@ $sendingValue=$_GET["title"];
 </header>
             <nav id="siteNavigation" class="mainNavigation" role="navigation">
 			<div class="navMenu"><ul>
-<li><a href="https://thisinterestsme.com/">홈</a></li>
-<li ><a href="https://thisinterestsme.com/contact/">게시판</a></li>
-<li ><a href="https://thisinterestsme.com/privacy-policy/">인물 소개</a></li>
-<li ><a href="https://thisinterestsme.com/privacy-policy">굿즈샵</a></li>
+<li><a href="http://192.168.56.101/mainPage.php">홈</a></li>
+<li ><a href="http://192.168.56.101/imageBoardPage.php">게시판</a></li>
+<li ><a href="http://192.168.56.101/mainPage.php">인물 소개</a></li>
+<li ><a href="http://192.168.56.101/mainPage.php">굿즈샵</a></li>
 </ul>
 </div>
 		</nav><!-- #site-navigation -->
