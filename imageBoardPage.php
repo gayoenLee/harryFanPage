@@ -135,18 +135,42 @@ $sqlSecond = database(
 //while문이 끝날 때까지 게시판테이블 배열의 정보를 가져옴.
 }?>
 </table>
-<div id="pageNum" style="text-align:center">
 
-
-
-</div>
-
+<div id="pageNum" style="text-align:center;">
+<?php
+if($page <=1){
+    //빈 값
+}else{
+    echo "<a href='imageBoardPage.php?page=1'>처음</a>";
+}
+if(page<=1){
+    //빈 값
+}else{
+    $present = $page - 1;
+    echo"<a href='imageBoardPage.php?page=$present'>이전</a>";
+}
+for($i = $blockStart; $i <= $blockEnd; $i++){
+    if($page == $i){
+        echo "<b>$i</b>";
+    }else{
+        echo "<a href='imageBoardPage.php?page=$i'>$i</a>";
+    }
+}
+if($page >= $totalPage){
+    //빈 값
+}else{
+    $next = $page + 1;
+    echo "<a href='imageBoardPage.php?page=$next'>다음</a>";
+}
+if($page >= $totalPage){
+    //빈 값
+}else{
+    echo "<a href='imageBoardPage.php?page=$totalPage'>마지막</a>";
+}
 ?>
 </div>
+
    
-
-
-
 
 <?php
 $pageNum = ($_GET['page']) ? $_GET['page'] : 1;
