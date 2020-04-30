@@ -4,6 +4,13 @@ include_once"config.php";
 include_once"dbConnect.php";
 $sendingValue=$_GET["title"];
 //  디비에서 게시글 정보 가져오기
+
+if(isset($_GET['page'])){
+    $page = $_GET["page"];
+}
+else{
+    $page = 1;
+}
 ?>
 <?php
 // 저장된 내용 가져오기
@@ -78,6 +85,39 @@ $(location).attr("href", actionURL);
 
             </tr>
 
+            <!-- 페이징 디비로 구현 시작 -->
+<?php
+$sql = database("SELECT * FROM talkBoard");
+//mysqli_num_rows : 게시판 테이블에 있는 모든 레코드 수를 변수에 저장.
+$totalRecord = mysqli_num_rows($sql);
+//한 페이지에 보여줄 갯수
+$list = 5;
+//블록당 보여줄 페이지 갯수
+$blockCount = 5;
+//현재 페이지 블록
+$blockNum = ceil($page / $blockCount);
+//블록 시작 번호
+$blockStart = (($blockNum - 1) * $blockCount)+1;
+//블럭 마지막 번호
+$blockEnd = $blockStart + $blockCount - 1;
+//페이징한 페이지 수
+$totalPage = ceil($totalRecord / $list);
+if($blockEnd > $totalPage){
+    $blockEnd = $totalPage;
+}
+//블록의 총 갯수
+$totalBlock = ceil($totalPage / $blockCount);
+//페이지의 시작
+$pageStart = ($page - 1) * $list;
+
+//게시글 정보 가져오기
+$sqlSecond = database(
+    //게시판 글 테이블에서 num을 내림차순으로 정렬해서 pageStart를 시작으로 list(5)만큼 보여주도록 정보를 가져오겠다.
+    "SELECT * FROM talkBoard ORDER BY num DESC LIMIT $pageStart, $list"
+);
+?>
+
+
 <!-- 글 목록 가져오기 -->
 <tbody>
     <tr>
@@ -95,6 +135,13 @@ $(location).attr("href", actionURL);
 //while문이 끝날 때까지 게시판테이블 배열의 정보를 가져옴.
 }?>
 </table>
+<div id="pageNum" style="text-align:center">
+
+
+
+</div>
+
+?>
 </div>
    
 
