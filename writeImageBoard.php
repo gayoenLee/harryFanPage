@@ -7,6 +7,7 @@ include "loginOK.php";
 <head>
     <title>이미지 공유 게시판</title>
     <link rel="stylesheet" type="text/css" href="showImageBoardCSS.css"/>
+    <script src="https://code.jquery.com/jquery-3.5.0.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
 </head>
 <body>
     <p>
