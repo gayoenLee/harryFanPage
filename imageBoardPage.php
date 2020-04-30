@@ -1,9 +1,9 @@
-
 <?php  
-//  디비에서 게시글 정보 가져오기
-include_once"./config.php";
-include_once"./dbConnect.php";
+session_start();
+include_once"config.php";
+include_once"dbConnect.php";
 $sendingValue=$_GET["title"];
+//  디비에서 게시글 정보 가져오기
 ?>
 <?php
 // 저장된 내용 가져오기
@@ -21,11 +21,7 @@ $title = $talkBoard["title"];
 if(strlen($title)>30){
     $title = str_replace($board["title"], mb_substr($talkBoard["title"],0,30,"utf-8")."...",$talkBoard["title"]);
 }
-
-
 ?>
-
-
 <!DOCTYPE html>
 <html>
     <head>
