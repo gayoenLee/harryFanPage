@@ -59,7 +59,8 @@ $logged = $username."(".$userid.")";
                     <tbody>
                         <tr>
                             <td>
-                                <input type="text" placeholder="아이디" name="userName"><b></b></td>
+                                <span>&nbsp;&nbsp;&nbsp;아이디 : <b><?=$userid?></b></span>
+                                <input type="hidden"  name="userName" value=$userid ><b></b></td>
                         </tr>
                         <tr>
                             <input
@@ -72,7 +73,6 @@ $logged = $username."(".$userid.")";
                     <tr>
                         <td><input
                             type="password"
-                        
                             placeholder="글 비밀번호"
                             name="password"
                             id="userPassword"
@@ -83,8 +83,8 @@ $logged = $username."(".$userid.")";
                             <textarea
                                
                                 placeholder="글 내용"
-                                name="contents"
-                                id="userContents"
+                                name="content"
+                                id="userContent"
                                 style="height: 350px"
                                 required="required"></textarea>
                         </td>
