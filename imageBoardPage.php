@@ -1,7 +1,9 @@
 <?php  
 session_start();
+echo session_cache_expire();
 include_once"config.php";
 include_once"dbConnect.php";
+$id = $_POST['id'];
 $sendingValue=$_GET["title"];
 //  디비에서 게시글 정보 가져오기
 
@@ -52,6 +54,7 @@ $(location).attr("href", actionURL);
 <div class="content">
     <div>
         <h1><b>게시판</b></h1>
+       <!--세션 넘어오는 것 확인  <?php print_r($_SESSION) ;?> -->
         <div class="writeBtn">
         <button  class="write" onclick="location.href='writeImageBoard.php'">글쓰기</button>
         </div>
@@ -92,7 +95,7 @@ if(strlen($title)>30){
 <!-- data-action은 커스텀 속성., 클릭한 글의 번호에 해당하는 글을 읽는 페이지로 이동하겠다는 것. -->
     <span class="readCheck" style="cursor:pointer" 
     data-action="./showImageBoardContents.php?num=<?=$talkBoard['num']?>"><?=$title?></span>
-    <td width="120"><?=$talkBoard['name'];?></td>
+    <td width="120"><?=$talkBoard['id'];?></td>
     <td width="100"><?=$talkBoard['time'];?></td>
     <td width="100"><?=$talkBoard['view'];?></td>
 </tr>
