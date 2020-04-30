@@ -1,7 +1,11 @@
 
 <?php  
+//  디비에서 게시글 정보 가져오기
+include_once"./config.php";
+include_once"./dbConnect.php";
 $sendingValue=$_GET["title"];
 ?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -44,9 +48,9 @@ $sendingValue=$_GET["title"];
 
             </tr>
 <?php
-$pageNum = ($_GET['page']) ? $_GET['page'] : 1;//page : default -1
+$pageNum = ($_GET['page']) ? $_GET['page'] : 1;
 //한 페이지에 보여줄 글 목록 갯수
-$listNum = ($_GET['listNum'])?$_GET['listNum']:5; //page : default -50
+$listNum = ($_GET['listNum'])?$_GET['listNum']:5; 
 
 //한 블럭에 나타낼 페이지 번호 갯수
 $blockPageNumList=5; 
