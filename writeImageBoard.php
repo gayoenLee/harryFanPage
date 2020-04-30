@@ -1,3 +1,8 @@
+<?php
+include "config.php";
+include "dbConnect.php";
+include "loginOK.php";
+?>
 <!DOCTYPE html>
 <head>
     <title>이미지 공유 게시판</title>
