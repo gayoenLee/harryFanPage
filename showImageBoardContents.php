@@ -93,6 +93,7 @@ $logged = $username."(".$userid.")";
                                 <a href="http://192.168.56.101/imageBoardPage.php">[목록으로]</a>
                             </li> -->
                             <li class="button">
+                            <a href="imageBoardPage.php">[목록]</a>
                                 <input  type="submit" value="[수정]" name="submit">
                             </li>
                         </form>
