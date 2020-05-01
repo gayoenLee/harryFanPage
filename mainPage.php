@@ -1,12 +1,28 @@
 <?php
+session_start();
 include 'config.php'
 ?>
-
 <!DOCTYPE html>
 
 <head>
     <style type="text/css">
-        @import url(mainPageCSS.css);
+ .content {
+    width: 67%;
+    float: left;
+}
+.sidebar {
+    width: 33%;
+    float: right;
+}
+.feature {
+    width: 25%;
+    float: left;
+}
+.wrap:after, .features:after {
+    content: " "; 
+    display: block; 
+    clear: both;
+}
     </style>
     <link rel="stylesheet" href="firstPageCSS.css">
     <title>홈</title>
@@ -56,11 +72,20 @@ $logged = $username."(".$userid.")";
         </nav>
     </div>
     <span class="username">WELCOME !</span>
-    <span class="username">
-        <?php 
-            echo $_POST["email"]; 
-            ?>
-    </span>
+<div class="wrap">
+    <main class="content">
+        <p>여기에 게시물들 가져오기ㅁㄴ아리;'ㅁㅇ넣;ㅣ'ㄴㅇ러하;'ㅣㅁ나ㅓ일'ㄴ이;마히;ㅇㄴㅁ'ㅏㅎ;</p>
+            </main>
+    <aside class="sidebar">ㅇㄴㅁㄹㄴㅇㄹㄴㅁㅇㄹㅇㄴ사이드</aside>
+</div><!--.wrap --> 
+<section class="features">
+  <a class="feature" href="#"><img src="https://fakeimg.pl/300x200/"></a>
+  <a class="feature" href="#"><img src="https://fakeimg.pl/300x200/"></a>
+  <a class="feature" href="#"><img src="https://fakeimg.pl/300x200/"></a>
+  <a class="feature" href="#"><img src="https://fakeimg.pl/300x200/"></a>
+</section> 
+
+
 
 </body>
 
