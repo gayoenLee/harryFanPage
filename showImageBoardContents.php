@@ -72,11 +72,16 @@ alert(document.cookie);
     <meta charset="UTF-8">
     <title>이미지 게시판</title>
     <link rel="stylesheet" type="text/css" href="showImageBoardCSS.css"/>
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+
     <script
   src="https://code.jquery.com/jquery-3.5.0.min.js"
   integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ="
   crossorigin="anonymous"></script> 
-  <scipt type="text/javascript" src="js/common.js"></scipt>
+ <script type="text/javascript" src="/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="/js/jquery-ui.js"></script>
+<script type="text/javascript" src="/js/common.js"></script>
+
     </head>
 <body>
     <div id="page" style="height: auto !important;">
