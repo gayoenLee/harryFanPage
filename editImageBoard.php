@@ -3,18 +3,7 @@ include "config.php";
 include "dbConnect.php";
 
 $contentNum = $_GET['num'];
-$userPassword = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
-$time = date('Y-m-d');
-//받아온  num값을 선택해서 게시글 수정.
-database(
-    "UPDATE talkBoard SET
-    time = '$time',
-    password = '$userPassword',
-    title = '{$_POST['title']}',
-    content = '{$_POST['content']}'
-    WHERE num = '$contentNum'
-    ");
 ?>
 
 
