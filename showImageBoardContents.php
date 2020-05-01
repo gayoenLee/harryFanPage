@@ -1,66 +1,6 @@
 <?php
-//댓글 수정시 받은 post값들
-$deleteTitle=$_POST["title"];
-$comment = $_POST["comment"];
-$email = $_POST["email"];
-$time = $_POST["time"];
-// 댓글 수정 후 받은 배열 값들 압축 풀어서 가져오기.
-$data = file_get_contents("imageBoardCommentData/".$_POST["time"].$deleteTitle);
-$array = unserialize($data);
-
-//게시글 수정시 받은 post값들
-
-
-//게시글 저장한 데이터 배열 압축 풀기
-$title=$_GET['title'];
-$boardData = file_get_contents("imageBoardData/".$_GET['title']);
-$boardArray =unserialize($boardData);
-
-function printList(){
-    $list = scandir('./imageBoardData');
-    $i=0;
-    while($i < count($list)){
-        if($list[$i] != '.'){
-            if($list[$i] !='..'){
-                echo "<li><a href=\"showImageBoardContents.php?id=$list[$i]\">$list[$i]</a></li>\n";
-            }
-        }
-        $i =$i + 1;
-    }
-}
-
-// 게시글 제목 받은 것
-function printTitle(){
-    //게시글 저장한 데이터 배열 압축 풀기
-    $title=$_GET['title'];
-    $boardData = file_get_contents("imageBoardData/".$_GET['title']);
-    $boardArray =unserialize($boardData);
-        echo $boardArray[0];
-}
-//게시글 내용 
-function printContents(){
-    //게시글 저장한 데이터 배열 압축 풀기
-$title=$_GET['title'];
-$boardData = file_get_contents("imageBoardData/".$_GET['title']);
-$boardArray =unserialize($boardData);
-    echo $boardArray[2];
-}
-
-function printEmail(){
-     //게시글 저장한 데이터 배열 압축 풀기
-$title=$_GET['title'];
-$boardData = file_get_contents("imageBoardData/".$_GET['title']);
-$boardArray =unserialize($boardData);
-$contentsEmail=$boardArray[1];
-    echo $boardArray[1];
-}
-function printTime(){
-    $title=$_GET['title'];
-$boardData = file_get_contents("imageBoardData/".$_GET['title']);
-$boardArray =unserialize($boardData);
-$contentsTime = $boardArray[4];
-    echo $boardArray[4];
-}
+include_once"config.php";
+include"dbConnect.php";
 
 ?>
 <!DOCTYPE html>
@@ -101,19 +41,14 @@ $contentsTime = $boardArray[4];
              ?></h3>
             <div id="userInfo">
             <span>작성자 :</span>
-                <?php
-echo printEmail();
-?>
+  
  <span>작성 시간 :</span>
-                <?php echo  printTime();
-                ?>
+                
                 <div id="boardLine"></div>
             </div>
             <!-- 글 내용 나오는 부분 시작-->
             <div id="boardContents">
-                <h2><?php
-echo printContents();
-?>
+                <h2>
 </div>
  <div id="boardLine"></div>
 </h2></div>
