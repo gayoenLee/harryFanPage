@@ -1,10 +1,7 @@
 <?php  
 session_start();
-echo session_cache_expire();
-include_once"config.php";
-include_once"dbConnect.php";
-$id = $_POST['id'];
-$sendingValue=$_GET["title"];
+include_once'./config.php';
+include_once'./dbConnect.php';
 //  디비에서 게시글 정보 가져오기
 
 if(isset($_GET['page'])){
@@ -14,14 +11,16 @@ else{
     $page = 1;
 }
 ?>
-
 <!DOCTYPE html>
 <html>
     <head>
         <meta charset="utf-8">
         <title>이미지 공유 게시판</title>
-        <script src="https://code.jquery.com/jquery-3.5.0.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
-        <!-- <link rel="stylesheet" href="imageBoardPageCSS.css"> -->
+         <script
+  src="https://code.jquery.com/jquery-3.5.0.min.js"
+  integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ="
+  crossorigin="anonymous"></script> 
+          <!-- <link rel="stylesheet" href="imageBoardPageCSS.css">  -->
 <script>
 $(function(){
     //span의 클래스인 readCheck가 클릭 이벤트가 발생하면 자신의 속성 값인 data-action값을 새로운 변수인 actionURL에 저장하고 그 링크로 이동하게 함.
@@ -77,20 +76,19 @@ $sqlSecond = database(
 while(
     //fetch_aray : mysql 레코드 가져오기. 배열로 가져옴.
     //https://blog.naver.com/diceworld/220295811114
-    $talkBoard = $sqlSecond->fetch_array()
-){
+    $talkBoard = $sqlSecond->fetch_array()){
     //배열로 저장.
 $title = $talkBoard["title"];
 // 글자수가 30이 넘으면 ...처리
-if(strlen($title)>30){
-    $title = str_replace($board["title"], mb_substr($talkBoard["title"],0,30,"utf-8")."...",$talkBoard["title"]);
-}
+// if(strlen($title)>30){
+//     $title = str_replace($talkBoard["title"], mb_substr($talkBoard["title"],0,30,"utf-8")."...",$talkBoard["title"]);
+// }
 ?>
 
 <!-- 글 목록 가져오기 -->
 <tbody>
     <tr>
-<td width="70"><?=$board['num']; ?></td>
+<td width="70"><?=$talkBoard['num']; ?></td>
 <td width = "500">
 <!-- data-action은 커스텀 속성., 클릭한 글의 번호에 해당하는 글을 읽는 페이지로 이동하겠다는 것. -->
     <span class="readCheck" style="cursor:pointer" 
