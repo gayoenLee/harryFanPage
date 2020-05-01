@@ -1,16 +1,12 @@
 <?php
-include "config.php";
+include_once "config.php";
 include "dbConnect.php";
 
 $contentNum = $_GET['num'];
-?>
-
-
-<?php
-$title=$_POST['title'];
-$boardData = file_get_contents("imageBoardData/".$_POST['title']);
-$boardArray =unserialize($boardData);
-
+$sql = database(
+    "SELECT * FROM talkBoard where num='$contentNum'
+    ");
+    $talkBoard = $sql -> fetch_array();
 ?>
 <!DOCTYPE html>
 <head>
@@ -66,42 +62,23 @@ $logged = $username."(".$userid.")";
 		</nav><!-- 네비 바 끝 -->
     </header>
 
-
-
     <div id="boardRead">
-        <form action="editImageBoardOK.php" method="post">
-            <input type="hidden" name="oldTitle" value="<?php echo $_POST['title'];?>">
-            <h2><input type="text" name="title" placeholder="Title" value="<?php echo $_POST['title']?>"></h2>
-            <input type="hidden" name="password" value="<?php
-             $boardData = file_get_contents("imageBoardData/".$_POST['title']);
-             $boardArray =unserialize($boardData);
-             echo $boardArray[3];
-             ?>">
-            <input type="hidden" name="userName" value="<?php
-             $boardData = file_get_contents("imageBoardData/".$_POST['title']);
-             $boardArray =unserialize($boardData);
-             echo $boardArray[1];
-             ?>">
-            <input type="hidden" name="time" value="<?php
-             $boardData = file_get_contents("imageBoardData/".$_POST['title']);
-             $boardArray =unserialize($boardData);
-             echo $boardArray[4];
-             ?>">
+        <form action="editImageBoardOK.php/<?php echo $talkBoard['num'];?>" method="post">
+            <input type="hidden" name="num" value="<?=$contentNum?>"/>
+
+            <h2><input type="text" name="title" placeholder="Title" value="<?= $talkBoard['title']?>" required></h2>
             <div id="userInfo">
-            <span>작성자 :</span>
-                <?php
-echo printEmail();
+            <span>작성자 아이디 :</span>
+                <?=$talkBoard['id']
 ?>
- <span>작성 시간 :</span>
-                <?php echo  printTime();
+ <span>작성일 :</span>
+                <?=$talkBoard['time']
                 ?>
                 <div id="boardLine"></div>
             </div>
             <!-- 글 내용 -->
             <div id="boardContents">
-               <textarea rows="10" cols="70" name="contents"><?php
-// echo printList();
-echo printContents();
+               <textarea rows="10" cols="70" name="content"><?=$talkBoard['content']
 ?></textarea>
             </div>
 
