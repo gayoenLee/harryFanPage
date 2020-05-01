@@ -3,22 +3,35 @@ include_once"config.php";
 include"dbConnect.php";
 
 $contentNum = $_GET['num'];
-//조회수 올리기
 $view = mysqli_fetch_array(
     database("SELECT * FROM talkBoard WHERE num='$contentNum'
 "));
 $view = $view['view'] + 1;
-database(
-    "UPDATE talkBoard SET 
-    view='$view'
-    WHERE num='$contentNum'
-    "
-);
 //받아온 num값을 선택해서 게시글 정보 가져오기
 $sql = database(
     "SELECT * FROM talkBoard where num='$contentNum'
     ");
     $talkBoard = $sql -> fetch_array();
+//조회수 올리기-쿠키 사용해서 중복 조회 방지 
+if(!empty($contentNum) && empty($_COOKIE['imageBoard'.$contentNum])){
+    $sqlSecond = 
+        "UPDATE talkBoard SET 
+        view='$view'
+        WHERE num='$contentNum'
+        ";
+        $result = $db->query($sqlSecond);
+if(empty($result)){
+?>
+<script>
+alert('오류가 발생했습니다');
+history.back();
+</script>
+<?php
+}else{
+    setcookie('imageBoard'.$contentNum, TRUE, time()+(60*60*24), '/');
+}
+}
+
 ?>
 <!DOCTYPE html>
 <head>
