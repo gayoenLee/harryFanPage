@@ -94,6 +94,9 @@ $logged = $username."(".$userid.")";
                             </li> -->
                             <li class="button">
                             <a href="imageBoardPage.php">[목록]</a>
+                            <?php
+                            if($userid==$talkBoard['id']){
+                                ?>
                                 <input  type="submit" value="[수정]" name="submit">
                             </li>
                         </form>
@@ -107,7 +110,7 @@ $logged = $username."(".$userid.")";
                                   $contentsTime = $boardArray[4];
                                       echo $boardArray[4];
                                 ?>">
-                                <input  type="submit" value="[삭제]">
+                                <input  type="submit" value="[삭제]"><?php } ?>
                             </li>
                         </ul>
                     </div>
