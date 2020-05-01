@@ -4,15 +4,18 @@ include "config.php";
 include "dbConnect.php";
 //아래 코드 지웠더니 로그인 상태 확인됨.
 // include "loginOK.php";
-$id = $_POST['id'];
+//$id = $_POST['id'];
 ?>
 <!DOCTYPE html>
+<html>
 <head>
+<meta charse="UTF-8">
+<meta name="viewport" content="width=device-width" initial-scale="1">
     <title>이미지 공유 게시판</title>
     <link rel="stylesheet" type="text/css" href="showImageBoardCSS.css"/>
-    <!-- <script src="https://code.jquery.com/jquery-3.5.0.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script> -->
-<!-- <script src="/js/login.js">
-</script> -->
+     <script src="https://code.jquery.com/jquery-3.5.0.min.js" ></script> 
+    <script src="/js/login.js">
+</script> 
 </head>
 <body>
     <p>
@@ -60,14 +63,14 @@ $logged = $username."(".$userid.")";
                         <tr>
                             <td>
                                 <span>&nbsp;&nbsp;&nbsp;아이디 : <b><?=$userid?></b></span>
-                                <input type="hidden"  name="userName" value=$userid ><b></b></td>
+                               <b></b></td>
                         </tr>
                         <tr>
                             <input
                                 type="text"
                                 placeholder="글 제목"
                                 name="title"
-                                id="userTitle"
+                                id="title"
                                 required="required"></td>
                     </tr>
                     <tr>
@@ -75,25 +78,23 @@ $logged = $username."(".$userid.")";
                             type="password"
                             placeholder="글 비밀번호"
                             name="password"
-                            id="userPassword"
+                            id="upassword"
                             style="width: 150px;"></td>
                     </tr>
                     <tr>
                         <td>
                             <textarea
-                               
                                 placeholder="글 내용"
                                 name="content"
-                                id="userContent"
+                                id="ucontent"
                                 style="height: 350px"
                                 required="required"></textarea>
                         </td>
                     </tr>
                 </tbody>
             </table>
-            <input type="hidden" name="boardTime" value="<?php echo date("Y-m-d H:i:s");?>">
-            <input type="checkbox" value="1" name="lockpost">비밀글<br><br>
-            <button class="button" type="submit">글 쓰기</button>
+            <!-- <input type="hidden" name="boardTime" value="<?php echo date("Y-m-d H:i:s");?>"> -->
+            <input class="button" type="submit"></input>
         </form>
     </body>
 
