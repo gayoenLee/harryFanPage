@@ -33,7 +33,35 @@ $boardArray =unserialize($boardData);
 <li ><a href="192.168.56.101/imageBoardPage.php">게시판</a></li>
 <li ><a href="192.168.56.101/mainPage.php">인물 소개</a></li>
 <li ><a href="192.168.56.101/mainPage.php">굿즈샵</a></li>
+<?php
+                if(!$userid){
+                    ?>
+                    <ul>
+                    <li>
+                    <a href='#' role="button">접속하기<span class="caret"></span></a>
+                    <ul>
+                    <li><a href="login.php">로그인</a></li>
+                    </li>
+                    <li><a href="joinMember.php">회원가입</a></li>
+                    </ul>
+                    </li>
+                    </ul>
+                    <?php
+                }else{
+$logged = $username."(".$userid.")";
+                    ?>
+                    <ul>
+                    <li>
+                    <a href="#" role="button"><b><?=$logged?></b>님의 회원관리
+                    <span class="caret"></span></a>
+<ul>
+<li><a href="logout.php">로그아웃</a></li>
 </ul>
+
+                    </li>
+                    </ul>
+                    <?php
+                }?>
 </div>
 		</nav><!-- 네비 바 끝 -->
     </header>
