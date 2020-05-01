@@ -79,7 +79,7 @@ $logged = $username."(".$userid.")";
     </header>
     <div class="boardRead">
         <!-- 게시물 수정하는 페이지로 데이터 보내기 -->
-        <form method="POST" action="editImageBoard.php">
+        <form method="POST" action="editImageBoard.php?num=<?=$talkBoard['num']?>">
             <input type="hidden" value="<?php echo $_GET['title'];?>" name="title">
             <input type="hidden" value=$email name='email'>
            
@@ -112,7 +112,7 @@ $logged = $username."(".$userid.")";
                             </li>
                         </form>
                         <li class="button">
-                            <form action="deleteImageBoard.php" method="post">
+                            <form action="deleteImageBoard.php?num=<?=$talkBoard['num']?>" method="post">
                                 <input type="hidden" name="title" value="<?php echo $_GET['title'];?>">
                                 <input type="hidden" name="time" value="<?php 
                                   $title=$_GET['title'];
