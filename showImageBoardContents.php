@@ -2,12 +2,18 @@
 include_once"config.php";
 include"dbConnect.php";
 
+$contentNum = $_GET['num'];
+//받아온 num값을 선택해서 게시글 정보 가져오기
+$sql = database(
+    "SELECT * FROM talkBoard where num='$contentNum'
+    ");
+    $talkBoard = $sql -> fetch_array();
 ?>
 <!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
     <title>이미지 게시판</title>
-    <link rel="stylesheet" type="text/css" href="shsowImageBoardCSS.css"/>
+    <link rel="stylesheet" type="text/css" href="showImageBoardCSS.css"/>
     <script
   src="https://code.jquery.com/jquery-3.5.0.min.js"
   integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ="
@@ -28,8 +34,36 @@ include"dbConnect.php";
 <li ><a href="http://192.168.56.101/imageBoardPage.php">게시판</a></li>
 <li ><a href="http://192.168.56.101/mainPage.php">인물 소개</a></li>
 <li ><a href="http://192.168.56.101/mainPage.php">굿즈샵</a></li>
+<?php
+                if(!$userid){
+                    ?>
+                    <ul>
+                    <li>
+                    <a href='#' role="button">접속하기<span class="caret"></span></a>
+                    <ul>
+                    <li><a href="login.php">로그인</a></li>
+                    </li>
+                    <li><a href="joinMember.php">회원가입</a></li>
+                    </ul>
+                    </li>
+                    </ul>
+                    <?php
+                }else{
+$logged = $username."(".$userid.")";
+                    ?>
+                    <ul>
+                    <li>
+                    <a href="#" role="button"><b><?=$logged?></b>님의 회원관리
+                    <span class="caret"></span></a>
+<ul>
+<li><a href="logout.php">로그아웃</a></li>
 </ul>
-</div>
+
+                    </li>
+                    </ul>
+                    <?php
+                }?>
+                   </div> 
 		</nav><!-- 네비 바 끝 -->
     </header>
     <div class="boardRead">
@@ -37,22 +71,18 @@ include"dbConnect.php";
         <form method="POST" action="editImageBoard.php">
             <input type="hidden" value="<?php echo $_GET['title'];?>" name="title">
             <input type="hidden" value=$email name='email'>
-            <input type="hidden" value=$
-
-            <h3 ><?php 
-             $pageTitle=$_GET['title'];
-             echo $pageTitle;
-             ?></h3>
+           
+            <h3 ><?=$talkBoard['title']?></h3>
             <div id="userInfo">
-            <span>작성자 :</span>
+            <span>작성자 :<?=$talkBoard['id']?></span>
   
- <span>작성 시간 :</span>
+ <span>작성 시간 :<?=$talkBoard['time']?></span>
                 
                 <div id="boardLine"></div>
             </div>
             <!-- 글 내용 나오는 부분 시작-->
             <div id="boardContents">
-                <h2>
+                <h2><?=$talkBoard['content']?>
 </div>
  <div id="boardLine"></div>
 </h2></div>
