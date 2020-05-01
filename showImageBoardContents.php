@@ -232,93 +232,11 @@ $logged = $username."(".$userid.")";
                     </form>
                 </div>
             </div>
-            <div>
+            <div class="reply_view">
             <!-- 댓글 추가되는 곳 -->
+            <h3>댓글 목록</h3>
             <?php
-             $title = $_GET["title"];
-function printCommentList(){
-    //게시물 제목에 맞는 댓글 파일 전부 가져오기
-    $list = scandir('./imageBoardCommentData');
-    $i=0;
-    if(isset($_POST["editTitle"])){
-        $comment = $_POST["comment"];
-$email = $_POST["email"];
-$title = $_POST["title"];
-$time = $_POST["time"];
-
-$commentArray = array($title, $email, $comment, $time);
-$data = serialize($commentArray);
-    file_put_contents('imageBoardCommentData/'.$_POST["editTitle"], $data);
-}//echo count($list);
-    while($i < count($list)){
-        if($list[$i] != '.'){
-            if($list[$i] !='..'){
-       if($list[$i]){
-                if(strpos($list[$i],$_GET["title"])!==false){
-                $data = file_get_contents("imageBoardCommentData/".$list[$i]);
-                 $array = unserialize($data);
-                // echo "0번째".$array[0]."<br/>";
-                 echo "<div ><li >작성자".$array[1]."<br/></li></div>";
-                 echo "<div style='visibility: visible'><li class='commentList'>댓글 내용 : ".$array[2]."<br/></li></div>";
-                 echo "<div><li>작성 시간 : ".$array[3]."<br/></li></div>";
-                 $sendTitle=$_GET["title"];
-               echo  "<HTML>
-                <form 
-                 action= 'deleteImageBoardComment.php'
-                  method='get'>
-                    <input type='hidden' name='title' value='$list[$i]';?>
-                    <input type='hidden' name='pageTitle' value='$sendTitle';?>
-                    <input type='submit' value='[삭제]'>
-                    </form>
-                    </HTML>";
-                   
-                    echo  "<HTML>
-                    <form action='showImageBoardContents.php?title=.$sendTitle '
-                     >
-                     
-                        <input type='button' value='[수정]' onClick='showElement($i)'>
-                                         </form>
-                        </HTML>";
-
-                    echo "<html>
-                    <div class='container$i' style='visibility:hidden'>
-                    <form action='' method='POST'>
-                 
-                    <input type='hidden' name='editTitle' value='$list[$i]';?>
-                    <input type='hidden' name='title' value='$array[0]' ;?>
-                    <input type='hidden' name='email' value='$array[1]' ;?>
-                    <input type='text' name='comment' value='$array[2]' ;?>
-                    <input type='hidden' name='time' value='$array[3]' ;?>
-                    <input type='hidden' name='pageTitle' value='$sendTitle';?>
-                    <input type='button' value='[취소]' onClick='hideElement($i)'>
-                    <input type='submit' value='[저장]'>
-                    </form>
-                    </div>
-                    </html>";
-  
-                }
-            
-                }
-    
-            }
-    }
-    $i =$i + 1;
-        
-}
-}
-            include 'commentaAddForm.php';
             ?>
-            <script type="text/javascript">
-            function showElement(position) {    
-            element = document.querySelector('.container'+position); 
-            element.style.visibility = 'visible'; 
-        } 
-        function hideElement(position) { 
-            element = document.querySelector('.container'+position); 
-            element.style.visibility = 'hidden'; 
-        } 
-    </script> 
-    </div>
     </div>                    
             <!-- </script> -->
     
