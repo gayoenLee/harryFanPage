@@ -3,7 +3,6 @@ include "config.php";
 include "dbConnect.php";
 
 $contentNum = $_GET['num'];
-
 ?>
 
 
@@ -11,39 +10,6 @@ $contentNum = $_GET['num'];
 $title=$_POST['title'];
 $boardData = file_get_contents("imageBoardData/".$_POST['title']);
 $boardArray =unserialize($boardData);
-
-?>
-
-
-<?php
-function printContents(){
-       //게시글 저장한 데이터 배열 압축 풀기
-$title=$_POST['title'];
-$boardData = file_get_contents("imageBoardData/".$_POST['title']);
-$boardArray =unserialize($boardData);
-    echo $boardArray[2];
-}
-function printEmail(){
-    $title=$_POST['title'];
-$boardData = file_get_contents("imageBoardData/".$_POST['title']);
-$boardArray =unserialize($boardData);
-
-    echo $boardArray[1];
-}
-function printTime(){
-    $title=$_POST['title'];
-$boardData = file_get_contents("imageBoardData/".$_POST['title']);
-$boardArray =unserialize($boardData);
-    echo $boardArray[4];
-}
-$title=$_POST['title'];
-$boardData = file_get_contents("imageBoardData/".$_POST['title']);
-$boardArray =unserialize($boardData);
-$userName = $boardArray[1];
-$time= $boardArray[4];
-
-
-
 
 ?>
 <!DOCTYPE html>
