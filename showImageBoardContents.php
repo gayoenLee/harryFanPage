@@ -3,6 +3,17 @@ include_once"config.php";
 include"dbConnect.php";
 
 $contentNum = $_GET['num'];
+//조회수 올리기
+$view = mysqli_fetch_array(
+    database("SELECT * FROM talkBoard WHERE num='$contentNum'
+"));
+$view = $view['view'] + 1;
+database(
+    "UPDATE talkBoard SET 
+    view='$view'
+    WHERE num='$contentNum'
+    "
+);
 //받아온 num값을 선택해서 게시글 정보 가져오기
 $sql = database(
     "SELECT * FROM talkBoard where num='$contentNum'
