@@ -3,6 +3,7 @@ include_once"config.php";
 include"dbConnect.php";
 
 $contentNum = $_GET['num'];
+$cookieContentNum = $contentNum;
 $view = mysqli_fetch_array(
     database("SELECT * FROM talkBoard WHERE num='$contentNum'
 "));
@@ -32,7 +33,40 @@ history.back();
 }
 }
 
+//오늘 본 게시물 또는 최근 본 게시물 만들기
+$i=0;
+//todayViewBoardCookie라는 쿠키가 존재하면
+if(isset($_COOKIE['todayViewBoardCookie'.$userid])){
+    //todayViewBoard변수에 todayViewBoardCookie를 저장.
+$todayViewBoard = $_COOKIE['todayViewBoardCookie'.$userid];
+//쿠키를 ','로 나누어서 구분한다.
+$todayViewEach = explode(",", $_COOKIE['todayViewBoardCookie'.$userid]);
+//최근 목록 5개를 뽑기 위해 배열을 최신 것부터 반대로 정렬해주기.
+$todayViewArray = array_reverse($todayViewEach);
+//위의 배열의 사이즈만큼 반복.
+while($i<sizeof($todayViewArray)){
+if($cookieContentNum == $todayViewArray[$i]){
+    //중복을 막기 위한 변수 $save
+    $save='no';
+}
+$i++;
+}
+}
+//저장된 쿠키값이 없을 경우 새로 쿠키 저장.
+if(!isset($_COOKIE['todayViewBoardCookie'.$userid])){
+    setcookie('todayViewBoardCookie'.$userid, $cookieContentNum, time()+21600, "/");
+}
+//저장된 쿠키값이 존재하고, 중복된 값이 아닌 경우 기존의 todyaViewBoardCookie에 현재 쿠키를 추가하는 소스
+if(isset($_COOKIE['todayViewBoardCookie'.$userid])){
+    if($save != 'no'){
+        setcookie('todayViewBoardCookie'.$userid, $todayViewBoard.",".$cookieContentNum, time()+21600, "/");
+    }
+}
 ?>
+<!-- 쿠키가 잘됐는지 확인하는 코드 -->
+<script>
+alert(document.cookie);
+</script>
 <!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
