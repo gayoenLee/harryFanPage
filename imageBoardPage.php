@@ -1,11 +1,10 @@
 <?php  
 session_start();
-include_once'./config.php';
-include_once'./dbConnect.php';
-//  디비에서 게시글 정보 가져오기
+include_once'config.php';
+include_once'dbConnect.php';
 
 if(isset($_GET['page'])){
-    $page = $_GET["page"];
+    $page = $_GET['page'];
 }
 else{
     $page = 1;
@@ -20,7 +19,7 @@ else{
   src="https://code.jquery.com/jquery-3.5.0.min.js"
   integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ="
   crossorigin="anonymous"></script> 
-          <!-- <link rel="stylesheet" href="imageBoardPageCSS.css">  -->
+           <link rel="stylesheet" href="imageBoardPageCSS.css"> 
 <script>
 $(function(){
     //span의 클래스인 readCheck가 클릭 이벤트가 발생하면 자신의 속성 값인 data-action값을 새로운 변수인 actionURL에 저장하고 그 링크로 이동하게 함.
@@ -46,8 +45,49 @@ $(location).attr("href", actionURL);
 <li ><a href="http://192.168.56.101/imageBoardPage.php">게시판</a></li>
 <li ><a href="http://192.168.56.101/mainPage.php">인물 소개</a></li>
 <li ><a href="http://192.168.56.101/mainPage.php">굿즈샵</a></li>
+<?php
+                if(!$userid){
+                    ?>
+                    <ul>
+                    <li>
+                    <a href='#' role="button">접속하기<span class="caret"></span></a>
+                    <ul>
+                    <li><a href="login.php">로그인</a></li>
+                    </li>
+                    <li><a href="joinMember.php">회원가입</a></li>
+                    </ul>
+                    </li>
+                    </ul>
+                    <?php
+                }else{
+                    $logged = $username;
+                    switch($userPoint['point']){
+case '0':
+    echo "현재 등급 : 새싹회원 ";
+break;
+
+case '5':
+    echo "현재 등급 : 일반회원";
+break;
+
+case '10':
+    echo "현재 등급 : 우수회원";
+break;
+                    }
+                    ?>
+                    <ul>
+                    <li>
+                    <a href="#" role="button"><b><?=$logged?></b>님의 회원관리
+                    <span class="caret"></span></a>
+<ul>
+<li><a href="logout.php">로그아웃</a></li>
 </ul>
-</div>
+
+                    </li>
+                    </ul>
+                    <?php
+                }?>
+                   </div> 
 		</nav><!-- #site-navigation -->
 			<section class="container">
 <div class="content">
@@ -127,15 +167,12 @@ if($blockEnd > $totalPage){
 $totalBlock = ceil($totalPage / $blockCount);
 //페이지의 시작
 $pageStart = ($page - 1) * $list;
-
 //게시글 정보 가져오기
 $sqlSecond = database(
     //게시판 글 테이블에서 num을 내림차순으로 정렬해서 pageStart를 시작으로 list(5)만큼 보여주도록 정보를 가져오겠다.
     "SELECT * FROM talkBoard ORDER BY num DESC LIMIT $pageStart, $list"
 );
 ?>
-
-
 
 <div id="pageNum" style="text-align:center;">
 <?php
