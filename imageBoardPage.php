@@ -3,12 +3,19 @@ session_start();
 include_once'config.php';
 include_once'dbConnect.php';
 
+$pointSql = database(
+    "SELECT * FROM levelPointTable WHERE id='$userid'
+    "
+    );
+    $userPoint = $pointSql->fetch_array();
 if(isset($_GET['page'])){
     $page = $_GET['page'];
 }
 else{
     $page = 1;
 }
+
+
 ?>
 <!DOCTYPE html>
 <html>
