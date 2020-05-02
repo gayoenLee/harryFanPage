@@ -5,6 +5,11 @@ include "dbConnect.php";
 //아래 코드 지웠더니 로그인 상태 확인됨.
 // include "loginOK.php";
 //$id = $_POST['id'];
+$pointSql = database(
+    "SELECT * FROM levelPointTable WHERE id='$userid'
+    "
+    );
+    $userPoint = $pointSql->fetch_array();
 ?>
 <!DOCTYPE html>
 <html>
@@ -59,6 +64,11 @@ $logged = $username."(".$userid.")";
                             <h3>게시판 글쓰기</h3>
                         </th>
                     </thead>
+                    <?php
+if(!isset($_SESSION['userid'])){
+    echo "<div id='not_use'>로그인을 해야 볼 수 있습니다.</div>";    
+}else if($userPoint['point'] == '3' || $userPoint['point']>'1'){
+    ?>
                     <tbody>
                         <tr>
                             <td>
@@ -96,6 +106,12 @@ $logged = $username."(".$userid.")";
             <!-- <input type="hidden" name="boardTime" value="<?php echo date("Y-m-d H:i:s");?>"> -->
             <input class="button" type="submit"></input>
         </form>
+<?php  }else{
+  echo  "<div id='not_use'>일반등급만 볼 수 있는 게시판입니다.<br />방문 횟수를 늘려서 1포인트를 적립하세요.(일반등급 5포인트)</div>";
+  
+    
+    
+}?>
     </body>
 
 </html>
