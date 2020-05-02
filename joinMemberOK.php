@@ -1,5 +1,4 @@
 <?php
-
 include_once "dbConnect.php";
 
 $id = $_POST['id'];
@@ -13,6 +12,14 @@ password='$password',
 name='$name',
 email = '$email'
 "
+);
+
+database(
+    "INSERT INTO levelPointTable 
+   (id, password, name, email, point)
+   VALUES(
+       '$id', '$password', '$name', '$email', 0
+   )"
 );
 echo "
 <script>
