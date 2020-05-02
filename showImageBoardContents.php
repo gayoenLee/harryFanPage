@@ -114,7 +114,20 @@ alert(document.cookie);
                     </ul>
                     <?php
                 }else{
-$logged = $username."(".$userPoint['point'].")";
+                    $logged = $username;
+                    switch($userPoint['point']){
+case '0':
+    echo "현재 등급 : 새싹회원 ";
+break;
+
+case '5':
+    echo "현재 등급 : 일반회원";
+break;
+
+case '10':
+    echo "현재 등급 : 우수회원";
+break;
+                    }
                     ?>
                     <ul>
                     <li>
