@@ -17,6 +17,42 @@ else{
 
 
 ?>
+
+
+<?php
+//방문횟수 확인하는 쿠키
+if(isset($_COOKIE['visitLog'])){
+    //쿠키가 있으면
+    $logData = $_COOKIE['visitLog'];
+   // $counter = $_COOKIE['visitNum'.$userid]+1;
+   $counter = $logData["counter"];
+    $time = $logData["time"];
+    $lastDate = date("Y년n월j일", $time);
+}else{
+    $counter = 0;
+ $lastDate = "첫 방문입니다.";
+   // $counter = 1;
+    //최근 한달 동안의 활동을 기준으로 회원 레벨 등급 올리기.
+}
+//쿠키가 없으면
+//setcookie('visitNum'.$userid, $counter, time()+60*2);
+$firstResult = setcookie("visitLog[counter]", ++$counter, time()+60*60,"/");
+$secondResult = setcookie("visitLog[time]", time(), time()+60*60*24,"/");
+$result = ($firstResult && $secondResult);
+// if($counter == 1){
+//     echo '처음 방문했습니다.';
+// }else{
+//     echo $counter.'번째 방문';
+// }
+if ($result) {
+    echo "이 페이지의 방문은 ", $counter, " 번째입니다<hr>";
+    echo "이전 방문 : ", $lastDate, "<hr>";
+    echo print_r($_COOKIE);
+    echo '<a href="page2_arr.html">페이지를 이동합니다</a><br>';
+    echo '(<a href="reset_log.php">초기화합니다</a>)';
+} else echo '<span class="error">print_r($_COOKIE);</span>';
+
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -101,6 +137,7 @@ break;
     <div>
         <h1><b>게시판</b></h1>
        <!--세션 넘어오는 것 확인  <?php print_r($_SESSION) ;?> -->
+       <!-- 글쓰기 -->
         <div class="writeBtn">
         <button  class="write" onclick="location.href='writeImageBoard.php'">글쓰기</button>
         </div>
