@@ -93,12 +93,14 @@ if(!isset($_SESSION['userid'])){
                     </tr>
                     <tr>
                         <td>
+
                             <textarea
                                 placeholder="글 내용"
                                 name="content"
                                 id="ucontent"
                                 style="height: 350px"
-                                required="required"></textarea>
+                                required="required">
+                                </textarea>
                         </td>
                     </tr>
                 </tbody>
@@ -106,6 +108,12 @@ if(!isset($_SESSION['userid'])){
             <!-- <input type="hidden" name="boardTime" value="<?php echo date("Y-m-d H:i:s");?>"> -->
             <input class="button" type="submit"></input>
         </form>
+        <form action="upload.php" method="post" enctype="multipart/form-data">
+    Select Image Files to Upload:
+    <input type="file" name="files[]" multiple="multiple" ><br />
+    <input type="file" name="files[]" multiple="multiple" ><br />
+    <input type="submit" name="submit" value="UPLOAD">
+</form>
 <?php  }else{
   echo  "<div id='not_use'>일반등급만 볼 수 있는 게시판입니다.<br />방문 횟수를 늘려서 1포인트를 적립하세요.(일반등급 5포인트)</div>";
   
