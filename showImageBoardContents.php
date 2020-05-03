@@ -71,30 +71,14 @@ if(isset($_COOKIE['todayViewBoardCookie'.$userid])){
     }
 }
 
-
-
 ?>
-
-<?php
-// Get images from the database
-$query = $db->query("SELECT * FROM images ORDER BY id DESC");
-
-if($query->num_rows > 0){
-    while($row = $query->fetch_assoc()){
-        $imageURL = 'uploads/'.$row["file_name"];
-?>
-    <img src="<?php echo $imageURL; ?>" alt="" />
-<?php }
-}else{ ?>
-    <p>No image(s) found...</p>
-<?php } ?> 
-
 
 
 <!-- 쿠키가 잘됐는지 확인하는 코드 -->
 <script>
 alert(document.cookie);
 </script>
+
 <!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
@@ -203,6 +187,19 @@ break;
             <!-- 글 내용 나오는 부분 시작-->
             <div id="boardContents">
                 <h2><?=$talkBoard['content']?>
+                <?php
+// Get images from the database
+$query = $db->query("SELECT * FROM images WHERE contentTitle='".$talkBoard['title']."' ");
+
+if($query->num_rows > 0){
+    while($row = $query->fetch_assoc()){
+        $imageURL = 'uploads/'.$row["file_name"];
+?>
+    <img src="<?php echo $imageURL; ?>" alt="" />
+<?php }
+}else{ ?>
+    <p>No image(s) found...</p>
+<?php } ?> 
 </div>
  <div id="boardLine"></div>
 </h2></div>
