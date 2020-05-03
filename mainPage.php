@@ -3,10 +3,82 @@ session_start();
 include 'config.php';
 include 'dbConnect.php';
 
+//포인트 테이블 데이터 가져오기
+$pointSql = database(
+    "SELECT * FROM levelPointTable WHERE id='$userid'
+    "
+    );
+    $userPoint = $pointSql->fetch_array();
+//게시판에 로그인한 아이디인 사람이 글을 얼마나 올렸는지 갯수 가져오기.
+    $writeIdNum = database(
+        "SELECT COUNT(id) from talkBoard WHERE id='$userid'"
+    );
 //쿠키를 ','로 나누어서 구분한다.
 $todayViewEach = explode(",", $_COOKIE['todayViewBoardCookie'.$userid]);
 //최근 목록 5개를 뽑기 위해 배열을 최신 것부터 반대로 정렬해주기.
 $todayViewArray = array_reverse($todayViewEach);
+
+
+?>
+<?php
+//방문횟수 확인하는 쿠키
+if(isset($_COOKIE[$userid."visitLog"])){
+    //쿠키가 있으면
+    $logData = $_COOKIE[$userid."visitLog"];
+   $counter = $logData["counter"];
+    $time = $logData["time"];
+    $lastDate = date("Y년n월j일 A g시i분", $time);
+    
+}else{
+    $counter = 0;
+ $lastDate = "첫 방문입니다.";
+   // $counter = 1;
+    //최근 한달 동안의 활동을 기준으로 회원 레벨 등급 올리기.
+}
+//쿠키가 없으면
+//setcookie('visitNum'.$userid, $counter, time()+60*2);
+if($lastDate == date("Y년n월j일 A g시i분")){
+    $firstResult = setcookie($userid.'visitLog[counter]', $counter, time()+60,'/');
+$secondResult = setcookie($userid.'visitLog[time]', time(), time()+60,'/');
+}else{
+$firstResult = setcookie($userid.'visitLog[counter]', ++$counter, time()+60,'/');
+$secondResult = setcookie($userid.'visitLog[time]', time(), time()+60,'/');
+}
+$result = ($firstResult && $secondResult);
+
+// if($counter == 1){
+//     echo '처음 방문했습니다.';
+// }else{
+//     echo $counter.'번째 방문';
+// }
+if ($result) {
+    echo "이 페이지의 방문은 ", $counter, " 번째입니다<hr>";
+    echo "이전 방문 : ", $lastDate, "<hr>";
+    echo "오늘 날짜 : ", date("Y년n월j일"), "<hr>";
+    echo "날짜 히스토리 : ".$logData['time'];
+    echo '<a href="page2_arr.html">페이지를 이동합니다</a><br>';
+    echo '(<a href="reset_log.php">초기화합니다</a>)';
+} else echo '<span class="error">print_r($_COOKIE);</span>';
+//새싹 회원이 우수회원으로 올라가기 위한 조건.
+if($userPoint['point']==0 && $counter>3){
+    database("UPDATE levelPointTable 
+    SET
+    point = 3
+    WHERE point = 0;
+    "
+    );
+        }
+//게시물 올린 갯수 구해서 그에 따라서 회원등급 우수회원으로 올리기.
+//그러면 글 쓸수 있도록 하기.
+if($writeIdNum>3 && userPoint['point'] == 3){
+    database("UPDATE levelPointTable
+    SET
+    point=5
+    WHERE point = 3");
+}
+
+
+
 ?>
 <!DOCTYPE html>
 
