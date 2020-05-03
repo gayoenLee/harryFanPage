@@ -3,6 +3,7 @@ include_once"config.php";
 include"dbConnect.php";
 
 $contentNum = $_GET['num'];
+
 $cookieContentNum = $contentNum;
 $view = mysqli_fetch_array(
     database("SELECT * FROM talkBoard WHERE num='$contentNum'
@@ -69,7 +70,27 @@ if(isset($_COOKIE['todayViewBoardCookie'.$userid])){
         setcookie('todayViewBoardCookie'.$userid, $todayViewBoard.",".$cookieContentNum, time()+21600, "/");
     }
 }
+
+
+
 ?>
+
+<?php
+// Get images from the database
+$query = $db->query("SELECT * FROM images ORDER BY id DESC");
+
+if($query->num_rows > 0){
+    while($row = $query->fetch_assoc()){
+        $imageURL = 'uploads/'.$row["file_name"];
+?>
+    <img src="<?php echo $imageURL; ?>" alt="" />
+<?php }
+}else{ ?>
+    <p>No image(s) found...</p>
+<?php } ?> 
+
+
+
 <!-- 쿠키가 잘됐는지 확인하는 코드 -->
 <script>
 alert(document.cookie);
@@ -78,11 +99,22 @@ alert(document.cookie);
 <head>
     <meta charset="UTF-8">
     <title>이미지 게시판</title>
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
     <link rel="stylesheet" type="text/css" href="showImageBoardCSS.css"/>
+    <link rel="stylesheet" type="text/css" href="css/jqueryUI.css" />
+
+<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="js/jqueryUI.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
     <script
   src="https://code.jquery.com/jquery-3.5.0.min.js"
   integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ="
   crossorigin="anonymous"></script> 
+  <!-- <link rel="stylesheet" type="text/css" href="/css/jquery-ui.css" />
+<link rel="stylesheet" type="text/css" href="/css/style.css" />
+<script type="text/javascript" src="/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="/js/jquery-ui.js"></script>
+<script type="text/javascript" src="/js/common.js"></script> -->
     </head>
 <body>
     <div id="page" style="height: auto !important;">
@@ -119,12 +151,22 @@ alert(document.cookie);
 case '0':
     echo "현재 등급 : 새싹회원 ";
 break;
-
+case '1':
+    echo "현재 등급 : 새싹회원 ";
+break;
+case '2':
+    echo "현재 등급 : 새싹회원 ";
+break;
+case '3':
+    echo "현재 등급 : 새싹회원 ";
+break;
+case '4':
+    echo "현재 등급 : 일반회원";
+break;
 case '5':
     echo "현재 등급 : 일반회원";
 break;
-
-case '10':
+case '6':
     echo "현재 등급 : 우수회원";
 break;
                     }
@@ -197,144 +239,52 @@ break;
                 <!-- 하단에 댓글 달기 버튼, 입력 폼 -->
                 <div class="commentSide">    
                     <h3>댓글 남기기</h3>
-                    
-                    <form
-                        action="imageBoardAddCommentProcess.php"
-                        method="POST"
-                        id="commentForm">
-                        <p>
-                            <span>아래에 내용을 입력해주세요</span>
-                            <span>필수 입력창은</span><span class="required">*</span>로 표시되어 있습니다.
-                        </p>
-                        <p>댓글
-                            <textarea
-                                id="comment"
-                                name="comment"
-                                cols="45"
-                                rows="8"
-                                maxlength="65525"
-                                required="required"></textarea>
-                        </p>
-                        <p>
-                            비밀번호<span class="required">*</span>
-                            <input
-                                id="password"
-                                name="password"
-                                type="password"
-                                size="30"
-                                maxlength="245"
-                                required="required">
-                        </p>
-                        <p>
-                            이메일<span class="required">*</span>
-                            
-                            <input
-                                id="email"
-                                name="email"
-                                size="30"
-                                maxlength="100"
-                                aria-describedby="email-notes"
-                                required="required">
-                        </p>
-                        <p>
-                            <input type="hidden" name="title" value="<?php  echo $_GET["title"];?>">
-                            <input type="hidden" name="time" value="<?php echo date("Y-m-d H:i:s");?>">
-                            <input name="submit" type="submit" value="댓글 작성">
-
-                        </p>
-
-                    </form>
-                </div>
-            </div>
-            <div>
-            <!-- 댓글 추가되는 곳 -->
-            <?php
-             $title = $_GET["title"];
-function printCommentList(){
-    //게시물 제목에 맞는 댓글 파일 전부 가져오기
-    $list = scandir('./imageBoardCommentData');
-    $i=0;
-    if(isset($_POST["editTitle"])){
-        $comment = $_POST["comment"];
-$email = $_POST["email"];
-$title = $_POST["title"];
-$time = $_POST["time"];
-
-$commentArray = array($title, $email, $comment, $time);
-$data = serialize($commentArray);
-    file_put_contents('imageBoardCommentData/'.$_POST["editTitle"], $data);
-}//echo count($list);
-    while($i < count($list)){
-        if($list[$i] != '.'){
-            if($list[$i] !='..'){
-       if($list[$i]){
-                if(strpos($list[$i],$_GET["title"])!==false){
-                $data = file_get_contents("imageBoardCommentData/".$list[$i]);
-                 $array = unserialize($data);
-                // echo "0번째".$array[0]."<br/>";
-                 echo "<div ><li >작성자".$array[1]."<br/></li></div>";
-                 echo "<div style='visibility: visible'><li class='commentList'>댓글 내용 : ".$array[2]."<br/></li></div>";
-                 echo "<div><li>작성 시간 : ".$array[3]."<br/></li></div>";
-                 $sendTitle=$_GET["title"];
-               echo  "<HTML>
-                <form 
-                 action= 'deleteImageBoardComment.php'
-                  method='get'>
-                    <input type='hidden' name='title' value='$list[$i]';?>
-                    <input type='hidden' name='pageTitle' value='$sendTitle';?>
-                    <input type='submit' value='[삭제]'>
-                    </form>
-                    </HTML>";
-                   
-                    echo  "<HTML>
-                    <form action='showImageBoardContents.php?title=.$sendTitle '
-                     >
-                     
-                        <input type='button' value='[수정]' onClick='showElement($i)'>
-                                         </form>
-                        </HTML>";
-
-                    echo "<html>
-                    <div class='container$i' style='visibility:hidden'>
-                    <form action='' method='POST'>
-                 
-                    <input type='hidden' name='editTitle' value='$list[$i]';?>
-                    <input type='hidden' name='title' value='$array[0]' ;?>
-                    <input type='hidden' name='email' value='$array[1]' ;?>
-                    <input type='text' name='comment' value='$array[2]' ;?>
-                    <input type='hidden' name='time' value='$array[3]' ;?>
-                    <input type='hidden' name='pageTitle' value='$sendTitle';?>
-                    <input type='button' value='[취소]' onClick='hideElement($i)'>
-                    <input type='submit' value='[저장]'>
-                    </form>
-                    </div>
-                    </html>";
-  
-                }
-            
-                }
-    
-            }
-    }
-    $i =$i + 1;
-        
-}
-}
-            include 'commentaAddForm.php';
-            ?>
-            <script type="text/javascript">
-            function showElement(position) {    
-            element = document.querySelector('.container'+position); 
-            element.style.visibility = 'visible'; 
-        } 
-        function hideElement(position) { 
-            element = document.querySelector('.container'+position); 
-            element.style.visibility = 'hidden'; 
-        } 
-    </script> 
-    </div>
-    </div>                    
-            <!-- </script> -->
-    
+         
+           	<!--- 댓글 불러오기 -->
+<div class="reply_view">
+<h3>댓글목록</h3>
+		<?php
+			$sql3 = database("select * from commentTable where contentNum=$contentNum order by num desc");
+			while($reply = $sql3->fetch_array()){ 
+		?>
+          <div class="dap_lo">
+			<div><b><?php echo $reply['id'];?></b></div>
+			<div class="dap_to comt_edit"><?php echo nl2br("$reply[comment]"); ?></div>
+			<div class="rep_me dap_to"><?php echo $reply['date']; ?></div>
+			<div class="rep_me rep_menu">
+				<a class="dat_edit_bt" href="#">수정</a>
+				<a class="dat_delete_bt" href="#">삭제</a>
+			</div>
+            <!-- 댓글 수정 폼 dialog -->
+			<div class="dat_edit">
+				<form method="post" action="editImageBoardCommentProcess.php">
+					<input type="hidden" name="rno" value="<?php echo $reply['num']; ?>" /><input type="hidden" name="b_no" value="<?php echo $contentNum; ?>">
+					<input type="password" name="pw" class="dap_sm" placeholder="비밀번호" />
+					<textarea name="content" class="dap_edit_t"><?php echo $reply['comment']; ?></textarea>
+					<input type="submit" value="수정하기" class="re_mo_bt">
+				</form>
+			</div>
+            <!-- 댓글 삭제 비밀번호 확인 -->
+			<div class='dat_delete'>
+				<form action="deleteImageBoardComment.php" method="post">
+					<input type="hidden" name="rno" value="<?php echo $reply['num']; ?>" /><input type="hidden" name="b_no" value="<?php echo $contentNum; ?>">
+			 		<p>비밀번호<input type="password" name="pw" /> <input type="submit" value="확인"></p>
+				 </form>
+			</div>
+		</div>
+	<?php } ?>
+    <!--- 댓글 입력 폼 -->
+	<div class="dap_ins">
+			<input type="hidden" name="bno" class="bno" value="<?php echo $contentNum; ?>">
+			<input type="text" name="dat_user" id="dat_user" class="dat_user" size="15" placeholder="아이디">
+			<input type="password" name="dat_pw" id="dat_pw" class="dat_pw" size="15" placeholder="비밀번호">
+			<div style="margin-top:10px; ">
+				<textarea name="content" class="reply_content" id="re_content" ></textarea>
+				<button id="rep_bt" class="re_bt">댓글</button>
+			</div>
+	</div>
+    </div><!--- 댓글 불러오기 끝 -->
+<div id="foot_box"></div>
+</div>
         </body>
     </html>
