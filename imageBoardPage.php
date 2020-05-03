@@ -49,6 +49,23 @@ if ($result) {
     echo '(<a href="reset_log.php">초기화합니다</a>)';
 } else echo '<span class="error">print_r($_COOKIE);</span>';
 
+function resize_image($file, $newfile, $w, $h) {
+    list($width, $height) = getimagesize($file);
+    if(strpos(strtolower($file), ".jpg"))
+       $src = imagecreatefromjpeg($file);
+    else if(strpos(strtolower($file), ".png"))
+       $src = imagecreatefrompng($file);
+    else if(strpos(strtolower($file), ".gif"))
+       $src = imagecreatefromgif($file);
+    $dst = imagecreatetruecolor($w, $h);
+    imagecopyresampled($dst, $src, 0, 0, 0, 0, $w, $h, $width, $height);
+    if(strpos(strtolower($newfile), ".jpg"))
+       imagejpeg($dst, $newfile);
+    else if(strpos(strtolower($newfile), ".png"))
+       imagepng($dst, $newfile);
+    else if(strpos(strtolower($newfile), ".gif"))
+       imagegif($dst, $newfile);
+ }
 ?>
 <!DOCTYPE html>
 <html>
@@ -205,8 +222,24 @@ $title = $talkBoard["title"];
 <td width="70"><?=$talkBoard['num']; ?></td>
 <td width = "500">
 <!-- data-action은 커스텀 속성., 클릭한 글의 번호에 해당하는 글을 읽는 페이지로 이동하겠다는 것. -->
+    <?php 
+    // Get images from the database
+$query = $db->query("SELECT * FROM images WHERE contentTitle='".$talkBoard['title']."' ");
+if($query->num_rows > 0){
+    $row = $query->fetch_assoc();
+        $imageURL = 'uploads/'.$row["file_name"];
+resize_image('uploads/'.$row["file_name"], 'uploads/'.$row["file_name"]."new", 70, 70);
+$newImageURL = 'uploads/'.$row["file_name"]."new";
+?>
+   <span class="readCheck" style="cursor:pointer" 
+    data-action="./showImageBoardContents.php?num=<?=$talkBoard['num']?>"><p><img src="<?php echo $newImageURL; ?>" alt="" /><?=$title?></p><br /></span>
+<?php 
+}else{
+    ?>
     <span class="readCheck" style="cursor:pointer" 
-    data-action="./showImageBoardContents.php?num=<?=$talkBoard['num']?>"><?=$title?></span>
+    data-action="./showImageBoardContents.php?num=<?=$talkBoard['num']?>"><?=$title?>
+    </span>
+   <?php }?>
     <td width="120"><?=$talkBoard['id'];?></td>
     <td width="100"><?=$talkBoard['time'];?></td>
     <td width="100"><?=$talkBoard['view'];?></td>
