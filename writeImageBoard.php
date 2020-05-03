@@ -55,7 +55,7 @@ $logged = $username."(".$userid.")";
                     </ul>
                     <?php
                 }?>
-    <form action="writeImageProcess.php" method="POST">
+    <form action="writeImageProcess.php" method="POST" enctype="multipart/form-data">
         <p>
             <table class="writeTable" style="text-align: center; border: 1px solid #ddddda">
                 <thead>
@@ -100,20 +100,21 @@ if(!isset($_SESSION['userid'])){
                                 id="ucontent"
                                 style="height: 350px"
                                 required="required">
+
+
                                 </textarea>
                         </td>
                     </tr>
                 </tbody>
             </table>
             <!-- <input type="hidden" name="boardTime" value="<?php echo date("Y-m-d H:i:s");?>"> -->
-            <input class="button" type="submit"></input>
-        </form>
-        <form action="upload.php" method="post" enctype="multipart/form-data">
+           
+        
     Select Image Files to Upload:
     <input type="file" name="files[]" multiple="multiple" ><br />
     <input type="file" name="files[]" multiple="multiple" ><br />
-    <input type="submit" name="submit" value="UPLOAD">
-</form>
+    <input class="button" type="submit" name="submit" value="UPLOAD">
+        </form>
 <?php  }else{
   echo  "<div id='not_use'>일반등급만 볼 수 있는 게시판입니다.<br />방문 횟수를 늘려서 1포인트를 적립하세요.(일반등급 5포인트)</div>";
   
