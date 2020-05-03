@@ -70,6 +70,7 @@ if(isset($_COOKIE['todayViewBoardCookie'.$userid])){
         setcookie('todayViewBoardCookie'.$userid, $todayViewBoard.",".$cookieContentNum, time()+21600, "/");
     }
 }
+
 function resize_image($file, $newfile, $w, $h) {
     list($width, $height) = getimagesize($file);
     if(strpos(strtolower($file), ".jpg"))
@@ -186,7 +187,7 @@ break;
                    </div> 
 		</nav><!-- 네비 바 끝 -->
     </header>
-    <div class="boardRead">
+    <div class="boardRead">>
         <!-- 게시물 수정하는 페이지로 데이터 보내기 -->
         <form method="POST" action="editImageBoard.php?num=<?=$talkBoard['num']?>">
             <input type="hidden" value="<?php echo $_GET['title'];?>" name="title">
@@ -210,13 +211,16 @@ $query = $db->query("SELECT * FROM images WHERE contentTitle='".$talkBoard['titl
 if($query->num_rows > 0){
     while($row = $query->fetch_assoc()){
         $imageURL = 'uploads/'.$row["file_name"];
+resize_image('uploads/'.$row["file_name"], 'uploads/'.$row["file_name"]."new", 500, 500);
+$newImageURL = 'uploads/'.$row["file_name"]."new";
 ?>
-    <img src="<?php echo $imageURL; ?>" alt="" />
+   <p><img src="<?php echo $newImageURL; ?>" alt="" /></p><br />
 <?php }
 }else{ ?>
     <p>No image(s) found...</p>
 <?php } ?> 
 </div>
+<br />
  <div id="boardLine"></div>
 </h2></div>
                     <!-- 목록, 수정 , 삭제 -->
