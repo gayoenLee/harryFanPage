@@ -36,9 +36,7 @@ if(isset($_COOKIE['visitLog'])){
 }
 //쿠키가 없으면
 //setcookie('visitNum'.$userid, $counter, time()+60*2);
-$firstResult = setcookie("visitLog[counter]", ++$counter, time()+60*60,"/");
-$secondResult = setcookie("visitLog[time]", time(), time()+60*60*24,"/");
-$result = ($firstResult && $secondResult);
+
 // if($counter == 1){
 //     echo '처음 방문했습니다.';
 // }else{
@@ -47,7 +45,7 @@ $result = ($firstResult && $secondResult);
 if ($result) {
     echo "이 페이지의 방문은 ", $counter, " 번째입니다<hr>";
     echo "이전 방문 : ", $lastDate, "<hr>";
-    echo print_r($_COOKIE);
+   
     echo '<a href="page2_arr.html">페이지를 이동합니다</a><br>';
     echo '(<a href="reset_log.php">초기화합니다</a>)';
 } else echo '<span class="error">print_r($_COOKIE);</span>';
@@ -62,6 +60,11 @@ if ($result) {
   src="https://code.jquery.com/jquery-3.5.0.min.js"
   integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ="
   crossorigin="anonymous"></script> 
+  <link rel="stylesheet" type="text/css" href="css/jqueryUI.css" />
+<link rel="stylesheet" type="text/css" href="css/style.css" />
+<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="js/jqueryUI.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
            <link rel="stylesheet" href="imageBoardPageCSS.css"> 
 <script>
 $(function(){
@@ -253,7 +256,18 @@ if($page >= $totalPage){
 </div>
     </div>
     <aside>
-       사이드
+    <br><br><br>
+<div id="searchBox" style="text-align: center">
+<form action="searchResult.php" method="get">
+<select name="category">
+<option value="title">제목</option>
+<option value="name">글쓴이</option>
+<option value="content">내용</option>
+</select>
+<input type="text" name="search" size="40" required="required">
+<button class="btn btn-primary">검색</button>
+</form>
+</div>
     </aside>
     </section>
         </body>
