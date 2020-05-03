@@ -187,7 +187,7 @@ break;
                    </div> 
 		</nav><!-- 네비 바 끝 -->
     </header>
-    <div class="boardRead">>
+    <div class="boardRead"  style="overflow:scroll;  height: 1500px; padding:10px; ">
         <!-- 게시물 수정하는 페이지로 데이터 보내기 -->
         <form method="POST" action="editImageBoard.php?num=<?=$talkBoard['num']?>">
             <input type="hidden" value="<?php echo $_GET['title'];?>" name="title">
@@ -221,7 +221,7 @@ $newImageURL = 'uploads/'.$row["file_name"]."new";
 <?php } ?> 
 </div>
 <br />
- <div id="boardLine"></div>
+ <!-- <div id="boardLine"></div> -->
 </h2></div>
                     <!-- 목록, 수정 , 삭제 -->
               <p>      <div class="boardBottomMenu">
@@ -254,7 +254,7 @@ $newImageURL = 'uploads/'.$row["file_name"]."new";
                 </form>
                 </p>
                 <!-- 하단에 댓글 달기 버튼, 입력 폼 -->
-                <div class="commentSide">    
+                <div class="commentSide" style="overflow:scroll;  height: 1500px; padding:10px; ">    
                     <h3>댓글 남기기</h3>
          
            	<!--- 댓글 불러오기 -->
