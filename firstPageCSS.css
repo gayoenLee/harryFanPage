@@ -4,12 +4,20 @@
   font-size: 50px;
   align-content: center;
 }
+header img {
+  width: 100%;
+  height: 500px;
+  position: relative;
+  top: 0;
+  vertical-align: middle;
+  border: 0;
+  /* background-image: url(); */
+}
 
 body {
   margin-top: 200px;
   text-align: center;
-  background-color: rgb(216, 216, 224);
-  align-content: center;
+  background-color: rgb(243, 239, 239);
 }
 
 .email,
@@ -35,7 +43,7 @@ nav ul li {
   padding: 0;
   width: 100px;
 
-  background: #f9f9f9;
+  background: #6db6d3d3;
 }
 
 ul li a {
@@ -46,19 +54,30 @@ ul li a {
 }
 
 ul li a:hover {
-  background: #ccc;
+  background: thistle;
   color: #fff;
 }
 .listTable {
-  width: 80%;
-  height: 300px;
-
-  align-content: center;
+  width: 60%;
+  height: 200px;
+  margin-left: auto;
   border: 1px solid #444444;
   border-collapse: collapse;
 }
+.listSecond {
+  width: 60%;
+  height: 200px;
+  border: 1px solid #444444;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+}
 th,
 td {
+  height: 50px;
   border: 1px solid #444444;
   padding: 10px;
+}
+.title {
+  text-align: left;
 }
