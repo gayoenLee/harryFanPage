@@ -9,6 +9,7 @@ body {
   margin-top: 200px;
   text-align: center;
   background-color: rgb(216, 216, 224);
+  align-content: center;
 }
 
 .email,
@@ -17,7 +18,7 @@ body {
   font-size: 35px;
 }
 nav {
-  width: 800px;
+  width: 80%;
   height: 100px;
   margin-left: 10%;
 }
@@ -33,7 +34,6 @@ nav ul li {
   margin: 0;
   padding: 0;
   width: 100px;
-  float: left;
 
   background: #f9f9f9;
 }
@@ -48,4 +48,17 @@ ul li a {
 ul li a:hover {
   background: #ccc;
   color: #fff;
+}
+.listTable {
+  width: 80%;
+  height: 300px;
+
+  align-content: center;
+  border: 1px solid #444444;
+  border-collapse: collapse;
+}
+th,
+td {
+  border: 1px solid #444444;
+  padding: 10px;
 }
