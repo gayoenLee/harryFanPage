@@ -13,11 +13,14 @@ $board = $sql2->fetch_array();
 $pwk = $_POST['pw'];
 $bpw = $reply['pw'];
 
-if(password_verify($pwk, $bpw)) 
+$ok = $_POST['ok'];
+$cancel = $_POST['cancel'];
+
+if($ok) 
 	{
 		$sql = database("delete from commentTable where num='".$rno."'"); ?>
-	<script type="text/javascript">alert('댓글이 삭제되었습니다.'); location.replace("showImageBoardContents?num=<?php echo $board["num"]; ?>");</script>
+	<script type="text/javascript">alert('댓글이 삭제되었습니다.'); location.replace("showImageBoardContents.php?num=<?php echo $board["num"]; ?>");</script>
 	<?php 
 	}else{ ?>
-		<script type="text/javascript">alert('비밀번호가 틀립니다');history.back();</script>
+		<script type="text/javascript">alert('취소됐습니다');history.back();</script>
 	<?php } ?>
