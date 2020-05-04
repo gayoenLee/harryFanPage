@@ -5,11 +5,29 @@
 <head>
 <meta charset="UTF-8">
 <title>게시판</title>
-<link rel="stylesheet" type="text/css" href="css/style.css" />
+<!-- <link rel="stylesheet" type="text/css" href="css/style.css" /> -->
 <link rel="stylesheet" type="text/css" href="css/searchResultCSS.css" />
+<link rel="stylesheet" type="text/css" href="css/showImageBoardCSS.css" />
+
 
 </head>
 <body>
+<nav id="siteNavigation" class="mainNavigation" role="navigation">
+			<div class="navMenu"><ul>
+<li><a href="http://192.168.56.101/mainPage.php">홈</a></li>
+<li ><a href="http://192.168.56.101/imageBoardPage.php">게시판</a></li>
+<li ><a href="http://192.168.56.101/mainPage.php">인물 소개</a></li>
+<li ><a href="http://192.168.56.101/mainPage.php">굿즈샵</a></li>
+
+		</nav><!-- #site-navigation -->
+			<section class="container">
+<div class="content">
+    <div>
+        <h1><b>게시판</b></h1>
+
+
+
+
 <div id="board_area"> 
 <!-- 18.10.11 검색 추가 -->
 <?php
