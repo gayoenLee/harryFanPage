@@ -254,6 +254,7 @@ $newImageURL = 'uploads/'.$row["file_name"]."new";
                 </form>
                 </p>
                 <!-- 하단에 댓글 달기 버튼, 입력 폼 -->
+                <div class="commentSide">
                 <div class="commentSide" style="overflow:scroll;  height: 1500px; padding:10px; ">    
                     <h3>댓글 남기기</h3>
          
@@ -300,7 +301,8 @@ $newImageURL = 'uploads/'.$row["file_name"]."new";
 				<button id="rep_bt" class="re_bt">댓글</button>
 			</div>
 	</div>
-    </div><!--- 댓글 불러오기 끝 -->
+    </div>
+    <!--- 댓글 불러오기 끝 -->
 <div id="foot_box"></div>
 </div>
         </body>
