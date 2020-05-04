@@ -76,8 +76,23 @@ if($writeIdNum>3 && userPoint['point'] == 3){
     point=5
     WHERE point = 3");
 }
-
-
+function resize_image($file, $newfile, $w, $h) {
+    list($width, $height) = getimagesize($file);
+    if(strpos(strtolower($file), ".jpg"))
+       $src = imagecreatefromjpeg($file);
+    else if(strpos(strtolower($file), ".png"))
+       $src = imagecreatefrompng($file);
+    else if(strpos(strtolower($file), ".gif"))
+       $src = imagecreatefromgif($file);
+    $dst = imagecreatetruecolor($w, $h);
+    imagecopyresampled($dst, $src, 0, 0, 0, 0, $w, $h, $width, $height);
+    if(strpos(strtolower($newfile), ".jpg"))
+       imagejpeg($dst, $newfile);
+    else if(strpos(strtolower($newfile), ".png"))
+       imagepng($dst, $newfile);
+    else if(strpos(strtolower($newfile), ".gif"))
+       imagegif($dst, $newfile);
+ }
 
 ?>
 <!DOCTYPE html>
@@ -152,7 +167,7 @@ $logged = $username."(".$userid.")";
                     ?>
                     <ul>
                     <li>
-                    <a href="#" role="button"><b><?=$logged?></b>님의 회원관리
+                    <a href="#" role="button"><b><?=$userid?>님</b>
                     <span class="caret"></span></a>
 <ul>
 <li><a href="logout.php">로그아웃</a></li>
@@ -165,12 +180,73 @@ $logged = $username."(".$userid.")";
                    </div> 
         </nav>
     </div>
-    <span class="username">WELCOME !</span>
-<div class="wrap">
-    <main class="content">
-        <p>
-        <div class="float">
-<table border=0 background=" " style=background-repeat:no-repeat width=80 height=500 cellpadding=0 cellspacing=0;>
+    <!-- 메인부분 시작 -->
+    <span class="username">
+     <!-- 게시판 최신글 가져오기 -->
+     <h3>최근 게시물</h3>
+     <table class="listTable" style="text-align: center; border: 1px solid#ddddda">
+            <tr>
+                <th style="background-color: #eeeeee; text-align: center;">번호</th>
+                <th style="background-color: #eeeeee; text-align: center;">제목</th>
+                <th style="background-color: #eeeeee; text-align: center;">작성자</th>
+                <th style="background-color: #eeeeee; text-align: center;">작성일</th>
+                <th style="background-color: #eeeeee; text-align: center;">조회수</th>
+
+            </tr>
+            <!-- 최신 글 5개가져오기 -->
+            
+<?php
+$list = 5;
+$sql  = database(
+"SELECT * FROM talkBoard ORDER BY num DESC LIMIT $list
+");
+?>
+<!-- 저장된 내용 가져오기 -->
+<?php
+while($talkBoard = $sql-> fetch_array()){
+$title = $talkBoard['title'];
+
+
+?>
+<tbody>
+    <tr>
+<td width="70"><?=$talkBoard['num']; ?></td>
+<td width = "500">
+<!-- data-action은 커스텀 속성., 클릭한 글의 번호에 해당하는 글을 읽는 페이지로 이동하겠다는 것. -->
+    <?php 
+    // Get images from the database
+$query = $db->query("SELECT * FROM images WHERE contentTitle='".$talkBoard['title']."' ");
+if($query->num_rows > 0){
+    $row = $query->fetch_assoc();
+        $imageURL = 'uploads/'.$row["file_name"];
+resize_image('uploads/'.$row["file_name"], 'uploads/'.$row["file_name"]."new", 70, 70);
+$newImageURL = 'uploads/'.$row["file_name"]."new";
+?>
+   <span class="readCheck" style="cursor:pointer" 
+    data-action="./showImageBoardContents.php?num=<?=$talkBoard['num']?>"><p><img src="<?php echo $newImageURL; ?>" alt="" /><?=$title?></p><br /></span>
+<?php 
+}else{
+    ?>
+    <span class="readCheck" style="cursor:pointer" 
+    data-action="./showImageBoardContents.php?num=<?=$talkBoard['num']?>"><?=$title?>
+    </span>
+   <?php }?>
+    <td width="120"><?=$talkBoard['id'];?></td>
+    <td width="100"><?=$talkBoard['time'];?></td>
+    <td width="100"><?=$talkBoard['view'];?></td>
+</tr>
+</tbody>
+<?php
+};
+?>
+</table>
+    <!-- 최근에 본 게시물 -->
+
+    <div class="recentView"><h3>최근에 본 게시물</h3>
+    <?php      
+    if(isset($todayViewArray)){
+    ?>
+    <table border=0 background=" " style=background-repeat:no-repeat width=80 height=500 cellpadding=0 cellspacing=0;>
 <?
  if(!($todayViewArray[0] == "" || $todayViewArray[0] == null)){
 ?>
@@ -192,15 +268,15 @@ for($i=0; $i<5 && $todayViewArray[$i]; $i++){
  $rows=mysqli_fetch_array($result);
 ?>
 
-<tr align=center style="padding-right:15px;padding-top:5px;">
- <td align=center height=42 >
+<tr style="padding-top:5px;">
+ <td  height=42 >
  <a href="showImageBoardContents.php?num=<?=$rows['num']?>"><?=$rows['title']?>
   <!-- <img src="../shopimages/<?=$rows[minimage]?>" width=60 height=42 border=0 onerror='this.src=../img/noimage.gif'> -->
  </a>
  </td>
 </tr>
 <?
- echo "<tr><td align=center height=5 style=padding-right:15px;line-height :9px; font-size:9,>".substr2($rows['title'],0,10)."</td></tr>";
+ echo "<tr><td>".$rows['title']."</td></tr>";
  /*echo "<tr><td align=center height=5 style=line-height :9px; font-size:11>"."\\".number_format($rows[price])."</td></tr>";*/
  }
 }
@@ -210,10 +286,30 @@ for($i=0; $i<5 && $todayViewArray[$i]; $i++){
 </tr>
 </center>
 </table>
+<?php
+    }
+else{?>
+<h2>아직 조회한 게시물이 없습니다.</h2>
+<?php
+}
+?>
+</div>
+
+    </span>
+
+
+
+<div class="wrap">
+    <main class="content">
+        <p>
+        <div class="float">
+
 </div>
         </p>
             </main>
-    <aside class="sidebar">ㅇㄴㅁㄹㄴㅇㄹㄴㅁㅇㄹㅇㄴ사이드</aside>
+    <aside class="sidebar">ㅇㄴㅁㄹㄴㅇㄹㄴㅁㅇㄹㅇㄴ사이드
+    
+    </aside>
 </div><!--.wrap --> 
 <section class="features">
   <a class="feature" href="#"><img src="https://fakeimg.pl/300x200/"></a>
