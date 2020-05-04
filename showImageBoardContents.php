@@ -90,12 +90,6 @@ function resize_image($file, $newfile, $w, $h) {
  }
 ?>
 
-
-<!-- 쿠키가 잘됐는지 확인하는 코드 -->
-<script>
-alert(document.cookie);
-</script>
-
 <!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
@@ -129,9 +123,34 @@ alert(document.cookie);
 			<div class="navMenu"><ul>
 <li><a href="http://192.168.56.101/mainPage.php">홈</a></li>
 <li ><a href="http://192.168.56.101/imageBoardPage.php">게시판</a></li>
-<li ><a href="http://192.168.56.101/mainPage.php">인물 소개</a></li>
-<li ><a href="http://192.168.56.101/mainPage.php">굿즈샵</a></li>
-<?php
+<li ><a href="http://192.168.56.101/newsPage.php">최근 뉴스</a></li>
+                   </div> 
+		</nav><!-- 네비 바 끝 -->
+    </header>
+    <ul style="float:right; list-style-type:none; margin-right : 200px">
+    <?php
+                if(!$userid){
+                    ?>
+                    <ul>
+                    <li>
+                    <a href='#' role="button">접속하기<span class="caret"></span></a>
+                    <ul>
+                    <li><a href="login.php">로그인</a></li>
+                    </li>
+                    <li><a href="joinMember.php">회원가입</a></li>
+                    </ul>
+                    </li>
+                    </ul>
+                    <?php
+                }else{
+$logged = $username."(".$userid.")";
+                    ?>
+                    <ul>
+                    <li>
+                    <?=$userid?>님
+                    <span class="caret"></span></a></li></ul>
+                    <ul><li>
+                    <?php
                 if(!$userid){
                     ?>
                     <ul>
@@ -171,22 +190,22 @@ case '6':
 break;
                     }
                     ?>
-                    <ul>
-                    <li>
-                    <a href="#" role="button"><b><?=$logged?></b>님의 회원관리
-                    <span class="caret"></span></a>
+                    <?php
+                }?>
+                    </li></ul>
 <ul>
 <li><a href="logout.php">로그아웃</a></li>
 </ul>
-
+                <br /><br /><br /><br /><br /><br />
                     </li>
                     </ul>
                     <?php
                 }?>
                    </div> 
-		</nav><!-- 네비 바 끝 -->
-    </header>
-    <div class="boardRead"  style="overflow:scroll;  height: 1500px; padding:10px; ">
+        <!-- <li><a href="/bbs/login.php">로그인</a></li>
+        <li><a href="/bbs/register_form.php">회원가입</a></li> -->
+    </ul>
+    <div class="boardRead" >
         <!-- 게시물 수정하는 페이지로 데이터 보내기 -->
         <form method="POST" action="editImageBoard.php?num=<?=$talkBoard['num']?>">
             <input type="hidden" value="<?php echo $_GET['title'];?>" name="title">
@@ -201,7 +220,7 @@ break;
                 <div id="boardLine"></div>
             </div>
             <!-- 글 내용 나오는 부분 시작-->
-            <div id="boardContents">
+            <div id="boardContents" style="overflow-y:auto; overflow-x:auto !important;   height : auto; padding:10px; position: relative">
                 <h2><?=$talkBoard['content']?>
                 <?php
 // Get images from the database
@@ -220,8 +239,9 @@ $newImageURL = 'uploads/'.$row["file_name"]."new";
 <?php } ?> 
 </div>
 <br />
- <!-- <div id="boardLine"></div> -->
+ <div id="boardLine"></div>
 </h2></div>
+<br /><br />
                     <!-- 목록, 수정 , 삭제 -->
               <p>      <div class="boardBottomMenu">
                         <ul>
