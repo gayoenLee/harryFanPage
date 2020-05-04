@@ -25,13 +25,9 @@
     <div>
         <h1><b>게시판</b></h1>
 
-
-
-
 <div id="board_area"> 
 <!-- 18.10.11 검색 추가 -->
 <?php
- 
   /* 검색 변수 */
   $catagory = $_GET['category'];
   $search = $_GET['search'];
