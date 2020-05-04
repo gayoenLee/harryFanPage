@@ -14,9 +14,7 @@ if(isset($_GET['page'])){
 else{
     $page = 1;
 }
-
 ?>
-
 
 <?php
 //방문횟수 확인하는 쿠키
@@ -288,19 +286,26 @@ if($page >= $totalPage){
 ?>
 </div>
     </div>
-    <aside>
+    <div class="serchdiv">
     <br><br><br>
 <div id="searchBox" style="text-align: center">
 <form action="searchResult.php" method="get">
 <select name="category">
-<option value="title">제목</option>
+<div class - "searchTitle">
+<option value="title">제목</option></div>
+<div class="searchName">
 <option value="name">글쓴이</option>
+</div>
+<div class="searchContent">
 <option value="content">내용</option>
+</div>
 </select>
 <input type="text" name="search" size="40" required="required">
 <button class="btn btn-primary">검색</button>
 </form>
 </div>
+</div>
+<aside>
     </aside>
     </section>
         </body>
