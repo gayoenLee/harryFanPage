@@ -5,7 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>게시판</title>
-<link rel="stylesheet" type="text/css" href="/css/style.css" />
+<link rel="stylesheet" type="text/css" href="css/style.css" />
+<link rel="stylesheet" type="text/css" href="css/searchResultCSS.css" />
+
 </head>
 <body>
 <div id="board_area"> 
@@ -66,14 +68,18 @@
       </tbody>
     </table>
     <!-- 18.10.11 검색 추가 -->
-    <div id="search_box2">
+    <div class="searchBox" style="text-align: center">
       <form action="searchResult.php" method="get">
       <select name="catgo">
-        <option value="title">제목</option>
-        <option value="id">글쓴이</option>
-        <option value="content">내용</option>
+      <div class - "searchTitle">
+        <option value="title">제목</option></div>
+        <div class="searchName">
+        <option value="id">글쓴이</option></div>
+        <div class="searchContent">
+        <option value="content">내용</option></div>
       </select>
-      <input type="text" name="search" size="40" required="required"/> <button>검색</button>
+      <input type="text" name="search" size="40" required="required"/> 
+      <button>검색</button>
     </form>
   </div>
 </div>
