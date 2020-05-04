@@ -49,10 +49,10 @@
           while($talkBoard = $sqlSecond->fetch_array()){
            
           $title=$talkBoard["title"]; 
-            if(strlen($title)>30)
-              { 
-                $title=str_replace($talkBoard["title"],mb_substr($talkBoard["title"],0,30,"utf-8")."...",$talkBoard["title"]);
-              }
+            // if(strlen($title)>30)
+            //   { 
+            //     $title=str_replace($talkBoard["title"],mb_substr($talkBoard["title"],0,30,"utf-8")."...",$talkBoard["title"]);
+            //   }
         
         ?>
       <tbody>
