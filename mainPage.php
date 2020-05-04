@@ -98,25 +98,7 @@ function resize_image($file, $newfile, $w, $h) {
 <!DOCTYPE html>
 
 <head>
-    <style type="text/css">
- .content {
-    width: 67%;
-    float: left;
-}
-.sidebar {
-    width: 33%;
-    float: right;
-}
-.feature {
-    width: 25%;
-    float: left;
-}
-.wrap:after, .features:after {
-    content: " "; 
-    display: block; 
-    clear: both;
-}
-    </style>
+   
     <link rel="stylesheet" href="firstPageCSS.css">
     <script
   src="https://code.jquery.com/jquery-3.5.0.min.js"
@@ -148,7 +130,10 @@ function resize_image($file, $newfile, $w, $h) {
                 <li><a href="imageBoardPage.php">BOARD</a></li>
                 <li><a href="newsPage.html">NEWS</a></li>
                 <li><a href="goodsPage.html">GOODS</a></li>
-                <?php
+        </nav>
+    </div>
+    <ul style="float:right; list-style-type:none;">
+    <?php
                 if(!$userid){
                     ?>
                     <ul>
@@ -178,8 +163,9 @@ $logged = $username."(".$userid.")";
                     <?php
                 }?>
                    </div> 
-        </nav>
-    </div>
+        <!-- <li><a href="/bbs/login.php">로그인</a></li>
+        <li><a href="/bbs/register_form.php">회원가입</a></li> -->
+    </ul>
     <!-- 메인부분 시작 -->
     <span class="username">
      <!-- 게시판 최신글 가져오기 -->
@@ -241,16 +227,24 @@ $newImageURL = 'uploads/'.$row["file_name"]."new";
 ?>
 </table>
     <!-- 최근에 본 게시물 -->
+<br /><br/><br /><br /><br/><br /><br /><br/><br />
 
-    <div class="recentView"><h3>최근에 본 게시물</h3>
+    <div class="recentView"><h3>내가 최근에 본 게시물</h3>
     <?php      
     if(isset($todayViewArray)){
     ?>
-    <table border=0 background=" " style=background-repeat:no-repeat width=80 height=500 cellpadding=0 cellspacing=0;>
+    <table border=0 background=" " style=background-repeat:no-repeat width=80% cellpadding=0 cellspacing=0;>
+    <tr>
+                <th style="background-color: #eeeeee; text-align: center;">번호</th>
+                <th style="background-color: #eeeeee; text-align: center;">제목</th>
+                <th style="background-color: #eeeeee; text-align: center;">작성자</th>
+                <th style="background-color: #eeeeee; text-align: center;">작성일</th>
+                <th style="background-color: #eeeeee; text-align: center;">조회수</th>
+
+            </tr>
 <?
  if(!($todayViewArray[0] == "" || $todayViewArray[0] == null)){
 ?>
-<tr style="paddind-left:10px;"><td height=20><strong>최근 본 게시물</strong></td></tr>
 <?} ?>
 <?
 //상품명을 몇 자로 이내로 자르는 함수
@@ -263,27 +257,27 @@ function substr2($str, $start, $end){ //start부터 end까지 상품명을 추�
 <?
 for($i=0; $i<5 && $todayViewArray[$i]; $i++){
  if($todayViewArray[$i] !=""){
- $query="select title, id, time from talkBoard where num=$todayViewArray[$i]";
+ $query="select title, id, time, view from talkBoard where num=$todayViewArray[$i]";
  $result=database($query);
  $rows=mysqli_fetch_array($result);
 ?>
-
 <tr style="padding-top:5px;">
+<td><?=$todayViewArray[$i]?></td>
  <td  height=42 >
  <a href="showImageBoardContents.php?num=<?=$rows['num']?>"><?=$rows['title']?>
   <!-- <img src="../shopimages/<?=$rows[minimage]?>" width=60 height=42 border=0 onerror='this.src=../img/noimage.gif'> -->
  </a>
  </td>
+ <td><?=$rows['id']?></td>
+ <td><?=$rows['time']?></td>
+ <td><?=$rows['view']?></td>
 </tr>
 <?
- echo "<tr><td>".$rows['title']."</td></tr>";
+
  /*echo "<tr><td align=center height=5 style=line-height :9px; font-size:11>"."\\".number_format($rows[price])."</td></tr>";*/
  }
 }
 ?>
-<tr>
-<td></td>
-</tr>
 </center>
 </table>
 <?php
@@ -307,9 +301,7 @@ else{?>
 </div>
         </p>
             </main>
-    <aside class="sidebar">ㅇㄴㅁㄹㄴㅇㄹㄴㅁㅇㄹㅇㄴ사이드
-    
-    </aside>
+  
 </div><!--.wrap --> 
 <section class="features">
   <a class="feature" href="#"><img src="https://fakeimg.pl/300x200/"></a>
