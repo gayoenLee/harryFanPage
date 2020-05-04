@@ -286,9 +286,9 @@ if($page >= $totalPage){
 ?>
 </div>
     </div>
-    <div class="serchdiv">
+    <div class="serchDiv">
     <br><br><br>
-<div id="searchBox" style="text-align: center">
+<div class="searchBox" style="text-align: center">
 <form action="searchResult.php" method="get">
 <select name="category">
 <div class - "searchTitle">
