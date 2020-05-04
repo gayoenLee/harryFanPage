@@ -117,11 +117,10 @@ function resize_image($file, $newfile, $w, $h) {
         <h1>LOGO</h1>
         <nav>
             <ul class="menu">
-                <li><a href="#">HOME</a></li>
-                <li><a href="aboutPage.html">ABOUT</a></li>
-                <li><a href="imageBoardPage.php">BOARD</a></li>
-                <li><a href="newsPage.html">NEWS</a></li>
-                <li><a href="goodsPage.html">GOODS</a></li>
+                <li><a href="#">홈</a></li>
+                <li><a href="imageBoardPage.php">게시판</a></li>
+                <li><a href="newsPage.php">최근 뉴스</a></li>
+               
         </nav>
     </div>
     <ul style="float:right; list-style-type:none;">
@@ -140,15 +139,41 @@ function resize_image($file, $newfile, $w, $h) {
                     </ul>
                     <?php
                 }else{
-$logged = $username."(".$userid.")";
-                    ?>
+$logged = $username;
+switch($userPoint['point']){
+    case '0':
+        echo "현재 등급 : 새싹회원 ";
+    break;
+    case '1':
+        echo "현재 등급 : 새싹회원 ";
+    break;
+    case '2':
+        echo "현재 등급 : 새싹회원 ";
+    break;
+    case '3':
+        echo "현재 등급 : 새싹회원 ";
+    break;
+    case '4':
+        echo "현재 등급 : 일반회원";
+    break;
+    case '5':
+        echo "현재 등급 : 일반회원";
+    break;
+    case '6':
+        echo "현재 등급 : 우수회원";
+    break;
+                        }
+                        ?>
                     <ul>
                     <li>
                     <?=$userid?>님
                     <span class="caret"></span></a></li></ul>
+
 <ul>
 <li><a href="logout.php">로그아웃</a></li>
 </ul>
+                <br /><br /><br /><br /><br /><br />
+
 <ul>
     <li><?php if ($result) {
     echo "이 페이지의 방문은 ", $counter, " 번째입니다<hr>";
@@ -168,9 +193,10 @@ $logged = $username."(".$userid.")";
     <span class="username">
      <!-- 게시판 최신글 가져오기 -->
      <h3>최근 게시물</h3>
-     <table class="listTable" style="text-align: center; border: 1px solid#ddddda">
+     <table class="listTable" style=" border: 1px solid#ddddda">
             <tr>
                 <th style="background-color: #eeeeee; text-align: center;">번호</th>
+                <th style="background-color: #eeeeee; text-align: center;">   </th>
                 <th style="background-color: #eeeeee; text-align: center;">제목</th>
                 <th style="background-color: #eeeeee; text-align: center;">작성자</th>
                 <th style="background-color: #eeeeee; text-align: center;">작성일</th>
@@ -195,7 +221,7 @@ $title = $talkBoard['title'];
 <tbody>
     <tr>
 <td width="70"><?=$talkBoard['num']; ?></td>
-<td width = "500">
+
 <!-- data-action은 커스텀 속성., 클릭한 글의 번호에 해당하는 글을 읽는 페이지로 이동하겠다는 것. -->
     <?php 
     // Get images from the database
@@ -203,17 +229,19 @@ $query = $db->query("SELECT * FROM images WHERE contentTitle='".$talkBoard['titl
 if($query->num_rows > 0){
     $row = $query->fetch_assoc();
         $imageURL = 'uploads/'.$row["file_name"];
+        if(isset($imageURL)){
 resize_image('uploads/'.$row["file_name"], 'uploads/'.$row["file_name"]."new", 70, 70);
 $newImageURL = 'uploads/'.$row["file_name"]."new";
 ?>
-   <span class="readCheck" style="cursor:pointer" 
-    data-action="./showImageBoardContents.php?num=<?=$talkBoard['num']?>"><p><img src="<?php echo $newImageURL; ?>" alt="" /><?=$title?></p><br /></span>
+  <td><img src="<?php echo $newImageURL; ?>" alt="" /></td>
+  <td  class="title" width = "500"><span class="readCheck" style="cursor:pointer" 
+    data-action="./showImageBoardContents.php?num=<?=$talkBoard['num']?>"><?=$title?></p></span></td>
 <?php 
-}else{
+}}else{
     ?>
-    <span class="readCheck" style="cursor:pointer" 
-    data-action="./showImageBoardContents.php?num=<?=$talkBoard['num']?>"><?=$title?>
-    </span>
+    <td><p><img src=" "> </p></td>
+    <td  class="title" width = "500"><span class="readCheck" style="cursor:pointer" 
+    data-action="./showImageBoardContents.php?num=<?=$talkBoard['num']?>"><?=$talkBoard['title']?></p></span></td>
    <?php }?>
     <td width="120"><?=$talkBoard['id'];?></td>
     <td width="100"><?=$talkBoard['time'];?></td>
@@ -231,7 +259,7 @@ $newImageURL = 'uploads/'.$row["file_name"]."new";
     <?php      
     if(isset($todayViewArray)){
     ?>
-    <table border=0 background=" " style=background-repeat:no-repeat width=80% cellpadding=0 cellspacing=0;>
+    <table class ="listSecond" border=0 background=" " style=background-repeat:no-repeat width=80% cellpadding=0 cellspacing=0 ;>
     <tr>
                 <th style="background-color: #eeeeee; text-align: center;">번호</th>
                 <th style="background-color: #eeeeee; text-align: center;">제목</th>
@@ -300,6 +328,7 @@ else{?>
             </main>
   
 </div><!--.wrap --> 
+<h3>최근 뉴스</h3>
 <section class="features">
   <a class="feature" href="#"><img src="https://fakeimg.pl/300x200/"></a>
   <a class="feature" href="#"><img src="https://fakeimg.pl/300x200/"></a>
@@ -307,7 +336,7 @@ else{?>
   <a class="feature" href="#"><img src="https://fakeimg.pl/300x200/"></a>
 </section> 
 
-
+<a href="#">제일 위로</a>
 
 </body>
 
