@@ -3,7 +3,7 @@ html {
 }
 body {
   font-family: "Source Sans Pro", sans-serif;
-  background-color: rgb(243, 239, 239);
+  background-color: white;
 }
 .content {
   display: table;
@@ -26,7 +26,7 @@ header {
   width: 45.8%;
 } */
 nav {
-  width: 800px;
+  width: auto;
   height: 100px;
   margin-left: 10%;
 }
@@ -42,9 +42,9 @@ nav ul li {
 
   margin: 0;
   padding: 0;
-  width: 100px;
+  width: auto;
   float: left;
-  background: #f9f9f9;
+  background: #6db6d3d3;
 }
 
 ul li a {
@@ -55,7 +55,7 @@ ul li a {
 }
 
 ul li a:hover {
-  background: #ccc;
+  background: thistle;
   color: #fff;
 }
 
@@ -85,7 +85,7 @@ tr td {
   margin: 4px;
   font-size: 15px;
   border-radius: 10px;
-  background-color: whitesmoke;
+  background-color: thistle;
 }
 .write:hover {
   cursor: pointer;
@@ -98,7 +98,7 @@ tr td {
   margin: 4px;
   font-size: 15px;
   border-radius: 10px;
-  background-color: thistle;
+  background-color: rgb(191, 114, 226);
 }
 .content {
   width: 80%;
@@ -139,16 +139,32 @@ td {
 } */
 .searchDiv {
   margin: 20px 0;
-  padding: 10px;
+  padding: 60px;
 }
 
 .searchBox {
   display: flex;
   justify-content: center;
+  position: absolute;
+  top: 355px;
+  left: 575px;
+  padding: 50;
 }
 .searchTitle,
 .searchName,
 .searchContent {
   padding: 15px;
   margin: 5px;
+  width: auto;
+  height: 100;
+}
+.SearchBar {
+  position: absolute;
+  top: 355px;
+  left: 575px;
+}
+
+.searchBox input {
+  height: 30px;
+  width: 300px;
 }
