@@ -51,14 +51,6 @@ $result = ($firstResult && $secondResult);
 // }else{
 //     echo $counter.'번째 방문';
 // }
-if ($result) {
-    echo "이 페이지의 방문은 ", $counter, " 번째입니다<hr>";
-    echo "이전 방문 : ", $lastDate, "<hr>";
-    echo "오늘 날짜 : ", date("Y년n월j일"), "<hr>";
-    echo "날짜 히스토리 : ".$logData['time'];
-    echo '<a href="page2_arr.html">페이지를 이동합니다</a><br>';
-    echo '(<a href="reset_log.php">초기화합니다</a>)';
-} else echo '<span class="error">print_r($_COOKIE);</span>';
 //새싹 회원이 우수회원으로 올라가기 위한 조건.
 if($userPoint['point']==0 && $counter>3){
     database("UPDATE levelPointTable 
@@ -152,12 +144,18 @@ $logged = $username."(".$userid.")";
                     ?>
                     <ul>
                     <li>
-                    <a href="#" role="button"><b><?=$userid?>님</b>
-                    <span class="caret"></span></a>
+                    <?=$userid?>님
+                    <span class="caret"></span></a></li></ul>
 <ul>
 <li><a href="logout.php">로그아웃</a></li>
 </ul>
-
+<ul>
+    <li><?php if ($result) {
+    echo "이 페이지의 방문은 ", $counter, " 번째입니다<hr>";
+    echo "이전 방문 : ", $lastDate, "<hr>";
+    echo "오늘 날짜 : ", date("Y년n월j일"), "<hr>";
+} else echo '<span class="error">print_r($_COOKIE);</span>';?></li>
+</ul>
                     </li>
                     </ul>
                     <?php
@@ -290,8 +288,7 @@ else{?>
 </div>
 
     </span>
-
-
+    <br /><br/><br /><br /><br/><br /><br /><br/><br />
 
 <div class="wrap">
     <main class="content">
