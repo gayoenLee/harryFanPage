@@ -100,15 +100,14 @@ alert(document.cookie);
 <head>
     <meta charset="UTF-8">
     <title>이미지 게시판</title>
-    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <link rel="stylesheet" type="text/css" href="style.css" />
     <link rel="stylesheet" type="text/css" href="showImageBoardCSS.css"/>
     <link rel="stylesheet" type="text/css" href="css/jqueryUI.css" />
 
 <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="js/jqueryUI.js"></script>
 <script type="text/javascript" src="js/common.js"></script>
-    <script
-  src="https://code.jquery.com/jquery-3.5.0.min.js"
+    <script src="https://code.jquery.com/jquery-3.5.0.min.js"
   integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ="
   crossorigin="anonymous"></script> 
   <!-- <link rel="stylesheet" type="text/css" href="/css/jquery-ui.css" />
@@ -217,7 +216,7 @@ $newImageURL = 'uploads/'.$row["file_name"]."new";
    <p><img src="<?php echo $newImageURL; ?>" alt="" /></p><br />
 <?php }
 }else{ ?>
-    <p>No image(s) found...</p>
+   
 <?php } ?> 
 </div>
 <br />
@@ -255,41 +254,59 @@ $newImageURL = 'uploads/'.$row["file_name"]."new";
                 </p>
                 <!-- 하단에 댓글 달기 버튼, 입력 폼 -->
                 <div class="commentSide">
-                <div class="commentSide" style="overflow:scroll;  height: 1500px; padding:10px; ">    
+                <div class="commentSide ">    
                     <h3>댓글 남기기</h3>
          
            	<!--- 댓글 불러오기 -->
 <div class="reply_view">
 <h3>댓글목록</h3>
 		<?php
+        //commentTable의 contentNum은 게시판 글번호
+        
 			$sql3 = database("select * from commentTable where contentNum=$contentNum order by num desc");
 			while($reply = $sql3->fetch_array()){ 
+                
 		?>
-          <div class="dap_lo">
+         <?php $check = $reply['num'] ?>
+         <?php $delete = $reply['num']+1 ?>
+
+        <!-- 댓글이 보여지는 내용 dap_lo 댓글 수정시 작성자에게만 수정, 삭제 나오도록 하기-->
+          <div class="dap_lo" id="<?php echo 'container'.$check?>" style='visibility:visible'>
 			<div><b><?php echo $reply['id'];?></b></div>
 			<div class="dap_to comt_edit"><?php echo nl2br("$reply[comment]"); ?></div>
 			<div class="rep_me dap_to"><?php echo $reply['date']; ?></div>
 			<div class="rep_me rep_menu">
-				<a class="dat_edit_bt" href="#">수정</a>
-				<a class="dat_delete_bt" href="#">삭제</a>
+            <? if($userid == $reply['id']){?>
+            <input type = "button" onClick="hideElement(<?php echo $check?>)" value="수정하기">
+
+            <input type = "button" onClick = "showCheck(<?php echo $delete?>)" value="삭제하기">
+        <? } 
+        ?>
 			</div>
-            <!-- 댓글 수정 폼 dialog -->
-			<div class="dat_edit">
+            </div>
+       
+            <!-- 댓글 수정 폼  -->
+			<div class="dap_edit" id = "<?php echo 'containerEdit'.$check ?>" style = 'visibility:hidden' onClick="showElement(<?php echo $check?>)">
 				<form method="post" action="editImageBoardCommentProcess.php">
-					<input type="hidden" name="rno" value="<?php echo $reply['num']; ?>" /><input type="hidden" name="b_no" value="<?php echo $contentNum; ?>">
-					<input type="password" name="pw" class="dap_sm" placeholder="비밀번호" />
-					<textarea name="content" class="dap_edit_t"><?php echo $reply['comment']; ?></textarea>
-					<input type="submit" value="수정하기" class="re_mo_bt">
+					<input type="hidden" name="rno" value="<?php echo $reply['num']; ?>" />
+                    <input type="hidden" name="b_no" value="<?php echo $contentNum; ?>"/>
+					<input type="text" name="content" value="<?php echo $reply['comment']; ?>"/>
+					<input type="submit" name = "submit"value="수정하기">
 				</form>
+            
 			</div>
             <!-- 댓글 삭제 비밀번호 확인 -->
-			<div class='dat_delete'>
+			<div id = "<?php echo 'containerDelete'.$delete ?>" style = 'visibility:hidden' onClick="showCheck(<?php echo $delete?>)">
 				<form action="deleteImageBoardComment.php" method="post">
 					<input type="hidden" name="rno" value="<?php echo $reply['num']; ?>" /><input type="hidden" name="b_no" value="<?php echo $contentNum; ?>">
-			 		<p>비밀번호<input type="password" name="pw" /> <input type="submit" value="확인"></p>
+                    <p>위의 댓글을 정말 삭제하시겠습니까?</p>
+                     <input type="submit" name="cancel"value="취소">
+                      <input type="submit" name="ok" value="확인">
 				 </form>
-			</div>
-		</div>
+			</div><br />
+		
+       
+
 	<?php } ?>
     <!--- 댓글 입력 폼 -->
 	<div class="dap_ins">
@@ -301,7 +318,24 @@ $newImageURL = 'uploads/'.$row["file_name"]."new";
 				<button id="rep_bt" class="re_bt">댓글</button>
 			</div>
 	</div>
-    </div>
+   
+    <script>
+            function showElement(num) {    
+            element = document.querySelector('#containerEdit'+num); 
+            element.style.visibility = "visible"; 
+
+        } 
+        function hideElement(num) { 
+            element = document.querySelector('#container'+num); 
+            element.style.visibility = "hidden"; 
+            showElement(num);
+
+        } 
+        function showCheck(p){
+            element = document.querySelector('#containerDelete'+p); 
+            element.style.visibility = "visible"; 
+        }
+    </script> 
     <!--- 댓글 불러오기 끝 -->
 <div id="foot_box"></div>
 </div>
