@@ -39,13 +39,6 @@ if(isset($_COOKIE['visitLog'])){
 // }else{
 //     echo $counter.'번째 방문';
 // }
-if ($result) {
-    echo "이 페이지의 방문은 ", $counter, " 번째입니다<hr>";
-    echo "이전 방문 : ", $lastDate, "<hr>";
-   
-    echo '<a href="page2_arr.html">페이지를 이동합니다</a><br>';
-    echo '(<a href="reset_log.php">초기화합니다</a>)';
-} else echo '<span class="error">print_r($_COOKIE);</span>';
 
 function resize_image($file, $newfile, $w, $h) {
     list($width, $height) = getimagesize($file);
@@ -92,6 +85,7 @@ $(location).attr("href", actionURL);
 </script>
     </head>
     <body>
+    <img src="ima/harrypotter.jpeg" alt></img>
         <div id="page" style="height: auto !important;">
         <header id="headerImage" class="site-header" role="banner">   
 <h1 class="siteTitle">
@@ -103,8 +97,7 @@ $(location).attr("href", actionURL);
 			<div class="navMenu"><ul>
 <li><a href="http://192.168.56.101/mainPage.php">홈</a></li>
 <li ><a href="http://192.168.56.101/imageBoardPage.php">게시판</a></li>
-<li ><a href="http://192.168.56.101/mainPage.php">인물 소개</a></li>
-<li ><a href="http://192.168.56.101/mainPage.php">굿즈샵</a></li>
+<li ><a href="http://192.168.56.101/mainPage.php">최근 뉴스</a></li>
 <?php
                 if(!$userid){
                     ?>
@@ -137,7 +130,7 @@ break;
                     ?>
                     <ul>
                     <li>
-                    <a href="#" role="button"><b><?=$logged?></b>님의 회원관리
+                    <a href="#" role="button"><b><?=$logged?></b>님</li>
                     <span class="caret"></span></a>
 <ul>
 <li><a href="logout.php">로그아웃</a></li>
@@ -160,7 +153,7 @@ break;
         </div>
         <p></p>
         <div>
-        <table class="listTable" style="text-align: center; border: 1px solid#ddddda">
+        <table class="listTable" style=" border: 1px solid#ddddda">
             <tr>
                 <th style="background-color: #eeeeee; text-align: center;">번호</th>
                 <th style="background-color: #eeeeee; text-align: center;">제목</th>
@@ -287,7 +280,6 @@ if($page >= $totalPage){
 </div>
     </div>
     <div class="serchDiv">
-    <br><br><br>
 <div class="searchBox" style="text-align: center">
 <form action="searchResult.php" method="get">
 <select name="category">
@@ -300,9 +292,10 @@ if($page >= $totalPage){
 <option value="content">내용</option>
 </div>
 </select>
-<input type="text" name="search" size="40" required="required">
+<input type="text" name="search" size="80" required="required">
 <button class="btn btn-primary">검색</button>
 </form>
+
 </div>
 </div>
 <aside>
