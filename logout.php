@@ -5,7 +5,7 @@ unset($_SESSION["username"]);
 echo("
 <script>
 alert('로그아웃 했습니다.');
-location.href='firstPage.php';
+location.href='harrypotterFirst.php';
 </script>
 
 ");
