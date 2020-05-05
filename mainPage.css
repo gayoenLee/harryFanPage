@@ -8,6 +8,11 @@
   top: 0;
   left: 0;
 }
+body {
+  font-family: "Source Sans Pro", sans-serif;
+  background-color: rgb(243, 239, 239);
+  text-align: center;
+}
 
 h1 {
   color: white;

@@ -221,7 +221,6 @@ $title = $talkBoard['title'];
 <tbody>
     <tr>
 <td width="70"><?=$talkBoard['num']; ?></td>
-
 <!-- data-action은 커스텀 속성., 클릭한 글의 번호에 해당하는 글을 읽는 페이지로 이동하겠다는 것. -->
     <?php 
     // Get images from the database

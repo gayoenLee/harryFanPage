@@ -33,7 +33,7 @@
   $search = $_GET['search'];
 ?>
   <h1><?php echo $catagory; ?>에서 '<?php echo $search; ?>'검색결과</h1>
-  <h4 style="margin-top:30px;"><a href="/">홈으로</a></h4>
+  <h4 style="margin-top:30px;"><a href="mainPage.php">홈으로</a></h4>
     <table class="list-table">
       <thead>
           <tr>
@@ -46,14 +46,17 @@
         </thead>
         <?php
           $sqlSecond = database("select * from talkBoard where $catagory like '%$search%' order by num desc");
+          
           while($talkBoard = $sqlSecond->fetch_array()){
            
+             
+               
           $title=$talkBoard["title"]; 
             // if(strlen($title)>30)
             //   { 
             //     $title=str_replace($talkBoard["title"],mb_substr($talkBoard["title"],0,30,"utf-8")."...",$talkBoard["title"]);
             //   }
-        
+            
         ?>
       <tbody>
         <tr>

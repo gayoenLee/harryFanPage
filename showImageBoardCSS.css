@@ -8,12 +8,17 @@ body {
 }
 
 header {
-  height: auto;
-  background-image: url("https://lh3.googleusercontent.com/proxy/4zMGCr-jcvsjRYf_hQdCtg5lhv9A6GiXI_PsiVrIB9wYNjr2gf1MBEdr3EGIEUpP5NpUC6_wdutXvfdDW_oMWXwHoGmcA2uG8-oE9-qABGg4V1UOzZa5YIOBtUOFEByUXLVv07hgfxsd2D5cdA48tv55AtsNcvrmqvOyY3EyszH_eJ5Cgtli5yUwhtA_");
-  background-repeat: no-repeat;
-  background-position: right bottom;
-  background-size: cover;
   max-width: 100%;
+}
+
+header img {
+  width: 100%;
+  height: 500px;
+  position: relative;
+  top: 0;
+  vertical-align: middle;
+  border: 0;
+  /* background-image: url(); */
 }
 /* .headerImage {
     position: relative;
@@ -35,12 +40,12 @@ nav ul li {
   padding: 10px;
   display: inline-block;
   list-style-type: none;
+
   margin: 0;
   padding: 0;
-  width: 100px;
+  width: auto;
   float: left;
-
-  background: #f9f9f9;
+  background: #6db6d3d3;
 }
 
 ul li a {
@@ -51,7 +56,7 @@ ul li a {
 }
 
 ul li a:hover {
-  background: #ccc;
+  background: thistle;
   color: #fff;
 }
 

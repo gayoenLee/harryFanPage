@@ -12,4 +12,5 @@ database(
 <script>
 alert('선택한 게시글이 삭제되었습니다.');
 </script>
+<!-- http-equiv :  -->
 <meta http-equiv="refresh" content="0 url=imageBoardPage.php">

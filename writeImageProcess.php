@@ -12,6 +12,7 @@ $utitle = $_POST['title'];
 $ucontent = $_POST['content'];
 //삭제 시 번호가 비워지지 않게 하기 위해 작성.
 database("alter table talkBoard auto_increment = 1");
+
 database(
     "INSERT INTO talkBoard
     (id, password, title, content, time, view) VALUES ('$uid',
@@ -20,7 +21,7 @@ database(
     '$ucontent',
     '$utime', 0)
     ");
-   
+
    if(isset($_POST['submit'])){ 
     // Include the database configuration file 
     
