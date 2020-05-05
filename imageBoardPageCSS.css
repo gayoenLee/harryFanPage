@@ -65,10 +65,11 @@ aside {
 }
 td li {
   list-style-type: none;
-  padding-left: 0px;
+  padding-left: auto;
 }
 tr td {
-  padding-left: 0px;
+  padding-left: auto;
+  padding-right: auto;
 }
 
 .writeBtn {
@@ -106,9 +107,9 @@ tr td {
   align-content: center;
 }
 .listTable {
-  width: 80%;
-  height: 300px;
-  margin-left: 20%;
+  width: 90%;
+  height: 200px;
+  margin-left: auto;
   align-content: center;
   border: 1px solid #444444;
   border-collapse: collapse;
@@ -129,6 +130,7 @@ h1 {
 
 th,
 td {
+  height: 50px;
   border: 1px solid #444444;
   padding: 10px;
 }
