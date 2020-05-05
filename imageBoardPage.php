@@ -156,6 +156,7 @@ break;
         <table class="listTable" style=" border: 1px solid#ddddda">
             <tr>
                 <th style="background-color: #eeeeee; text-align: center;">번호</th>
+                <th style="background-color: #eeeeee; text-align: center;">   </th>
                 <th style="background-color: #eeeeee; text-align: center;">제목</th>
                 <th style="background-color: #eeeeee; text-align: center;">작성자</th>
                 <th style="background-color: #eeeeee; text-align: center;">작성일</th>
@@ -211,7 +212,6 @@ $title = $talkBoard["title"];
 <tbody>
     <tr>
 <td width="70"><?=$talkBoard['num']; ?></td>
-<td width = "500">
 <!-- data-action은 커스텀 속성., 클릭한 글의 번호에 해당하는 글을 읽는 페이지로 이동하겠다는 것. -->
     <?php 
     // Get images from the database
@@ -219,17 +219,19 @@ $query = $db->query("SELECT * FROM images WHERE contentTitle='".$talkBoard['titl
 if($query->num_rows > 0){
     $row = $query->fetch_assoc();
         $imageURL = 'uploads/'.$row["file_name"];
+        if(isset($imageURL)){
 resize_image('uploads/'.$row["file_name"], 'uploads/'.$row["file_name"]."new", 70, 70);
 $newImageURL = 'uploads/'.$row["file_name"]."new";
 ?>
-   <span class="readCheck" style="cursor:pointer" 
-    data-action="./showImageBoardContents.php?num=<?=$talkBoard['num']?>"><p><img src="<?php echo $newImageURL; ?>" alt="" /><?=$title?></p><br /></span>
+    <td><img src="<?php echo $newImageURL; ?>" alt="" /></td>
+  <td  class="title" width = "500"><span class="readCheck" style="cursor:pointer" 
+    data-action="./showImageBoardContents.php?num=<?=$talkBoard['num']?>"><?=$title?></p></span></td>
 <?php 
-}else{
+}}else{
     ?>
-    <span class="readCheck" style="cursor:pointer" 
-    data-action="./showImageBoardContents.php?num=<?=$talkBoard['num']?>"><?=$title?>
-    </span>
+        <td><img src=" "></td>
+        <td  class="title" width = "500"><span class="readCheck" style="cursor:pointer" 
+    data-action="./showImageBoardContents.php?num=<?=$talkBoard['num']?>"><?=$talkBoard['title']?></p></span></td>
    <?php }?>
     <td width="120"><?=$talkBoard['id'];?></td>
     <td width="100"><?=$talkBoard['time'];?></td>
