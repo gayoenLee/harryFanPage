@@ -1,5 +1,4 @@
 <?php
-session_start();
 include 'config.php';
 include 'dbConnect.php';
 
@@ -17,6 +16,65 @@ $pointSql = database(
 $todayViewEach = explode(",", $_COOKIE['todayViewBoardCookie'.$userid]);
 //최근 목록 5개를 뽑기 위해 배열을 최신 것부터 반대로 정렬해주기.
 $todayViewArray = array_reverse($todayViewEach);
+
+$userAgent = $_SERVER['HTTP_USER_AGENT'];
+
+function getBrowserInfo(){
+    $userAgent = $_SERVER['HTTP_USER_AGENT'];
+
+if(preg_match('/Firefox/i',$userAgent)){
+  $browser = 'Mozilla Firefox';
+}
+else if (preg_match('/Chrome/i',$userAgent)){
+  $browser = 'Google Chrome';
+}
+else if(preg_match('/Safari/i',$userAgent)){
+  $browser = 'Apple Safari';
+}
+else{
+  $browser = "Other";
+}
+return $browser;
+}
+//os정보 읽어오기
+function getOsInfo()
+{
+    $userAgent = $_SERVER['HTTP_USER_AGENT'];
+
+  if (preg_match('/linux/i', $userAgent)){ 
+    $os = 'linux';}
+  elseif(preg_match('/macintosh|mac os x/i', $userAgent)){
+    $os = 'mac';}
+  elseif (preg_match('/windows|win32/i', $userAgent)){
+    $os = 'windows';}
+  else {
+    $os = 'Other';
+  }
+  return $os;
+}
+$userAgent = $_SERVER['HTTP_USER_AGENT'];
+
+$browser = getBrowserInfo();
+$os      = getOsInfo();
+
+$arrayDay= array('일요일','월요일','화요일','수요일','목요일','금요일','토요일');
+$date = date('w'); //0 ~ 6 숫자 반환
+
+$staticsPageURL    = $_SERVER['PHP_SELF'];
+$staticsDayOfWeek   = $arrayDay[$date];
+$staticsAccessTime = date('H');
+$staticsUserIp     = getenv('REMOTE_ADDR');
+$staticsEnrollDate = date('Y') . date('m') . date('d');
+$staticsSignDate    = time();
+$staticsYear        = date('Y');
+$staticsMonth       = date('m');
+$staticsDay         = date('d');
+database(
+    "INSERT INTO statistics(browser, os, year, month, date, pageURL,dayOfWeek, 
+  accessTime, userIp, enrollDate, signDate, userId)
+   VALUES('$browser', '$os', '$staticsYear', '$staticsMonth',
+   '$staticsDay', '$staticsPageURL','$staticsDayOfWeek', '$staticsAccessTime',
+     '$staticsUserIp', '$staticsEnrollDate', $staticsSignDate, '$userid')");
 
 ?>
 <?php
@@ -89,7 +147,16 @@ function resize_image($file, $newfile, $w, $h) {
 <!DOCTYPE html>
 
 <head>
-   
+   <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-165857365-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-165857365-1');
+</script>
+
     <link rel="stylesheet" href="firstPageCSS.css">
     <script
   src="https://code.jquery.com/jquery-3.5.0.min.js"
