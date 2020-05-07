@@ -42,7 +42,7 @@ if(isset($_COOKIE['visitLog'])){
 
 function resize_image($file, $newfile, $w, $h) {
     list($width, $height) = getimagesize($file);
-    if(strpos(strtolower($file), ".jpg"))
+    if(strpos(strtolower($file), ".jpeg"))
        $src = imagecreatefromjpeg($file);
     else if(strpos(strtolower($file), ".png"))
        $src = imagecreatefrompng($file);
@@ -50,7 +50,7 @@ function resize_image($file, $newfile, $w, $h) {
        $src = imagecreatefromgif($file);
     $dst = imagecreatetruecolor($w, $h);
     imagecopyresampled($dst, $src, 0, 0, 0, 0, $w, $h, $width, $height);
-    if(strpos(strtolower($newfile), ".jpg"))
+    if(strpos(strtolower($newfile), ".jpeg"))
        imagejpeg($dst, $newfile);
     else if(strpos(strtolower($newfile), ".png"))
        imagepng($dst, $newfile);
@@ -85,7 +85,6 @@ $(location).attr("href", actionURL);
 </script>
     </head>
     <body>
-    <img src="ima/harrypotter.jpeg" alt></img>
         <div id="page" style="height: auto !important;">
         <header id="headerImage" class="site-header" role="banner">   
 <h1 class="siteTitle">
