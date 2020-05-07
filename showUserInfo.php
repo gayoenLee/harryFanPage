@@ -5,19 +5,27 @@ include 'dbConnect.php';
 $browserTotal = database(
   "SELECT COUNT(browser) from statistics"
 );
+$browserTotal = mysqli_fetch_array($browserTotal);
+$browser = $browserTotal[0];
+//모질라
 $sqlMozila = database(
   "SELECT COUNT(browser) from statistics WHERE browser='Mozilla Firefox'"
 );
 $mozilaResult = mysqli_fetch_array($sqlMozila);
-$check = $mozilaResult[0];
-
+$mozila = $mozilaResult[0];
+//크롬
 $sqlChrome = database(
   "SELECT COUNT(browser) from statistics WHERE browser='Google Chrome'"
 );
+$chromeResult = mysqli_fetch_array($sqlChrome);
+$chrome = $chromeResult[0];
+//사파리
 $sqlSafari = database(
 "SELECT COUNT(browser) from statistics WHERE browser='Apple Safari'" 
 );
-//os
+$safariResult = mysqli_fetch_array($sqlSafari);
+$safari = $safariResult[0];
+////////os
 $osTotal = database(
   "SELECT COUNT(os) from statistics"
 );
@@ -30,7 +38,7 @@ $sqlMac = database(
 $sqlWindow = database(
   "SELECT COUNT(os) from statistics WHERE os='win32'"
 );
-$browserOthers = $browserTotal - $sqlChrome - $sqlLinux - $sqlMozila;
+$browserOthers = $browser - $mozila - $chrome - $linux;
 $osOthers = $osTotal - $sqlLinux - $sqlMac - $sqlWindow;
 
 ?>
@@ -50,10 +58,10 @@ $osOthers = $osTotal - $sqlLinux - $sqlMac - $sqlWindow;
 
         var dataDevice = google.visualization.arrayToDataTable([
           ['Browser', 'Hours per Day'],
-          ['Mozila',    <?echo($check)?>],
-          ['Chrome',  <?echo($check)?>],
-          ['Safari', <?echo($check)?>],
-          ['Others', 0]
+          ['Mozila',    <?echo($mozila)?>],
+          ['Chrome',  <?echo($chrome)?>],
+          ['Safari', <?echo($safari)?>],
+          ['Others', <?echo($browserOthers)?>]
         
         ]);
 
