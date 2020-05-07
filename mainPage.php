@@ -18,7 +18,6 @@ $todayViewEach = explode(",", $_COOKIE['todayViewBoardCookie'.$userid]);
 //최근 목록 5개를 뽑기 위해 배열을 최신 것부터 반대로 정렬해주기.
 $todayViewArray = array_reverse($todayViewEach);
 
-
 ?>
 <?php
 //방문횟수 확인하는 쿠키
@@ -70,7 +69,7 @@ if($writeIdNum>3 && userPoint['point'] == 3){
 }
 function resize_image($file, $newfile, $w, $h) {
     list($width, $height) = getimagesize($file);
-    if(strpos(strtolower($file), ".jpg"))
+    if(strpos(strtolower($file), ".jpeg"))
        $src = imagecreatefromjpeg($file);
     else if(strpos(strtolower($file), ".png"))
        $src = imagecreatefrompng($file);
@@ -78,7 +77,7 @@ function resize_image($file, $newfile, $w, $h) {
        $src = imagecreatefromgif($file);
     $dst = imagecreatetruecolor($w, $h);
     imagecopyresampled($dst, $src, 0, 0, 0, 0, $w, $h, $width, $height);
-    if(strpos(strtolower($newfile), ".jpg"))
+    if(strpos(strtolower($newfile), ".jpeg"))
        imagejpeg($dst, $newfile);
     else if(strpos(strtolower($newfile), ".png"))
        imagepng($dst, $newfile);
