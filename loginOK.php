@@ -4,6 +4,9 @@ $id = $_POST['id'];
 $password = $_POST['password'];
 //서버에 접속하기 위해 필요
 $connect = mysqli_connect("127.0.0.1", "root", "Dlrkdus0607", "harrypotter");
+
+
+
 $sql = "SELECT * FROM userProfile WHERE id='$id'";
 
 $result = mysqli_query($connect, $sql);
@@ -20,7 +23,7 @@ if (!$numberMatch) {
     $row = mysqli_fetch_array($result);
     $dbPassword = $row['password'];
 
-    mysqli_close($db);
+    
 
     if (!password_verify($password, $dbPassword)) {
         echo ("
@@ -30,13 +33,12 @@ if (!$numberMatch) {
         </script>");
         exit;
     } else {
-        session_start();
         $_SESSION['userid'] = $row['id'];
         $_SESSION['username'] = $row['name'];
-        echo ("<script>
-        window.alert('세션 시작');
+        echo("<script>
             location.href = 'mainPage.php';
-            </script>
-            ");
-    }
+            </script>  " ); }
+
 }
+  
+?>
