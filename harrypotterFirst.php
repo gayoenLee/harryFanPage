@@ -2,6 +2,15 @@
 <!DOCTYPE html>
 <html>
   <head>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3P6EV1K6ZT"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3P6EV1K6ZT');
+</script>
      <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-165857365-1"></script>
 <script>
@@ -23,6 +32,29 @@
     <script> new WOW().init(); </script>
   </head>
   <body>
+  <!-- The core Firebase JS SDK is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js"></script>
+
+<!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+<script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-analytics.js"></script>
+
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyBeHGe1OvUTDn3bnwkmVRIaMUZNtBcWds4",
+    authDomain: "gayeonnharry.firebaseapp.com",
+    databaseURL: "https://gayeonnharry.firebaseio.com",
+    projectId: "gayeonnharry",
+    storageBucket: "gayeonnharry.appspot.com",
+    messagingSenderId: "703101803443",
+    appId: "1:703101803443:web:c930cf37df7e315ca209c6",
+    measurementId: "G-YJEEVCXFM3"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+</script>
     <div class="header">
       <div class="navbar">
         <div class="logo">
