@@ -48,9 +48,9 @@ $sqlWindow = database(
 );
 $windowResult = mysqli_fetch_array($sqlWindow);
 $window = $windowResult[0];
-
 $browserOthers = $browser - $mozila - $chrome - $linux;
 $osOthers = $os - $linux - $mac - $window;
+
 // 요일별로 언제 많이 들어왔는지 알아보기 위해 데이터베이스 이용하기
 $sqlMonday = database(
   "SELECT COUNT(dayOfWeek) from statistics WHERE dayOfWeek='월요일'"
@@ -93,12 +93,6 @@ $sqlSunday = database(
 );
 $sundayResult = mysqli_fetch_array($sqlSunday);
 $sunday = $sundayResult[0];
-
-
-
-
-
-
 ?>
 
 <!doctype html>
@@ -110,32 +104,27 @@ $sunday = $sundayResult[0];
       google.charts.setOnLoadCallback(drawChartDevice);
       google.charts.setOnLoadCallback(drawChartOS);
       google.charts.setOnLoadCallback(drawChartBrowser);
+
       var mozila = '<?$countResult["COUNT(browser)"];?>'
       console.log(mozila);
-      function drawChartDevice() {
 
+      function drawChartDevice() {
         var dataDevice = google.visualization.arrayToDataTable([
           ['Browser', 'Hours per Day'],
           ['Mozila',    <?echo($mozila)?>],
           ['Chrome',  <?echo($chrome)?>],
           ['Safari', <?echo($safari)?>],
           ['Others', <?echo($browserOthers)?>]
-        
         ]);
-
         var optionsDevice = {
           title: 'DEVICE'
         };
-
         var chartDevice = new google.visualization.PieChart(document.getElementById('piechartDevice'));
-
         chartDevice.draw(dataDevice, optionsDevice);
       }
 
-
-
+      //os통계 그래프
       function drawChartOS() {
-
 var dataOS = google.visualization.arrayToDataTable([
   ['OS', 'Hours per Day'],
   ['Linux', <?echo($linux)?>],
@@ -143,38 +132,30 @@ var dataOS = google.visualization.arrayToDataTable([
   ['Window', <?echo($window)?>],
   ['Others', <?echo($osOthers)?>],
 ]);
-
 var optionsOS = {
   title: 'OS'
 };
-
 var chartOS = new google.visualization.PieChart(document.getElementById('piechartOS'));
-
 chartOS.draw(dataOS, optionsOS);
 }
 
 function drawChartBrowser() {
-
 var dataBrowser = google.visualization.arrayToDataTable([
   ['DAYS', 'Hours per Day'],
   ['월',  <?echo($monday)?>],
   ['화',    <?echo($tuesday)?>],
   ['수',  <?echo($wednesday)?>],
   ['목', <?echo($thursday)?>],
-  ['금',  <?echo($friday)?>]
+  ['금',  <?echo($friday)?>],
   ['토', <?echo($saturday)?>],
   ['일', <?echo($sunday)?>]
 ]);
-
 var optionsBrowser = {
   title: 'Days'
 };
-
 var chartBrowser = new google.visualization.PieChart(document.getElementById('piechartBrowser'));
-
 chartBrowser.draw(dataBrowser, optionsBrowser);
 }
-
     </script>
 </head>
 <body>
