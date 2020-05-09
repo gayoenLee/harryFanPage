@@ -1,0 +1,140 @@
+hr {
+    border: none;
+    border-top: 2px dotted #bcbcbc;
+    color: #bcbcbc;
+    background-color: inherit;
+    height: 1px;
+    width: 100%;
+}
+
+h2,
+h3 {
+    text-align: left;
+}
+
+#container {
+    width: 90%;
+    margin: auto;
+    padding: 10px;
+    border: 2px solid #bcbcbc;
+}
+
+#headbar {
+    border: 1px solid #bcbcbc;
+    margin-bottom: 2%;
+}
+
+#headbar>ul {
+    width: 100%;
+}
+
+#headbar>ul>li {
+    display: inline;
+    /* 세로나열을 가로나열로 */
+    border-left: 1px solid #bcbcbc;
+    /* 메뉴 사이마다 | 표시 */
+    font: bold 12px;
+    padding: 0 10px;
+    /* 각 메뉴 간격 */
+}
+
+#headbar>ul>li:first-child {
+    border-left: none;
+}
+
+#header {
+    text-align: center;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+#content {
+    width: 90%;
+    padding: 20px;
+    margin-bottom: 20px;
+    float: right;
+    border: 1px solid #bcbcbc;
+}
+
+#introduce {
+    width: 32%;
+    padding: 10px;
+    margin-bottom: 20px;
+    float: left;
+    border: 1px solid #bcbcbc;
+    text-align: center;
+}
+
+#siteintroduce {
+    width: 32%;
+    border: 1px dolid #bcbcbc;
+    float: left;
+}
+
+#profileimg {
+    border: 0px solid #bcbcbc;
+    position: relative;
+    display: inline-block;
+    border-radius: 50%;
+    /*프로필 이미지를 둥글게 해줌 */
+    width: 170px;
+    height: 170px;
+}
+
+#mainimg {
+    width: 80%;
+    float: left;
+}
+
+#footer {
+    clear: both;
+    padding: 1px;
+    border: 1px solid #bcbcbc;
+}
+
+.contentimg {
+    width: 100%;
+}
+
+@media (max-width: 850px) {
+    #container {
+        width: auto;
+    }
+
+    #introduce {
+        float: none;
+        width: auto;
+    }
+
+    #content {
+        float: none;
+        width: auto;
+    }
+}
+
+#loginer {
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid #bcbcbc;
+    text-align: center;
+}
+
+#form {
+    font-size: 1.3em;
+    width: 80%;
+    display: inline-block;
+}
+
+::placeholder {
+    font-size: 1.3em;
+    font-family: 'Nanum Brush Script', cursive;
+}
+
+button {
+    border: 0px;
+    background-color: white;
+}
+
+#signupimg {
+    font-size: 1em !important;
+}
