@@ -11,12 +11,10 @@ database("alter table videos auto_increment = 1");
 database(
     "INSERT INTO videos
     (title, location, duration, time) VALUES
-    ('$title', '$location', '$duration', '$title')
+    ('$title', '$location', '$duration', '$time')
 ");
-echo "<script>
-location.href='uploadVideo.php?load=<?php ?>';
-</script>";
-
-
-?>
-<script type="text/javascript">location.replace("uploadVideo.php?load=<?php echo $title; ?>");</script>
+// echo "<script>
+// location.href='showVideo.php';
+// </script>";
+// ?>
+<script type="text/javascript">location.replace("showVideo.php");</script>
