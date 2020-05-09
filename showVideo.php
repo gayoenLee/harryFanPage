@@ -1,5 +1,6 @@
 <?php
 include 'dbConnect.php';
+    // //php.ini파일 수정 필요
 ?>
 <html>
 <head>
@@ -77,10 +78,8 @@ include 'dbConnect.php';
 }
 </style>
 </head>
-<!------ Include the above in your HEAD tag ---------->
 <body>
 <div class="container">
-
 <p>
     <h5>Features:</h5>
     <ul>
@@ -90,47 +89,38 @@ include 'dbConnect.php';
     </ul>
     <hr>
 </p>
+<p>
+<!-- 업로드 버튼 눌러서 동영상 추가하기 -->
+<form action='uploadVideo.php' method='post'>
+<input type="submit" value="upload">
+</form>
+</p>
+<?php
+$videoSql = database(
+    "SELECT * FROM videos ORDER BY idx
+    ");
+//비디오 저장된 내용 가져오기
+while($videos = $videoSql->fetch_array()){
+ $url = $videos['location'];
+ $title = $videos['title'];
+ $duration = $videos['duration'];
+ 
 
+?>
+
+<!-- 동영상 리스트들 시작-->
 <ul class="list-unstyled video-list-thumbs row">
 	<li class="col-lg-3 col-sm-4 col-xs-6">
 		<a href="#" title="해리포터 애니메이션">
-        <iframe class = "img-responsive" src="https://player.vimeo.com/video/184312722" width="440" height="260" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
-<p><a href="https://vimeo.com/184312722">Grant Berry_Harry Potter</a> from <a href="https://vimeo.com/grantberry">Grant Berry</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
-			<h2>Claudio Bravo, antes su debut con el Barça en la Liga</h2>
-			<span class="duration">01:00</span>
+        <iframe class = "img-responsive" src=<?=$url?> width="440" height="260" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+<p><?=$title?>on<a href="https://vimeo.com">Vimeo</a></on></p>
+			<span class="duration"><?=$duration?></span>
 		</a>
-	</li>
-	<li class="col-lg-3 col-sm-4 col-xs-6">
-		<a href="#" title="Claudio Bravo, antes su debut con el Barça en la Liga">
-        <iframe src="https://player.vimeo.com/video/267474969" width="640" height="265" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
-<p><a href="https://vimeo.com/267474969">Harry Potter - Test</a> from <a href="https://vimeo.com/sagararun">Sagar Arun</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
-			<h2>Claudio Bravo, antes su debut con el Barça en la Liga</h2>
-			<span class="duration">00:06</span>
-		</a>
-	</li>
-	<li class="col-lg-3 col-sm-4 col-xs-6">
-		<a href="#" title="Claudio Bravo, antes su debut con el Barça en la Liga">
-        <iframe src="https://player.vimeo.com/video/196616926" width="640" height="267" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
-<p><a href="https://vimeo.com/196616926">Harry Potter Symmetry</a> from <a href="https://vimeo.com/user59429282">Sergio Rojo</a> on <a href="https://vimeo.com">Vimeo</a>.</p>			<h2>Claudio Bravo, antes su debut con el Barça en la Liga</h2>
-			<span class="duration">03:15</span>
-		</a>
-	</li>
-	<li class="col-lg-3 col-md-4 col-sm-4 col-xs-6">
-		<a href="#" title="Claudio Bravo, antes su debut con el Barça en la Liga">
-			<img src="http://i.ytimg.com/vi/ZKOtE9DOwGE/mqdefault.jpg" alt="Barca" class="img-responsive" height="130px" />
-			<h2>Claudio Bravo, antes su debut con el Barça en la Liga</h2>
-			<span class="duration">03:15</span>
-		</a>
-	</li>
-    <li class="col-lg-3 col-md-4 col-sm-4 col-xs-6">
-		<a href="#" title="Claudio Bravo, antes su debut con el Barça en la Liga">
-			<img src="http://i.ytimg.com/vi/ZKOtE9DOwGE/mqdefault.jpg" alt="Barca" class="img-responsive" height="130px" />
-			<h2>Claudio Bravo, antes su debut con el Barça en la Liga</h2>
-			<span class="duration">03:15</span>
-		</a>
-	</li>
+    </li>
+    
+    <?php
+}?>
 </ul>
-
 </div>
 </body>
 </html>
