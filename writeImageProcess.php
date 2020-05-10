@@ -6,7 +6,6 @@ include 'dbConnect.php';
 //세션에 저장된 아이디값을 name에 저장.
 $uid = $userid;
 $utime = date('Y-m-d');
-$upassword = password_hash($_POST['password'], PASSWORD_DEFAULT);
 //앞에서 포스트로 받은 값들 저장.
 $utitle = $_POST['title'];
 $ucontent = $_POST['content'];
@@ -15,8 +14,7 @@ database("alter table talkBoard auto_increment = 1");
 
 database(
     "INSERT INTO talkBoard
-    (id, password, title, content, time, view) VALUES ('$uid',
-    '$upassword',
+    (id, title, content, time, view) VALUES ('$uid',
     '$utitle',
     '$ucontent',
     '$utime', 0)
