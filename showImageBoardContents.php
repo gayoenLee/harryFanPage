@@ -357,11 +357,10 @@ $newImageURL = 'uploads/'.$row["file_name"]."new";
                     <!-- 목록, 수정 , 삭제 -->
               <p>      <div class="boardBottomMenu">
                         <ul>
-                            <!-- <li class="button">
-                                <a href="http://192.168.56.101/imageBoardPage.php">[목록으로]</a>
-                            </li> -->
                             <li class="button">
-                            <a href="imageBoardPage.php">[목록]</a>
+                          <button type="button" onClick="location.href='imageBoardPage.php'">[목록]</button>
+                            </li>
+                            <li class="button">
                             <?php
                             if($userid==$talkBoard['id']){
                                 ?>
@@ -378,12 +377,15 @@ $newImageURL = 'uploads/'.$row["file_name"]."new";
                                   $contentsTime = $boardArray[4];
                                       echo $boardArray[4];
                                 ?>">
-                                <input  type="submit" value="[삭제]"><?php } ?>
+                                <input type="submit" value="[삭제]"><?php } ?>
                             </li>
                         </ul>
                     </div>
                 </form>
                 </p>
+               <div><button type="button" onClick="location.href='reportContent.php'">글 신고하기</button>
+               
+               </div>
                 <!-- 하단에 댓글 달기 버튼, 입력 폼 -->
                 <div class="commentSide">
                 <div class="commentSide ">    
@@ -443,7 +445,9 @@ $newImageURL = 'uploads/'.$row["file_name"]."new";
     <!--- 댓글 입력 폼 -->
 	<div class="dap_ins">
 			<input type="hidden" name="bno" class="bno" value="<?php echo $contentNum; ?>">
-			<input type="text" name="dat_user" id="dat_user" class="dat_user" size="15" placeholder="아이디">
+            <p>아이디 : <?=$userid?></p>
+			<!-- <input type="text" name="dat_user" id="dat_user" class="dat_user" size="15" placeholder="아이디"> -->
+            <input type="hidden" name="dat_user" id="dat_user" class="dat_user" size="20" value=<?=$userid?>>
 			<input type="password" name="dat_pw" id="dat_pw" class="dat_pw" size="15" placeholder="비밀번호">
 			<div style="margin-top:10px; ">
 				<textarea name="content" class="reply_content" id="re_content" ></textarea>
