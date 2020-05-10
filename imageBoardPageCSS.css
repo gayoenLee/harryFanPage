@@ -1,16 +1,19 @@
 html {
   padding: 10px;
 }
+
 body {
   font-family: "Source Sans Pro", sans-serif;
   background-color: white;
 }
+
 .content {
   display: table;
   margin: auto;
   display: table-cell;
   vertical-align: middle;
 }
+
 header {
   width: auto;
   height: 200px;
@@ -19,6 +22,7 @@ header {
   background-position: right bottom;
   background-size: cover;
 }
+
 /* .headerImage {
   position: relative;
   top: 0;
@@ -30,11 +34,13 @@ nav {
   height: 100px;
   margin-left: 10%;
 }
+
 nav ul {
   margin: 0;
   padding: 0;
   list-style: none;
 }
+
 nav ul li {
   padding: 10px;
   display: inline-block;
@@ -63,10 +69,12 @@ aside {
   width: 20%;
   float: left;
 }
+
 td li {
   list-style-type: none;
   padding-left: auto;
 }
+
 tr td {
   padding-left: auto;
   padding-right: auto;
@@ -76,6 +84,7 @@ tr td {
   position: relative;
   left: 100px;
 }
+
 .write {
   border: none;
   width: 100px;
@@ -88,6 +97,7 @@ tr td {
   border-radius: 10px;
   background-color: thistle;
 }
+
 .write:hover {
   cursor: pointer;
   border: none;
@@ -101,11 +111,13 @@ tr td {
   border-radius: 10px;
   background-color: rgb(191, 114, 226);
 }
+
 .content {
   width: 80%;
   float: left;
   align-content: center;
 }
+
 .listTable {
   width: 90%;
   height: 200px;
@@ -118,15 +130,17 @@ tr td {
 h1 {
   text-align: center;
 }
-.pagingSection {
+
+/* .pagingSection {
   padding: 5%;
   text-align: center;
 }
+
 .pagingItem {
   align-items: center;
   text-align: center;
   font-size: 15px;
-}
+} */
 
 th,
 td {
@@ -134,6 +148,7 @@ td {
   border: 1px solid #444444;
   padding: 10px;
 }
+
 /* .container::after {
   content: "";
   display: block;
@@ -152,6 +167,7 @@ td {
   left: 575px;
   padding: 50;
 }
+
 .searchTitle,
 .searchName,
 .searchContent {
@@ -160,6 +176,7 @@ td {
   width: auto;
   height: 100;
 }
+
 .SearchBar {
   position: absolute;
   top: 355px;
@@ -169,4 +186,76 @@ td {
 .searchBox input {
   height: 30px;
   width: 300px;
+}
+
+.pagination {
+  margin-top: 20px;
+  white-space: nowrap;
+  text-align: center;
+  height: 37px;
+  line-height: 37px;
+}
+
+.pagination a {
+  display: inline-block;
+  border: 1px solid #f7f7f7;
+  height: 35px;
+  width: 35px;
+  vertical-align: middle;
+  text-align: center;
+  text-decoration: none;
+  font-size: 15px;
+  color: #898989;
+  background: #f7f7f7;
+}
+
+.pagination .on {
+  color: #fff;
+  font-weight: bold;
+  background: #333;
+}
+
+.pagination .preview,
+.pagination .next {
+  height: 35px;
+  width: 35px;
+  border: 1px solid #ebebeb;
+  overflow: hidden;
+  position: relative;
+  font-size: 0;
+}
+
+.pagination .preview.end,
+.pagination .next.end {
+  height: 35px;
+  width: 35px;
+  font-size: 0;
+
+}
+
+.pagination .preview {
+  background: #ebebeb url("") no-repeat center center;
+  margin-right: 11px;
+
+}
+
+.pagination .preview.end {
+  background: #ebebeb url("") no-repeat center center;
+  margin-right: 4px;
+  border-right: 0;
+}
+
+.pagination .next {
+  background: #ebebeb url("") no-repeat center center;
+  margin-left: 12px;
+}
+
+.pagination .next.end {
+  background: #ebebeb url("") no-repeat center center;
+  margin-left: 4px;
+  border-left: 0;
+}
+
+.preview {
+  color: #898989;
 }
