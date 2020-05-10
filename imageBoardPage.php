@@ -42,18 +42,22 @@ if(isset($_COOKIE['visitLog'])){
 
 function resize_image($file, $newfile, $w, $h) {
     list($width, $height) = getimagesize($file);
-    if(strpos(strtolower($file), ".jpeg"))
-       $src = imagecreatefromjpeg($file);
+    if(strpos(strtolower($file), ".jpg"))
+       $src = imagecreatefromjpg($file);
     else if(strpos(strtolower($file), ".png"))
        $src = imagecreatefrompng($file);
+       else if(strpos(strtolower($file), ".jpeg"))
+       $src = imagecreatefromjpeg($file);
     else if(strpos(strtolower($file), ".gif"))
        $src = imagecreatefromgif($file);
     $dst = imagecreatetruecolor($w, $h);
     imagecopyresampled($dst, $src, 0, 0, 0, 0, $w, $h, $width, $height);
-    if(strpos(strtolower($newfile), ".jpeg"))
-       imagejpeg($dst, $newfile);
+    if(strpos(strtolower($newfile), ".jpg"))
+       imagejpg($dst, $newfile);
     else if(strpos(strtolower($newfile), ".png"))
        imagepng($dst, $newfile);
+       else if(strpos(strtolower($newfile), ".jpeg"))
+       imagejpeg($dst, $newfile);
     else if(strpos(strtolower($newfile), ".gif"))
        imagegif($dst, $newfile);
  }
@@ -324,20 +328,20 @@ if($query->num_rows > 0){
 </table>
 </div>
 
-<div id="pageNum" style="text-align:center;">
+<div class="pagination" id="pageNum" style="text-align:center;">
 <?php
 
 if($page <=1){
     //빈 값
 }else{
-    echo "<a href='imageBoardPage.php?page=1'>처음</a>";
+    echo "<a class='previewEnd'href='imageBoardPage.php?page=1'>처음</a>";
 }
 if($page<=1){
     //빈 값
 }else{
     $present = $page - 1;
 
-    echo"<a href='imageBoardPage.php?page=$present'>이전</a>";
+    echo"<a class='preview' href='imageBoardPage.php?page=$present'>이전</a>";
 }
 for($i = $blockStart; $i <= $blockEnd; $i++){
     if($page == $i){
@@ -350,12 +354,12 @@ if($page >= $totalPage){
     //빈 값
 }else{
     $next = $page + 1;
-    echo "<a href='imageBoardPage.php?page=$next'>다음</a>";
+    echo "<a class='next' href='imageBoardPage.php?page=$next'>다음</a>";
 }
 if($page >= $totalPage){
     //빈 값
 }else{
-    echo "<a href='imageBoardPage.php?page=$totalPage'>마지막</a>";
+    echo "<a class='end'href='imageBoardPage.php?page=$totalPage'>마지막</a>";
 }
 
 ?>
