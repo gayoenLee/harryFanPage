@@ -7,6 +7,8 @@ include 'dbConnect.php';
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<link rel="stylesheet" type="text/css" href="firstPageCSS.css" />
+
 <style>
 .video-list-thumbs{}
 .video-list-thumbs > li{
@@ -81,12 +83,87 @@ include 'dbConnect.php';
 <body>
 <div class="container">
 <p>
-    <h5>Features:</h5>
+    <!-- <h5>Features:</h5>
     <ul>
         <li>Responsive design with hover effect</li>
         <li>Compatible with bootstrap 3.0.0 and Up</li>
         <li>No Javascript</li>
-    </ul>
+	</ul> -->
+	<div class="wrapper">
+        <a href="donationPage.php">기부하기</a>
+        <h1>LOGO</h1>
+        <nav>
+            <ul class="menu">
+                <li><a href="#">홈</a></li>
+                <li><a href="imageBoardPage.php">게시판</a></li>
+                <li><a href="newsPage.php">최근 뉴스</a></li>
+                <li ><a href="http://192.168.56.101/showVideo.php">영상</a></li>
+               
+        </nav>
+    </div>
+    <ul style="float:right; list-style-type:none;">
+    <?php
+                if(!$userid){
+                    ?>
+                    <ul>
+                    <li>
+                    <a href='#' role="button">접속하기<span class="caret"></span></a>
+                    <ul>
+                    <li><a href="login.php">로그인</a></li>
+                    </li>
+                    <li><a href="joinMember.php">회원가입</a></li>
+                    </ul>
+                    </li>
+                    </ul>
+                    <?php
+                }else{
+$logged = $username;
+switch($userPoint['point']){
+    case '0':
+        echo "현재 등급 : 새싹회원 ";
+    break;
+    case '1':
+        echo "현재 등급 : 새싹회원 ";
+    break;
+    case '2':
+        echo "현재 등급 : 새싹회원 ";
+    break;
+    case '3':
+        echo "현재 등급 : 새싹회원 ";
+    break;
+    case '4':
+        echo "현재 등급 : 일반회원";
+    break;
+    case '5':
+        echo "현재 등급 : 일반회원";
+    break;
+    case '6':
+        echo "현재 등급 : 우수회원";
+    break;
+                        }
+                        ?>
+                    <ul>
+                    <li>
+                    <?=$userid?>님
+                    <span class="caret"></span></a></li></ul>
+
+<ul>
+<li><a href="logout.php">로그아웃</a></li>
+</ul>
+                <br /><br /><br /><br /><br /><br />
+
+<ul>
+    <li><?php if ($result) {
+    echo "이 페이지의 방문은 ", $counter, " 번째입니다<hr>";
+    echo "이전 방문 : ", $lastDate, "<hr>";
+    echo "오늘 날짜 : ", date("Y년n월j일"), "<hr>";
+} else echo '<span class="error">print_r($_COOKIE);</span>';?></li>
+</ul>
+                    </li>
+                    </ul>
+                    <?php
+                }?>
+                   </div> 
     <hr>
 </p>
 <p>
