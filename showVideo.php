@@ -1,4 +1,5 @@
 <?php
+include 'config.php';
 include 'dbConnect.php';
     // //php.ini파일 수정 필요
 ?>
@@ -78,17 +79,16 @@ include 'dbConnect.php';
 		margin: 8px 0 0;
 	}
 }
+.recentUpload{
+    text-align : center;
+    
+}
 </style>
 </head>
 <body>
 <div class="container">
 <p>
-    <!-- <h5>Features:</h5>
-    <ul>
-        <li>Responsive design with hover effect</li>
-        <li>Compatible with bootstrap 3.0.0 and Up</li>
-        <li>No Javascript</li>
-	</ul> -->
+ 
 	<div class="wrapper">
         <a href="donationPage.php">기부하기</a>
         <h1>LOGO</h1>
@@ -149,17 +149,7 @@ switch($userPoint['point']){
 
 <ul>
 <li><a href="logout.php">로그아웃</a></li>
-</ul>
-                <br /><br /><br /><br /><br /><br />
-
-<ul>
-    <li><?php if ($result) {
-    echo "이 페이지의 방문은 ", $counter, " 번째입니다<hr>";
-    echo "이전 방문 : ", $lastDate, "<hr>";
-    echo "오늘 날짜 : ", date("Y년n월j일"), "<hr>";
-} else echo '<span class="error">print_r($_COOKIE);</span>';?></li>
-</ul>
-                    </li>
+</ul>                    </li>
                     </ul>
                     <?php
                 }?>
@@ -172,9 +162,39 @@ switch($userPoint['point']){
 <input type="submit" value="upload">
 </form>
 </p>
+<h3>최근에 업로드된 동영상 </h3>
+<div class="recentUpload">
+<ul class="list-unstyled video-list-thumbs row">
+<li class="col-lg-3 col-sm-4 col-xs-6"></li>
+<?php
+$recentVideoSql = database(
+    "SELECT * FROM videos ORDER BY time DESC LIMIT 2"
+);
+
+while($recentVideos = $recentVideoSql->fetch_array()){
+    $recentUrl = $recentVideos['location'];
+    $recentTitle = $recentVideos['title'];
+    $recentDuration = $recentVideos['duration'];
+?>
+
+	<li class="col-lg-3 col-sm-4 col-xs-6">
+		<a href="#" title="해리포터 애니메이션">
+        <iframe class = "img-responsive" src=<?=$recentUrl?> width="600" height="420" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+<p><?=$recentTitle?></p>
+			<span class="duration"><?=$recentDuration?></span>
+		</a>
+    </>
+ 
+<?}?>
+ </ul>
+ </div>
+ </div>
+<br /><br /><br /><br /><br /><br />
+<h3>동영상 목록</h3>
+<br /><br />
 <?php
 $videoSql = database(
-    "SELECT * FROM videos ORDER BY idx
+    "SELECT * FROM videos ORDER BY time
     ");
 //비디오 저장된 내용 가져오기
 while($videos = $videoSql->fetch_array()){
@@ -189,8 +209,8 @@ while($videos = $videoSql->fetch_array()){
 <ul class="list-unstyled video-list-thumbs row">
 	<li class="col-lg-3 col-sm-4 col-xs-6">
 		<a href="#" title="해리포터 애니메이션">
-        <iframe class = "img-responsive" src=<?=$url?> width="440" height="260" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
-<p><?=$title?>on<a href="https://vimeo.com">Vimeo</a></on></p>
+        <iframe class = "img-responsive" src=<?=$url?> width="600" height="420" frameborder="0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+<p><?=$title?></p>
 			<span class="duration"><?=$duration?></span>
 		</a>
     </li>
@@ -198,6 +218,7 @@ while($videos = $videoSql->fetch_array()){
     <?php
 }?>
 </ul>
+</>
 </div>
 </body>
 </html>
