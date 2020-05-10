@@ -156,12 +156,14 @@ switch($userPoint['point']){
                    </div> 
     <hr>
 </p>
+<?php if($userid= 'admin67'){?>
 <p>
-<!-- 업로드 버튼 눌러서 동영상 추가하기 -->
+<!-- 업로드 버튼 눌러서 동영상 추가하기, 관리자만 보이도록 -->
 <form action='uploadVideo.php' method='post'>
 <input type="submit" value="upload">
 </form>
 </p>
+<?}?>
 <h3>최근에 업로드된 동영상 </h3>
 <div class="recentUpload">
 <ul class="list-unstyled video-list-thumbs row">
