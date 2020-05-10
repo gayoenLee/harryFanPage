@@ -10,9 +10,7 @@ $address = $donationInfo['address'];
 $phone = $donationInfo['phone'];
 $donationCost = $donationInfo['donationCost'];
 $donationName = $donationInfo['donationName'];
-
 ?>
-
 <!doctype html>
 <head>
 <meta charset="UTF-8">
@@ -23,9 +21,10 @@ $donationName = $donationInfo['donationName'];
 <body>
 <script>
 var IMP = window.IMP;
-IMP.init('imp35441007');
+ IMP.init('imp35441007');
+
 IMP.request_pay({
-    pg : 'kakao',
+    pg : 'inicis',
     pay_method : 'card',
     merchant_uid : 'merchant_' + new Date().getTime(),
     name : '주문명:결제테스트',
@@ -43,18 +42,16 @@ IMP.request_pay({
         msg += '결제 금액 : ' + rsp.paid_amount;
         msg += '카드 승인번호 : ' + rsp.apply_num;
        
-        location.replace("mainPage.php");
-       
+        location.replace("mainPage.php");    
     } else {
         var msg = '결제에 실패하였습니다.';
-        msg += '에러내용 : ' + rsp.error_msg;
-     
+        msg += '에러내용 : ' + rsp.error_msg; 
         location.replace("mainPage.php");
-       
+    
     }
-
     alert(msg);
 });
+
 </script>
   </body>
 </html>
