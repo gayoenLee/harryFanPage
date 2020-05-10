@@ -212,12 +212,14 @@ function resize_image($file, $newfile, $w, $h) {
 </script>
 
     <div class="wrapper">
+        <a href="donationPage.php">기부하기</a>
         <h1>LOGO</h1>
         <nav>
             <ul class="menu">
                 <li><a href="#">홈</a></li>
                 <li><a href="imageBoardPage.php">게시판</a></li>
                 <li><a href="newsPage.php">최근 뉴스</a></li>
+                <li ><a href="http://192.168.56.101/showVideo.php">영상</a></li>
                
         </nav>
     </div>
@@ -313,8 +315,6 @@ $sql  = database(
 <?php
 while($talkBoard = $sql-> fetch_array()){
 $title = $talkBoard['title'];
-
-
 ?>
 <tbody>
     <tr>
@@ -325,8 +325,8 @@ $title = $talkBoard['title'];
 $query = $db->query("SELECT * FROM images WHERE contentTitle='".$talkBoard['title']."' ");
 if($query->num_rows > 0){
     $row = $query->fetch_assoc();
-        $imageURL = 'uploads/'.$row["file_name"];
-        if(isset($imageURL)){
+    $imageURL = 'uploads/'.$row["file_name"];
+    if(isset($imageURL)){
 resize_image('uploads/'.$row["file_name"], 'uploads/'.$row["file_name"]."new", 70, 70);
 $newImageURL = 'uploads/'.$row["file_name"]."new";
 ?>
