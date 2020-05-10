@@ -99,6 +99,8 @@ $sunday = $sundayResult[0];
 <html>
   <head>
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <link rel="stylesheet" href="imageBoardPageCSS.css"> 
+
     <script type="text/javascript">
       google.charts.load('current', {'packages':['corechart']});
       google.charts.setOnLoadCallback(drawChartDevice);
@@ -157,8 +159,39 @@ var chartBrowser = new google.visualization.PieChart(document.getElementById('pi
 chartBrowser.draw(dataBrowser, optionsBrowser);
 }
     </script>
+    
 </head>
 <body>
+  
+<nav id="siteNavigation" class="mainNavigation" role="navigation">
+			<div class="navMenu"><ul>
+<li><a href="http://192.168.56.101/mainPage.php">홈</a></li>
+<li ><a href="http://192.168.56.101/imageBoardPage.php">게시판</a></li>
+<li ><a href="http://192.168.56.101/mainPage.php">최근 뉴스</a></li>
+<li ><a href="http://192.168.56.101/showVideo.php">영상</a></li>
+
+<?php
+                if($userid){
+                    ?>
+                    <ul>
+                    <li>
+                    <a href='#' role="button">접속하기<span class="caret"></span></a>
+                    <ul>
+                    <li><a href="login.php">로그인</a></li>
+                    </li>
+                    <li><a href="joinMember.php">회원가입</a></li>
+                    </ul>
+                    </li>
+                    </ul>
+                    <?php
+                }
+                    ?>
+                   </div> 
+		</nav>
+
+
+
+
 <div id="piechartDevice" style="width: 900px; height: 500px;"></div>
 <div id="piechartOS" style="width: 900px; height: 500px;"></div>
 <div id="piechartBrowser" style="width: 900px; height: 500px;"></div>
