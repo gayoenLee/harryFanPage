@@ -48,7 +48,7 @@ $sqlWindow = database(
 );
 $windowResult = mysqli_fetch_array($sqlWindow);
 $window = $windowResult[0];
-$browserOthers = $browser - $mozila - $chrome - $linux;
+$browserOthers = $browser - $mozila - $chrome - $safari;
 $osOthers = $os - $linux - $mac - $window;
 
 // 요일별로 언제 많이 들어왔는지 알아보기 위해 데이터베이스 이용하기
@@ -99,8 +99,25 @@ $sunday = $sundayResult[0];
 <html>
   <head>
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-  <link rel="stylesheet" href="imageBoardPageCSS.css"> 
+  <script src="https://code.jquery.com/jquery-3.5.0.min.js">
+  $(function () {
+ 
+ $(".tab_content").hide();
+ $(".tab_content:first").show();
 
+ $("ul.tabs li").click(function () {
+     $("ul.tabs li").removeClass("active").css("color", "#333");
+     //$(this).addClass("active").css({"color": "darkred","font-weight": "bolder"});
+     $(this).addClass("active").css("color", "darkred");
+     $(".tab_content").hide()
+     var activeTab = $(this).attr("rel");
+     $("#" + activeTab).fadeIn()
+ });
+});
+  </script>
+
+  <link rel="stylesheet" href="imageBoardPageCSS.css"> 
+<link rel="stylesheet" href="showUserInfoCSS.css">
     <script type="text/javascript">
       google.charts.load('current', {'packages':['corechart']});
       google.charts.setOnLoadCallback(drawChartDevice);
@@ -188,13 +205,32 @@ chartBrowser.draw(dataBrowser, optionsBrowser);
                     ?>
                    </div> 
 		</nav>
+    <h1>관리자 페이지</h1>
+ <div class="main">
+ <input id="tab1" type="radio" name="tabs" checked>
 
+ <label for="tab1">홈페이지 정보</label>
+ <input id="tab2" type="radio" name="tabs">
+ <label for="tab2">게시글 신고 접수</label>
+ <input id="tab3" type="radio" name="tabs">
+ <label for="tab3">tab menu1</label>
+ <input id="tab4" type="radio" name="tabs">
+ <label for="tab4">tab menu1</label>
+ <section id="content1">
+ <p><div class="chart" id="piechartDevice" style="width: 600px; height: 500px;"></div>
+<div  class="chart" id="piechartOS" style="width: 600px; height: 500px;"></div>
+<div class="chart"  id="piechartBrowser" style="width: 600px; height: 500px;"></div></p>
+ </section>
+ <section id="content2">
+ <p>tab menu1의 내용</p>
+ </section> <section id="content3">
+ <p>tab menu1의 내용</p>
+ </section> <section id="content4">
+ <p>tab menu1의 내용</p>
+ </section>
+ 
+ </div>
 
-
-
-<div id="piechartDevice" style="width: 900px; height: 500px;"></div>
-<div id="piechartOS" style="width: 900px; height: 500px;"></div>
-<div id="piechartBrowser" style="width: 900px; height: 500px;"></div>
 
   </body>
 </html>
