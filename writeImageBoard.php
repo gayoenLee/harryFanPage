@@ -31,6 +31,8 @@ $pointSql = database(
 
   gtag('config', 'G-3P6EV1K6ZT');
 </script>
+<!-- 네이버 스마트 에디터를 위한 코드 -->
+<script type="text/javascript" src="smartEditor2/js/service/HuskyEZCreator.js" charset="utf-8"></script>
 <body>
     <p>
         <div class="title"><h4>게시판</h4></div>
@@ -78,7 +80,8 @@ if(!isset($_SESSION['userid'])){
     echo "<div id='not_use'>로그인을 해야 볼 수 있습니다.</div>";    
 }else if($userPoint['point'] == '3' || $userPoint['point']>'1'){
     ?>
-                    <tbody>
+
+<tbody>
                         <tr>
                             <td>
                                 <span>&nbsp;&nbsp;&nbsp;아이디 : <b><?=$userid?></b></span>
@@ -92,14 +95,7 @@ if(!isset($_SESSION['userid'])){
                                 id="title"
                                 required="required"></td>
                     </tr>
-                    <tr>
-                        <td><input
-                            type="password"
-                            placeholder="글 비밀번호"
-                            name="password"
-                            id="upassword"
-                            style="width: 150px;"></td>
-                    </tr>
+                   
                     <tr>
                         <td>
 
@@ -118,17 +114,15 @@ if(!isset($_SESSION['userid'])){
             </table>
             <!-- <input type="hidden" name="boardTime" value="<?php echo date("Y-m-d H:i:s");?>"> -->
            
-        
+            <textarea id="txtContent" rows="10" cols="100" style="width: 100%;"></textarea>
+
     Select Image Files to Upload:
     <input type="file" name="files[]" multiple="multiple" ><br />
     <input type="file" name="files[]" multiple="multiple" ><br />
     <input class="button" type="submit" name="submit" value="UPLOAD">
-        </form>
+        </form> 
 <?php  }else{
-  echo  "<div id='not_use'>일반등급만 볼 수 있는 게시판입니다.<br />방문 횟수를 늘려서 1포인트를 적립하세요.(일반등급 5포인트)</div>";
-  
-    
-    
+  echo  "<div id='not_use'>일반등급만 볼 수 있는 게시판입니다.<br />방문 횟수를 늘려서 1포인트를 적립하세요.(일반등급 5포인트)</div>";  
 }?>
     </body>
 
