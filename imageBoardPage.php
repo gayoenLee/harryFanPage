@@ -176,6 +176,8 @@ $(location).attr("href", actionURL);
 <li><a href="http://192.168.56.101/mainPage.php">홈</a></li>
 <li ><a href="http://192.168.56.101/imageBoardPage.php">게시판</a></li>
 <li ><a href="http://192.168.56.101/mainPage.php">최근 뉴스</a></li>
+<li ><a href="http://192.168.56.101/showVideo.php">영상</a></li>
+
 <?php
                 if(!$userid){
                     ?>
@@ -296,10 +298,10 @@ $title = $talkBoard["title"];
 $query = $db->query("SELECT * FROM images WHERE contentTitle='".$talkBoard['title']."' ");
 if($query->num_rows > 0){
     $row = $query->fetch_assoc();
-        $imageURL = 'uploads/'.$row["file_name"];
-        if(isset($imageURL)){
-resize_image('uploads/'.$row["file_name"], 'uploads/'.$row["file_name"]."new", 70, 70);
-$newImageURL = 'uploads/'.$row["file_name"]."new";
+    $imageURL = 'uploads/'.$row["file_name"];
+    if(isset($imageURL)){
+        resize_image('uploads/'.$row["file_name"], 'uploads/'.$row["file_name"]."new", 70, 70);
+        $newImageURL = 'uploads/'.$row["file_name"]."new";
 ?>
     <td><img src="<?php echo $newImageURL; ?>" alt="" /></td>
   <td  class="title" width = "500"><span class="readCheck" style="cursor:pointer" 
