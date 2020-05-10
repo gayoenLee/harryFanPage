@@ -279,13 +279,13 @@ $sqlSecond = database(
 ?>
             <?php
 // 저장된 내용 가져오기
-
 while(
     //fetch_aray : mysql 레코드 가져오기. 배열로 가져옴.
     //https://blog.naver.com/diceworld/220295811114
     $talkBoard = $sqlSecond->fetch_array()){
     //배열로 저장.
 $title = $talkBoard["title"];
+$contentNum = $talkBoard['num'];
 // 글자수가 30이 넘으면 ...처리
 // if(strlen($title)>30){
 //     $title = str_replace($talkBoard["title"], mb_substr($talkBoard["title"],0,30,"utf-8")."...",$talkBoard["title"]);
@@ -298,6 +298,12 @@ $title = $talkBoard["title"];
 <td width="70"><?=$talkBoard['num']; ?></td>
 <!-- data-action은 커스텀 속성., 클릭한 글의 번호에 해당하는 글을 읽는 페이지로 이동하겠다는 것. -->
     <?php 
+    //게시글에 댓글 몇 개 있는지 확인하기 위해 댓글 갯수 가져오기
+$commentSql=database(
+    "SELECT COUNT(contentNum) FROM commentTable where contentNum=$contentNum"
+);
+$commentNum = mysqli_num_rows($commentSql);
+
     // Get images from the database
 $query = $db->query("SELECT * FROM images WHERE contentTitle='".$talkBoard['title']."' ");
 if($query->num_rows > 0){
@@ -315,7 +321,7 @@ if($query->num_rows > 0){
     ?>
         <td><img src=" "></td>
         <td  class="title" width = "500"><span class="readCheck" style="cursor:pointer" 
-    data-action="./showImageBoardContents.php?num=<?=$talkBoard['num']?>"><?=$talkBoard['title']?></p></span></td>
+    data-action="./showImageBoardContents.php?num=<?=$talkBoard['num']?>"><?=$talkBoard['title']?>[<?=$commentNum?>]</p></span></td>
    <?php }?>
     <td width="120"><?=$talkBoard['id'];?></td>
     <td width="100"><?=$talkBoard['time'];?></td>
