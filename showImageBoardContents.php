@@ -384,8 +384,11 @@ $newImageURL = 'uploads/'.$row["file_name"]."new";
                 </form>
                 </p>
                 <!-- 신고하기 버튼 -->
-               <div><button type="button" onClick="location.href='reportContent.php'">글 신고하기</button>
-               
+                <form action="reportContent.php" method='post'>
+                <input type="hidden" name="contentNum" value=<?=$contentNum?>>
+               <div><button type="button">
+               <input type="submit" name="submit">글 신고하기</button>
+               </form>
                </div>
                 <!-- 하단에 댓글 달기 버튼, 입력 폼 -->
                 <div class="commentSide">
