@@ -185,7 +185,7 @@ while($recentVideos = $recentVideoSql->fetch_array()){
 <p><?=$recentTitle?></p>
 			<span class="duration"><?=$recentDuration?></span>
 		</a>
-    </>
+    
  
 <?}?>
  </ul>
