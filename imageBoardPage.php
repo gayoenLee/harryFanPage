@@ -209,7 +209,7 @@ if($userid=='admin67'){
                     </li>
                     </ul>
                     <?php
-                }else{
+                }if($userid!='admin67'){
                     $logged = $username;
                     switch($userPoint['point']){
 case '0':
@@ -227,7 +227,7 @@ break;
                     ?>
                     <ul>
                     <li>
-                    <a href="#" role="button"><b><?=$logged?></b>님</li>
+                    <a href="#" role="button"><b><li></li><?=$logged?></b>님</li>
                     <span class="caret"></span></a>
 <ul>
 <li><a href="logout.php">로그아웃</a></li>
@@ -373,7 +373,7 @@ if($page >= $totalPage){
     //빈 값
 }else{
     $next = $page + 1;
-    echo "<a class='next' href='imageBoardPage.php?page=$next'>다음</a>";
+    echo "<a class='next' href='imageBoardPage.php?page=$next'>다음</a></a>";
 }
 if($page >= $totalPage){
     //빈 값
