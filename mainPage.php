@@ -241,8 +241,8 @@ if($userid=='admin67'){
 <li><a href="logout.php">로그아웃</a></li>
 </ul>
 <?php
-}
-                if(!$userid){
+}?>
+             <?php   if(!$userid){
                     ?>
                     <ul>
                     <li>
@@ -255,7 +255,7 @@ if($userid=='admin67'){
                     </li>
                     </ul>
                     <?php
-                }else{
+                }if($userid!='admin67'){
 $logged = $username;
 switch($userPoint['point']){
     case '0':
