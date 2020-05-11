@@ -93,6 +93,7 @@ $sqlSunday = database(
 );
 $sundayResult = mysqli_fetch_array($sqlSunday);
 $sunday = $sundayResult[0];
+
 ?>
 
 <!doctype html>
@@ -222,10 +223,22 @@ chartBrowser.draw(dataBrowser, optionsBrowser);
 <div class="chart"  id="piechartBrowser" style="width: 600px; height: 500px;"></div></p>
  </section>
  <section id="content2">
+ <p><h3>게시글 신고 접수 현황</h3>
+
+ <tr><td>게시글 번호</td> <td>제목</td> </tr>
+ <tr><td>작성자</td></tr>
+ <tr><td>신고자</td></tr>
+ <tr><td>신고일</td></tr>
+ <tr><td>신고 사유</td></tr>
+ 
+ 
+ 
+ </p>
+ </section>
+  <section id="content3">
  <p>tab menu1의 내용</p>
- </section> <section id="content3">
- <p>tab menu1의 내용</p>
- </section> <section id="content4">
+ </section> 
+ <section id="content4">
  <p>tab menu1의 내용</p>
  </section>
  
