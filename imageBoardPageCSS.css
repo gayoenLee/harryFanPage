@@ -222,7 +222,8 @@ td {
   border: 1px solid #ebebeb;
   overflow: hidden;
   position: relative;
-  font-size: 0;
+  font-size: 15;
+  text-emphasis-color: #333;
 }
 
 .pagination .preview.end,
