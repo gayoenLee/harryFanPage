@@ -5,16 +5,15 @@ include_once 'dbConnect.php';
 $contentNum = $_POST['contentNum'];
 $boardTitle = $_POST['boardTitle'];
 $boardId = $_POST['boardId'];
+
 $reportReason = $_POST['reason'];
-if(isset($_POST['message'])){
-$reportReason = $_POST['message'];
-};
+
 $reportPerson = $_POST['reportPerson'];
-$reportDate = 
+$reportEtcReason = $_POST['message'];
 database(
 "INSERT INTO boardReport 
 (contentNum, contentTitle, contentWriter, reportPerson, reportReason) 
-VALUES($contentNum, '$boardTitle', '$boardId', '$reportPerson', '$reportReason' )
+VALUES($contentNum, '$boardTitle', '$boardId', '$reportPerson', '$reportReason.$reportEtcReason')
 ");
 echo "
 <script>
