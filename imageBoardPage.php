@@ -182,7 +182,20 @@ $(location).attr("href", actionURL);
 <li ><a href="http://192.168.56.101/mainPage.php">최근 뉴스</a></li>
 <li ><a href="http://192.168.56.101/showVideo.php">영상</a></li>
 
+    <?php
+    //로그인한 계정이 관리자일 경우
+if($userid=='admin67'){
+    ?>
+    <ul>
+    <li ><a href="http://192.168.56.101/showUserInfo.php">관리자 페이지</a></li>
+    <li>
+    관리자님
+    <span class="caret"></span></a></li></ul>
+<ul>
+<li><a href="logout.php">로그아웃</a></li>
+</ul>
 <?php
+}
                 if(!$userid){
                     ?>
                     <ul>
