@@ -77,7 +77,7 @@
         <h1>My I introduce myself ?</h1>
         <h3>Fontend Designer | UI/UX Designer</h3>
       </div>
-      <img src="img/container.png" alt="">
+      <img src="img/big.jpg" alt="">
       
       <div class="goahead">
         <a href="#">해리포터를 좋아하는 사람들의 공간입니다.</a>
