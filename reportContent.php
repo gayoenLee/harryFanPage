@@ -1,6 +1,17 @@
 <?php
 include "dbConnect.php";
 include "config.php";
+//신고한 게시글 번호 이전에 포스트값으로 넘겨받음.
+$contentNum = $_POST['contentNum'];
+//게시글 작성자, 제목  디비에서 가져오기
+$boardSql = database(
+  "SELECT * FROM talkBoard WHERE num=$contentNum"
+);
+$boardInfo = $boardSql->fetch_array();
+$boardTitle = $boardInfo['title'];
+$boardId = $boardInfo['id'];
+$etc = 1;
+
 ?>
 
 <!DOCTYPE html>
@@ -114,61 +125,60 @@ body {
   -moz-osx-font-smoothing: grayscale;      
 }
     </style>
-    <script language="text/javascript">
-    var category
-
-    </script>
+    <script language="text/javascript"></script>
 </head>
 <body>
 <div class="login-page">
   <div class="form">
-    
       <p class="message"><h3>신고하기</h3></p>
-    <p class="message"><h5>제목 : 글 제목</h5></p>
-    <p class="message"><h5>작성자 : 작성자 정보</h5></p>
+    <p class="message"><h5>제목 :<?=$boardTitle?> </h5></p>
+    <p class="message"><h5>작성자 :<?=$boardId?></h5></p>
     <p class="message"><h5>아래에서 대표적인 사유 1개를 선택해주세요</h5></p>
 
-    <form class="login-form" action="reportProcessPage.php" method="post">
-      <input type="text" placeholder="신고자 이름" name="userName" id="userName"/>
+    <form class="login-form" name="reportReason" action="reportProcessPage.php" method="post">
+    <!-- 게시글 번호, 제목, 작성자 정보, 신고자 아이디 넘기기 -->
+      <input type="hidden" name="contentNum" value=<?=$contentNum?>>
+      <input type="hidden" name="boardTitle" value=<?=$boardTitle?>>
+      <input type="hidden" name="boardId" value=<?=$boardId?>>
+      <input type="hidden" name="reportPerson" value=<?=$userid?>>
+      <!-- 신고 사유 선택한 것 넘기기 -->
       <li>
-        <input type="radio" name="radioTxt" value="Apple" checked>부적절한 홍보 게시글
+        <label><input type="radio" name="reason" value="부적절한 홍보" checked>부적절한 홍보 게시글</label>
       </li>
       <li>
-        <input type="radio" name="radioTxt" value="Grape">음란성 또는 청소년에게 부적합한 내용
+        <label><input type="radio" name="reason" value="음란성 또는 청소년에게 부적합">음란성 또는 청소년에게 부적합한 내용</label><
       </li>
       <li>
-        <input type="radio" name="radioTxt" value="Banana">명예훼손/사생활 침해 및 저작권 침해등
+        <label><input type="radio" name="reason" value="명예훼손/사생활 침해 및 저작권 침해등">명예훼손/사생활 침해 및 저작권 침해등</label>
       </li>
       <li>
-        <input type="radio" name="radioTxt" value="Banana">기타
-      </li>
-      <input type="text" name="message" placeholder="해당 신고는 운영자에게 전달됩니다.">
+        <label><input type="radio" name="reason" value="기타" onClick = "showElement(<?php echo $etc?>)">기타</label> </li>
+     <!-- 기타 버튼 클릭시에만 입력창나오기 -->
+     <div id="<?php echo 'container'.$etc ?>" style="visibility:hidden" onClick="showElement(<?php echo $etc?>)">
+     <li><input type="text" name="message" placeholder="해당 신고는 운영자에게 전달됩니다.">
+     </li>
+     </div>
     </ul>
-          <input type="hidden" name="userId" id="userId" value="$userid"/>
-      <button><input type="submit" id="radioButton" name="submit"value="신고"></button>
-      <button><input type="submit" id="radioButton2" name="submit"value="취소"></button>
-
+          <input type="hidden" name="userId" id="userId" value=<?=$userid?>/>
+      <button><input type="submit" id="radioButton" name="submit"></button>
+      <button type="button" onClick="location.href='mainPage.php'">취소</button>
       <p class="message"> <a href="#">운영원칙 자세히 보기</a></p>
     </form>
   </div>
 </div>
-<script type="text/javascript">
-$(document).ready(function(){
-    $('#radioButton').click(function()){
-    //get
-    var radioval = $('input[name="radioTxt"]:checked').val();
-    $('#radioButton2').click(function () {
-          // setter
-          // 선택한 부분을 세팅할 수 있다.
-          $('input[name="radioTxt"]').val(['Banana']);
-        });
-});
-
-
+<!-- 체크박스중 기타 체크시 아래 사유 입력칸 필요 -->
+<script>
+function showElement(num){
+element = document.querySelector('#container'+num);
+element.style.visibility = "visible";
+}
+function hideElement(num){
+  element = document.querySelector('#container'+num);
+  element.style.visibility = "hidden";
+  showElement(num);
+}
 </script>
+
 </body>
-
-
-  </body>
 </html>
 
