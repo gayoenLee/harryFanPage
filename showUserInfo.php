@@ -99,6 +99,15 @@ $sunday = $sundayResult[0];
 <!doctype html>
 <html>
   <head>
+           <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-165857365-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-165857365-1');
+</script>
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
   <script src="https://code.jquery.com/jquery-3.5.0.min.js">
   $(function () {
@@ -187,8 +196,20 @@ chartBrowser.draw(dataBrowser, optionsBrowser);
 <li ><a href="http://192.168.56.101/imageBoardPage.php">게시판</a></li>
 <li ><a href="http://192.168.56.101/mainPage.php">최근 뉴스</a></li>
 <li ><a href="http://192.168.56.101/showVideo.php">영상</a></li>
-
 <?php
+    //로그인한 계정이 관리자일 경우
+if($userid=='admin67'){
+    ?>
+    <ul>
+    <li ><a href="http://192.168.56.101/showUserInfo.php">관리자 페이지</a></li>
+    <li>
+    관리자님
+    <span class="caret"></span></a></li></ul>
+<ul>
+<li><a href="logout.php">로그아웃</a></li>
+</ul>
+<?php
+}
                 if($userid){
                     ?>
                     <ul>
@@ -237,11 +258,21 @@ while($reportInfo = $reportSql->fetch_array()){
   $reportReason = $reportInfo['reportReason'];
   $reportDate = $reportInfo['reportDate'];
  ?>
- <tr><td>게시글 번호 : <?=$contentNum?></td> <td>제목 :<?=$contentTitle?></td> </tr>
+ <tbody>
+ <tr><td>게시글 번호 : <?=$contentNum?></td><td>제목 :<?=$contentTitle?></td></tr>
+ </tbody>
+ <tbody>
  <tr><td>작성자 : <?=$contentWriter?></td></tr>
+ </tbody>
+ <tbody>
  <tr><td>신고자 : <?=$reportPerson?></td></tr>
+ </tbody>
+ <tbody>
  <tr><td>신고일 : <?=$reportDate?></td></tr>
+ </tbody>
+ <tbody>
  <tr><td>신고 사유 : <?=$reportReason?></td></tr>
+ </tbody>
  <?}?>
  </p>
  </section>
