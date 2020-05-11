@@ -375,7 +375,7 @@ if($page >= $totalPage){
 <div class="searchBox" style="text-align: center">
 <form action="searchResult.php" method="get">
 <select name="category">
-<div class - "searchTitle">
+<div class = "searchTitle">
 <option value="title">제목</option></div>
 <div class="searchName">
 <option value="name">글쓴이</option>
