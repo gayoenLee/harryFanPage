@@ -2,6 +2,13 @@
 include 'config.php';
 include 'dbConnect.php';
     // //php.ini파일 수정 필요
+
+    if(isset($_GET['page'])){
+        $page = $_GET['page'];
+    }
+    else{
+        $page = 1;
+    }
 ?>
 <html>
 <head>
@@ -195,8 +202,32 @@ while($recentVideos = $recentVideoSql->fetch_array()){
 <h3>동영상 목록</h3>
 <br /><br />
 <?php
+$sql = database("SELECT * FROM videos");
+//mysqli_num_rows : 게시판 테이블에 있는 모든 레코드 수를 변수에 저장.
+$totalRecord = mysqli_num_rows($sql);
+//한 페이지에 보여줄 갯수
+$list = 4;
+//블록당 보여줄 페이지 갯수
+$blockCount = 3;
+//현재 페이지 블록
+$blockNum = ceil($page / $blockCount);
+//블록 시작 번호
+$blockStart = (($blockNum - 1) * $blockCount)+1;
+//블럭 마지막 번호
+$blockEnd = $blockStart + $blockCount - 1;
+//페이징한 페이지 수
+$totalPage = ceil($totalRecord / $list);
+if($blockEnd > $totalPage){
+    $blockEnd = $totalPage;
+}
+//블록의 총 갯수
+$totalBlock = ceil($totalPage / $blockCount);
+//페이지의 시작
+$pageStart = ($page - 1) * $list;
+
+
 $videoSql = database(
-    "SELECT * FROM videos ORDER BY time
+    "SELECT * FROM videos ORDER BY time DESC LIMIT $pageStart, $list
     ");
 //비디오 저장된 내용 가져오기
 while($videos = $videoSql->fetch_array()){
@@ -220,7 +251,42 @@ while($videos = $videoSql->fetch_array()){
     <?php
 }?>
 </ul>
-</>
+<div class="pagination" id="pageNum" style="text-align:center;">
+<?php
+
+if($page <=1){
+    //빈 값
+}else{
+    echo "<a class='previewEnd'href='showVideo.php?page=1'>처음</a>";
+}
+if($page<=1){
+    //빈 값
+}else{
+    $present = $page - 1;
+
+    echo"<a class='preview' href='showVideo.php?page=$present'>이전</a>";
+}
+for($i = $blockStart; $i <= $blockEnd; $i++){
+    if($page == $i){
+        echo "<b>$i</b>";
+    }else{
+        echo "<a href='showVideo.php?page=$i'>$i</a>";
+    }
+}
+if($page >= $totalPage){
+    //빈 값
+}else{
+    $next = $page + 1;
+    echo "<a class='next' href='showVideo.php?page=$next'>다음</a>";
+}
+if($page >= $totalPage){
+    //빈 값
+}else{
+    echo "<a class='end'href='showVideo.php?page=$totalPage'>마지막</a>";
+}
+
+?>
+</div>
 </div>
 </body>
 </html>
