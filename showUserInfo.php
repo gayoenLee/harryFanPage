@@ -223,16 +223,26 @@ chartBrowser.draw(dataBrowser, optionsBrowser);
 <div class="chart"  id="piechartBrowser" style="width: 600px; height: 500px;"></div></p>
  </section>
  <section id="content2">
- <p><h3>게시글 신고 접수 현황</h3>
 
- <tr><td>게시글 번호</td> <td>제목</td> </tr>
- <tr><td>작성자</td></tr>
- <tr><td>신고자</td></tr>
- <tr><td>신고일</td></tr>
- <tr><td>신고 사유</td></tr>
- 
- 
- 
+ <p><h3>게시글 신고 접수 현황</h3>
+ <?php
+//신고한 게시글 정보 가져오기
+$reportSql = database(
+  "SELECT * FROM boardReport order by num ");
+while($reportInfo = $reportSql->fetch_array()){
+  $contentNum = $reportInfo['contentNum'];
+  $contentTitle = $reportInfo['contentTitle'];
+  $contentWriter = $reportInfo['contentWriter'];
+  $reportPerson = $reportInfo['reportPerson'];
+  $reportReason = $reportInfo['reportReason'];
+  $reportDate = $reportInfo['reportDate'];
+ ?>
+ <tr><td>게시글 번호 : <?=$contentNum?></td> <td>제목 :<?=$contentTitle?></td> </tr>
+ <tr><td>작성자 : <?=$contentWriter?></td></tr>
+ <tr><td>신고자 : <?=$reportPerson?></td></tr>
+ <tr><td>신고일 : <?=$reportDate?></td></tr>
+ <tr><td>신고 사유 : <?=$reportReason?></td></tr>
+ <?}?>
  </p>
  </section>
   <section id="content3">
