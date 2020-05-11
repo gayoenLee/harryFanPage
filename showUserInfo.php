@@ -125,6 +125,49 @@ $sunday = $sundayResult[0];
  });
 });
   </script>
+  <style>
+  @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600);
+
+*, *:before, *:after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #105469;
+  font-family: 'Open Sans', sans-serif;
+}
+table {
+  background: #012B39;
+  border-radius: 0.25em;
+  border-collapse: collapse;
+  margin: 1em;
+}
+th {
+  border-bottom: 1px solid #364043;
+  color: #E2B842;
+  font-size: 0.85em;
+  font-weight: 600;
+  padding: 0.5em 1em;
+  text-align: left;
+}
+td {
+  color: #fff;
+  font-weight: 400;
+  padding: 0.65em 1em;
+}
+.disabled td {
+  color: #4F5F64;
+}
+tbody tr {
+  transition: background 0.25s ease;
+}
+tbody tr:hover {
+  background: #014055;
+}
+
+  </style>
 
   <link rel="stylesheet" href="imageBoardPageCSS.css"> 
 <link rel="stylesheet" href="showUserInfoCSS.css">
@@ -246,10 +289,21 @@ if($userid=='admin67'){
  <section id="content2">
 
  <p><h3>게시글 신고 접수 현황</h3>
+ <table>
+ <thead>
+ <tr>
+ <th>글 번호 
+ <th>제목 
+<th>작성자 
+ <th>신고자 
+<th>신고일  
+ <th>신고 사유  
+ </thead>
  <?php
 //신고한 게시글 정보 가져오기
 $reportSql = database(
   "SELECT * FROM boardReport order by num ");
+  
 while($reportInfo = $reportSql->fetch_array()){
   $contentNum = $reportInfo['contentNum'];
   $contentTitle = $reportInfo['contentTitle'];
@@ -259,21 +313,16 @@ while($reportInfo = $reportSql->fetch_array()){
   $reportDate = $reportInfo['reportDate'];
  ?>
  <tbody>
- <tr><td>게시글 번호 : <?=$contentNum?></td><td>제목 :<?=$contentTitle?></td></tr>
- </tbody>
- <tbody>
- <tr><td>작성자 : <?=$contentWriter?></td></tr>
- </tbody>
- <tbody>
- <tr><td>신고자 : <?=$reportPerson?></td></tr>
- </tbody>
- <tbody>
- <tr><td>신고일 : <?=$reportDate?></td></tr>
- </tbody>
- <tbody>
- <tr><td>신고 사유 : <?=$reportReason?></td></tr>
- </tbody>
+ <tr>
+      <td> <?=$contentNum?>
+      <td><?=$contentTitle?>
+      <td><?=$contentWriter?>
+      <td><?=$reportPerson?>
+      <td><?=$reportDate?>
+      <td><?=$reportReason?>
  <?}?>
+ </tbody>
+ </table>
  </p>
  </section>
   <section id="content3">
