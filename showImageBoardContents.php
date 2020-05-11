@@ -383,6 +383,7 @@ $newImageURL = 'uploads/'.$row["file_name"]."new";
                     </div>
                 </form>
                 </p>
+                <!-- 신고하기 버튼 -->
                <div><button type="button" onClick="location.href='reportContent.php'">글 신고하기</button>
                
                </div>
