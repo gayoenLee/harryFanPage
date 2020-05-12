@@ -168,6 +168,7 @@ $(location).attr("href", actionURL);
 </script>
     </head>
     <body>
+    
         <div id="page" style="height: auto !important;">
         <header id="headerImage" class="site-header" role="banner">   
 <h1 class="siteTitle">
@@ -180,7 +181,7 @@ $(location).attr("href", actionURL);
 <li><a href="http://192.168.56.101/mainPage.php">홈</a></li>
 <li ><a href="http://192.168.56.101/imageBoardPage.php">게시판</a></li>
 <li ><a href="http://192.168.56.101/mainPage.php">최근 뉴스</a></li>
-<li ><a href="http://192.168.56.101/showVideo.php">영상</a></li>
+<li ><a href="http://192.168.56.101/showVideo.php">영상 보기</a></li>
 
     <?php
     //로그인한 계정이 관리자일 경우
@@ -188,9 +189,8 @@ if($userid=='admin67'){
     ?>
     <ul>
     <li ><a href="http://192.168.56.101/showUserInfo.php">관리자 페이지</a></li>
-    <li>
-    관리자님
-    <span class="caret"></span></a></li></ul>
+    </ul>
+    <ul><li><a href="#">관리자님</a></li></ul>
 <ul>
 <li><a href="logout.php">로그아웃</a></li>
 </ul>
@@ -227,7 +227,7 @@ break;
                     ?>
                     <ul>
                     <li>
-                    <a href="#" role="button"><b><li></li><?=$logged?></b>님</li>
+                    <a href="#" role="button"><b><?=$logged?></b>님</li>
                     <span class="caret"></span></a>
 <ul>
 <li><a href="logout.php">로그아웃</a></li>
@@ -253,8 +253,8 @@ break;
         <table class="listTable" style=" border: 1px solid#ddddda">
             <tr>
                 <th style="background-color: #eeeeee; text-align: center;">번호</th>
-                <th style="background-color: #eeeeee; text-align: center;">   </th>
-                <th style="background-color: #eeeeee; text-align: center;">제목</th>
+                <th width="70" style="background-color: #eeeeee; text-align: center;">   </th>
+                <th style="background-color: #eeeeee; ">제목</th>
                 <th style="background-color: #eeeeee; text-align: center;">작성자</th>
                 <th style="background-color: #eeeeee; text-align: center;">작성일</th>
                 <th style="background-color: #eeeeee; text-align: center;">조회수</th>
@@ -313,11 +313,11 @@ $contentNum = $talkBoard['num'];
     <?php 
     //게시글에 댓글 몇 개 있는지 확인하기 위해 댓글 갯수 가져오기
 $commentSql=database(
-    "SELECT COUNT(contentNum) FROM commentTable where contentNum=$contentNum"
+    "SELECT COUNT(contentNum) FROM commentTable where contentNum='".$talkBoard['num']."'"
 );
 $commentNum = mysqli_num_rows($commentSql);
 
-    // Get images from the database
+    //이미지가 있는 게시글의 경우 이미지도 표시
 $query = $db->query("SELECT * FROM images WHERE contentTitle='".$talkBoard['title']."' ");
 if($query->num_rows > 0){
     $row = $query->fetch_assoc();
@@ -326,7 +326,7 @@ if($query->num_rows > 0){
         resize_image('uploads/'.$row["file_name"], 'uploads/'.$row["file_name"]."new", 70, 70);
         $newImageURL = 'uploads/'.$row["file_name"]."new";
 ?>
-    <td><img src="<?php echo $newImageURL; ?>" alt="" /></td>
+    <td width="70"class="imageThumbnail"><img src="<?php echo $newImageURL; ?>" alt="" /></td>
   <td  class="title" width = "500"><span class="readCheck" style="cursor:pointer" 
     data-action="./showImageBoardContents.php?num=<?=$talkBoard['num']?>"><?=$title?></p></span></td>
 <?php 
@@ -334,7 +334,7 @@ if($query->num_rows > 0){
     ?>
         <td><img src=" "></td>
         <td  class="title" width = "500"><span class="readCheck" style="cursor:pointer" 
-    data-action="./showImageBoardContents.php?num=<?=$talkBoard['num']?>"><?=$talkBoard['title']?>[<?=$commentNum?>]</p></span></td>
+    data-action="./showImageBoardContents.php?num=<?=$talkBoard['num']?>"><?=$talkBoard['title']?><span class="commentNum">[<?=$commentNum?>]</span></p></span></td>
    <?php }?>
     <td width="120"><?=$talkBoard['id'];?></td>
     <td width="100"><?=$talkBoard['time'];?></td>
@@ -360,7 +360,7 @@ if($page<=1){
 }else{
     $present = $page - 1;
 
-    echo"<a class='preview' href='imageBoardPage.php?page=$present'>이전</a>";
+    echo"<a class='preview' href='imageBoardPage.php?page=$present'></a>";
 }
 for($i = $blockStart; $i <= $blockEnd; $i++){
     if($page == $i){
