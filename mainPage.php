@@ -5,8 +5,7 @@ include 'dbConnect.php';
 //포인트 테이블 데이터 가져오기
 $pointSql = database(
     "SELECT * FROM levelPointTable WHERE id='$userid'
-    "
-    );
+    ");
     $userPoint = $pointSql->fetch_array();
 //게시판에 로그인한 아이디인 사람이 글을 얼마나 올렸는지 갯수 가져오기.
     $writeIdNum = database(
@@ -217,7 +216,7 @@ function resize_image($file, $newfile, $w, $h) {
 
     <div class="wrapper">
         <a href="donationPage.php">기부하기</a>
-        <h1>LOGO</h1>
+        <h1>harryPotter Community</h1>
         <nav>
             <ul class="menu">
                 <li><a href="#">홈</a></li>
@@ -289,6 +288,11 @@ switch($userPoint['point']){
 <ul>
 <li><a href="logout.php">로그아웃</a></li>
 </ul>
+<ul>
+    <li>
+        <a href="chat.html">채팅하기</a>
+    </li>
+</ul>
                 <br /><br /><br /><br /><br /><br />
 
 <ul>
@@ -311,15 +315,17 @@ switch($userPoint['point']){
      <!-- 게시판 최신글 가져오기 -->
      <h3>최근 게시물</h3>
      <table class="listTable" style=" border: 1px solid#ddddda">
+     <thead>
             <tr>
-                <th style="background-color: #eeeeee; text-align: center;">번호</th>
-                <th style="background-color: #eeeeee; text-align: center;">   </th>
-                <th style="background-color: #eeeeee; text-align: center;">제목</th>
-                <th style="background-color: #eeeeee; text-align: center;">작성자</th>
-                <th style="background-color: #eeeeee; text-align: center;">작성일</th>
-                <th style="background-color: #eeeeee; text-align: center;">조회수</th>
+                <th width = "70" style="background-color: #eeeeee; text-align: center;">번호</th>
+                <th width = "70"style="background-color: #eeeeee; text-align: center;">   </th>
+                <th width = "500"style="background-color: #eeeeee; text-align: center;">제목</th>
+                <th width = "100"style="background-color: #eeeeee; text-align: center;">작성자</th>
+                <th width="100"style="background-color: #eeeeee; text-align: center;">작성일</th>
+                <th width = "70"style="background-color: #eeeeee; text-align: center;">조회수</th>
 
             </tr>
+            </thead>
             <!-- 최신 글 5개가져오기 -->
             
 <?php
@@ -418,7 +424,6 @@ for($i=0; $i<5 && $todayViewArray[$i]; $i++){
  }
 }
 ?>
-</center>
 </table>
 <?php
     }
