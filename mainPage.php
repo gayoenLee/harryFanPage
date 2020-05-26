@@ -290,7 +290,7 @@ switch($userPoint['point']){
 </ul>
 <ul>
     <li>
-        <a href="chat.html">채팅하기</a>
+        <a href="/chat/chat.html">채팅하기</a>
     </li>
 </ul>
                 <br /><br /><br /><br /><br /><br />
@@ -447,6 +447,16 @@ else{?>
             </main>
   
 </div><!--.wrap --> 
+<?php
+$recentNewsSql = database(
+    "SELECT * FROM news ORDER BY idx DESC LIMIT 0,4"
+);
+
+while($recentNews = $recentNewsSql->fetch_array()){
+    $recentUrl = $recentVideos['link'];
+    $recentTitle = $recentVideos['title'];
+    $recentImage = $recentVideos['image'];
+?>
 <h3>최근 뉴스</h3>
 <section class="features">
   <a class="feature" href="#"><img src="https://fakeimg.pl/300x200/"></a>
