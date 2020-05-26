@@ -290,7 +290,7 @@ switch($userPoint['point']){
 </ul>
 <ul>
     <li>
-        <a href="/chat/chat.html">채팅하기</a>
+        <a href="http://192.168.56.101:3000/">채팅하기</a>
     </li>
 </ul>
                 <br /><br /><br /><br /><br /><br />
@@ -447,22 +447,22 @@ else{?>
             </main>
   
 </div><!--.wrap --> 
+<h3>최근 뉴스</h3>
+<section class="features">
 <?php
 $recentNewsSql = database(
     "SELECT * FROM news ORDER BY idx DESC LIMIT 0,4"
 );
 
 while($recentNews = $recentNewsSql->fetch_array()){
-    $recentUrl = $recentVideos['link'];
-    $recentTitle = $recentVideos['title'];
-    $recentImage = $recentVideos['image'];
+    $recentUrl = $recentNews['link'];
+    $recentTitle = $recentNews['title'];
+    $recentImage = $recentNews['image'];
 ?>
-<h3>최근 뉴스</h3>
-<section class="features">
-  <a class="feature" href="#"><img src="https://fakeimg.pl/300x200/"></a>
-  <a class="feature" href="#"><img src="https://fakeimg.pl/300x200/"></a>
-  <a class="feature" href="#"><img src="https://fakeimg.pl/300x200/"></a>
-  <a class="feature" href="#"><img src="https://fakeimg.pl/300x200/"></a>
+
+  <a class="feature" href=<?=$recentUrl?>><img src=<?=$recentImage?>><?=$recentTitle?></a>
+ 
+<?}?>
 </section> 
 
 <a href="#">제일 위로</a>
