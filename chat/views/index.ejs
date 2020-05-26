@@ -8,23 +8,55 @@
     <title>Chat App</title>
     <script defer src="http://192.168.56.101:3000/socket.io/socket.io.js"></script>
     <script defer src="script.js"></script>
+    <link rel="stylesheet" href="/chatCSS.css">
 </head>
 
 <body>
+    <div id="contentWrap">
+        <nav>
+            <span id="nav-header">
+                채팅창
+            </span>
+            <span id="logoutBtn">나가기</span>
 
-    <!-- 채팅하기 누르면 첫번째 화면 -->
-    <!--  룸 리스트 -->
-    <div id="room-container">
+        </nav>
+        <div id="contentCover">
+            <!-- 채팅방 목록 시작 -->
+            <div id="roomWrap">
+                <div id="roomList">
+                    <div id="roomHeader">채팅 방 목록</div>
+                    <div id="roomSelect">
+                        <div id="room-container">
+                            <% Object.keys(rooms).forEach(room => { %>
+                        </div>
+                        <div class="roomEl active" data-id="1"> <a href="/<%= room %>"> <%= room %></a></div>
+
+                        <% }) %>
+
+                    </div>
+                </div>
+            </div>
+            <div id="chatWrap">
+                <div id="chatHeader">채팅방 만들기</div>
+                <form id="chatForm" action="/room" method="POST">
+                    <input type="text" autocomplete="off" size="30" id="message" name="room" type="text" required
+                        placeholder="채팅방 이름을 입력하세요">
+                    <input type="submit" value="만들기">
+                </form>
+            </div>
+
+            <!-- 채팅하기 누르면 첫번째 화면 -->
+            <!--  룸 리스트 -->
+            <!-- <div id="room-container">
         <% Object.keys(rooms).forEach(room => { %>
         <div>방 이름 : <%= room %></div>
         <a href="/<%= room %>">방 입장</a>
         <% }) %>
-    </div>
+    </div> -->
 
-    <form action="/room" method="POST">
-        <input placeholder="방 이름을 입력해주세요" name="room" type="text" required>
-        <button type="submit">채팅방 만들기</button>
-    </form>
+
+        </div>
+    </div>
 </body>
 
 </html>
