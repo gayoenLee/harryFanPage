@@ -183,6 +183,8 @@ function resize_image($file, $newfile, $w, $h) {
   });
  });
 </script>
+<!-- 최근 뉴스 레이아웃 -->
+
 <style>
  .float{position:absolute; top:110px; right:30px;}
 </style>
@@ -446,10 +448,14 @@ else{?>
         </p>
             </main>
   
-</div><!--.wrap --> 
-<h3>최근 뉴스</h3>
-<section class="features">
-<?php
+</div>
+<div class="demo">
+    <div class="container">
+        <h3 class="h3">최근 뉴스</h3>    
+        <div class="row">
+            <div class="col-md-12">
+                <div id="news-slider2" class="owl-carousel">
+                <?php
 $recentNewsSql = database(
     "SELECT * FROM news ORDER BY idx DESC LIMIT 0,4"
 );
@@ -458,12 +464,36 @@ while($recentNews = $recentNewsSql->fetch_array()){
     $recentUrl = $recentNews['link'];
     $recentTitle = $recentNews['title'];
     $recentImage = $recentNews['image'];
+    $recentContent = $recentNews['contents'];
+    $recentDate = $recentNews['time'];
 ?>
-
-  <a class="feature" href=<?=$recentUrl?>><img src=<?=$recentImage?>><?=$recentTitle?></a>
- 
-<?}?>
-</section> 
+                    <div class="post-slide2">
+                        <div class="post-img">
+                            <a href="<?=$recentUrl?>"><img src=<?=$recentImage?> width:490px height:220px alt=""></a>
+                        </div>
+                        <div class="post-content">
+                            <h3 class="post-title"><a href="<?=$recentUrl?>"><?=$recentTitle?></a></h3>
+                            <p class="post-description">
+                               <?=$recentContent?>
+                            </p>
+                            <ul class="post-bar">
+                                <li><i class="fa fa-calendar"></i> <?=$recentDate?></li>
+                                <li>
+                                    <i class="fa fa-folder"></i>
+                                    <a href="#">해리포터</a>
+                                    <a href="#">연관 검색</a>
+                                </li>
+                            </ul>
+                            <a href="#" class="read-more">더 보기</a>
+                        </div>
+                    </div>
+                    <?}?>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<hr>
 
 <a href="#">제일 위로</a>
 
