@@ -1,6 +1,13 @@
 <?php
 include 'dbConnect.php';
 include 'config.php';
+//페이징에서 사용할 페이지 
+if(isset($_GET['page'])){
+    $page = $_GET['page'];
+}
+else{
+    $page = 1;
+}
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -53,46 +60,83 @@ Released   : 20131009
 		<div class="title">
 			<h2>최근 소식 BEST 4</h2>
 		</div>
+		<!-- 페이징 구현 시작 -->
+<?php
+$sql = database("SELECT * FROM news");
+//뉴스 테이블에 있는 모든 레코드 수를 변수에 저장
+$totalRecord = mysqli_num_rows($sql);
+//한 페이지에 보여줄 갯수
+$list = 2;
+//블록당 보여줄 페이지 갯수
+$blockCount = 5;
+//현재 페이지 블록
+$blockNum = ceil($page / $blockCount);
+
+//블록 시작 번호
+$blockStart = (($blockNum - 1) * $blockCount)+1;
+//블럭 마지막 번호
+$blockEnd = $blockStart + $blockCount - 1;
+//페이징한 페이지 수
+$totalPage = ceil($totalRecord / $list);
+if($blockEnd > $totalPage){
+    $blockEnd = $totalPage;
+}
+//블록의 총 갯수
+$totalBlock = ceil($totalPage / $blockCount);
+//페이지의 시작
+$pageStart = ($page - 1) * $list;
+// 뉴스 정보 가져오기
+$sqlFirstRow = database(    "SELECT * FROM news WHERE MOD(idx, 2) = 1 
+	ORDER BY idx DESC LIMIT $pageStart, $list"
+);
+$sqlSecondRow = database(
+"SELECT * FROM news WHERE MOD(idx, 2) = 0 
+ORDER BY idx DESC LIMIT $pageStart, $list"
+);
+?>
 		<!-- 첫번째 세로줄 -->
 		<div class="tbox1">
 			<div class="padding-bottom">
-				<h2>첫번째 소식</h2>
-				<img src="./images/img01.jpg" alt="" />
-				<p>In posuere eleifend odio. Quisque semper augue mattis wisi. Maecenas ligula. Pellentesque viverra vulputate enim. Aliquam erat volutpat. Pellentesque tristique ante ut risus. Quisque dictum.</p>
-				<a href="#" class="button">Etiam posuere</a>
-			</div>
-			<div>
-				<h2>두번째 소식</h2>
-				<img src="./images/img02.jpg" alt="" />
-				<p>In posuere eleifend odio. Quisque semper augue mattis wisi. Maecenas ligula. Pellentesque viverra vulputate enim. Aliquam erat volutpat. Pellentesque tristique ante ut risus. Quisque dictum.</p>
-				<a href="#" class="button">Etiam posuere</a>
-			</div>
-			<div>
-				<h2>두번째 소식</h2>
-				<img src="./images/img02.jpg" alt="" />
-				<p>In posuere eleifend odio. Quisque semper augue mattis wisi. Maecenas ligula. Pellentesque viverra vulputate enim. Aliquam erat volutpat. Pellentesque tristique ante ut risus. Quisque dictum.</p>
-				<a href="#" class="button">Etiam posuere</a>
+
+				<?php
+			   //첫번째 열에 홀수 idx 저장된 내용 가져오기 
+			   while($news = $sqlFirstRow->fetch_array()){
+				   $title = $news["title"];
+				   $link = $news["link"];
+				   $image = $news["image"];
+				   $contents = $news["contents"];
+			   
+			   
+				?>
+				<h2><?=$title?></h2>
+				<img src="<?php echo $image ?>"width=490; height=220; alt="" />
+				<p><?=$contents?></p>
+				<a href=<?=$link?> class="button">뉴스 보러가기</a>
+				<?php
+}
+				?>
 			</div>
 		</div>
-		<!-- 두번째 세로줄 -->
+		<!-- 두번째 세로줄에 짝수idx뉴스 가져오기 -->
 		<div class="tbox2">
 			<div class="padding-bottom">
-				<h2>세번째 소식</h2>
-				<img src="images/img03.jpg" alt="" />
-				<p>In posuere eleifend odio. Quisque semper augue mattis wisi. Maecenas ligula. Pellentesque viverra vulputate enim. Aliquam erat volutpat. Pellentesque tristique ante ut risus. Quisque dictum.</p>
-				<a href="#" class="button">Etiam posuere</a>
-			</div>
-			<div>
-				<h2>네번째 소식</h2>
-				<img src="./images/img04.jpg" alt="" />
-				<p>In posuere eleifend odio. Quisque semper augue mattis wisi. Maecenas ligula. Pellentesque viverra vulputate enim. Aliquam erat volutpat. Pellentesque tristique ante ut risus. Quisque dictum.</p>
-				<a href="#" class="button">Etiam posuere</a>
-			</div>
-			<div>
-				<h2>네번째 소식</h2>
-				<img src="./images/img04.jpg" alt="" />
-				<p>In posuere eleifend odio. Quisque semper augue mattis wisi. Maecenas ligula. Pellentesque viverra vulputate enim. Aliquam erat volutpat. Pellentesque tristique ante ut risus. Quisque dictum.</p>
-				<a href="#" class="button">Etiam posuere</a>
+
+			<?php
+			while($newsSecond = $sqlSecondRow->fetch_array()){
+$titleSecond = $newsSecond["title"];
+$linkSecond = $newsSecond["link"];
+$imageSecond = $newsSecond["image"];
+$contentsSecond = $newsSecond["contents"];
+
+			
+			?>
+				<h2><?=$titleSecond?></h2>
+				<img src="<?php echo $imageSecond ?>" width=490; height=220; alt="" />
+				<p><?=$contentsSecond?></p>
+				<a href=<?=$linkSecond?> class="button">뉴스 보러가기</a>
+				<?php
+}
+				?>
 			</div>
 		</div>
 	</div>
