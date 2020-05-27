@@ -140,6 +140,44 @@ $contentsSecond = $newsSecond["contents"];
 			</div>
 		</div>
 	</div>
+	<!-- 페이징 -->
+	<div class="pagination" id="pageNum" style="text-align:center;">
+<?php
+
+if($page <=1){
+    //빈 값
+}else{
+    echo "<a class='previewEnd'href='newsPage.php?page=1'>처음</a>";
+}
+if($page<=1){
+    //빈 값
+}else{
+    $present = $page - 1;
+
+    echo"<a class='preview' href='newsPage.php?page=$present'></a>";
+}
+for($i = $blockStart; $i <= $blockEnd; $i++){
+    if($page == $i){
+        echo "<b>$i</b>";
+    }else{
+        echo "<a href='newsPage.php?page=$i'>$i</a>";
+    }
+}
+if($page >= $totalPage){
+    //빈 값
+}else{
+    $next = $page + 1;
+    echo "<a class='next' href='newsBoardPage.php?page=$next'>다음</a></a>";
+}
+if($page >= $totalPage){
+    //빈 값
+}else{
+    echo "<a class='end'href='newsBoardPage.php?page=$totalPage'>마지막</a>";
+}
+
+?>
+</div>
+
 </div>
 <div id="copyright">
 	<p>&copy; Untitled. All rights reserved. | Photos by <a href="http://fotogrph.com/">Fotogrph</a> | Design by <a href="http://templated.co" rel="nofollow">TEMPLATED</a>.</p>
