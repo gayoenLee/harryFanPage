@@ -1,3 +1,8 @@
+<?php
+include 'dbConnect.php';
+include 'config.php';
+?>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <!--
 Design by TEMPLATED
@@ -48,6 +53,7 @@ Released   : 20131009
 		<div class="title">
 			<h2>최근 소식 BEST 4</h2>
 		</div>
+		<!-- 첫번째 세로줄 -->
 		<div class="tbox1">
 			<div class="padding-bottom">
 				<h2>첫번째 소식</h2>
@@ -61,11 +67,24 @@ Released   : 20131009
 				<p>In posuere eleifend odio. Quisque semper augue mattis wisi. Maecenas ligula. Pellentesque viverra vulputate enim. Aliquam erat volutpat. Pellentesque tristique ante ut risus. Quisque dictum.</p>
 				<a href="#" class="button">Etiam posuere</a>
 			</div>
+			<div>
+				<h2>두번째 소식</h2>
+				<img src="./images/img02.jpg" alt="" />
+				<p>In posuere eleifend odio. Quisque semper augue mattis wisi. Maecenas ligula. Pellentesque viverra vulputate enim. Aliquam erat volutpat. Pellentesque tristique ante ut risus. Quisque dictum.</p>
+				<a href="#" class="button">Etiam posuere</a>
+			</div>
 		</div>
+		<!-- 두번째 세로줄 -->
 		<div class="tbox2">
 			<div class="padding-bottom">
 				<h2>세번째 소식</h2>
 				<img src="images/img03.jpg" alt="" />
+				<p>In posuere eleifend odio. Quisque semper augue mattis wisi. Maecenas ligula. Pellentesque viverra vulputate enim. Aliquam erat volutpat. Pellentesque tristique ante ut risus. Quisque dictum.</p>
+				<a href="#" class="button">Etiam posuere</a>
+			</div>
+			<div>
+				<h2>네번째 소식</h2>
+				<img src="./images/img04.jpg" alt="" />
 				<p>In posuere eleifend odio. Quisque semper augue mattis wisi. Maecenas ligula. Pellentesque viverra vulputate enim. Aliquam erat volutpat. Pellentesque tristique ante ut risus. Quisque dictum.</p>
 				<a href="#" class="button">Etiam posuere</a>
 			</div>
